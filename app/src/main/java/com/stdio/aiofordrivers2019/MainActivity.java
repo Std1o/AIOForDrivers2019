@@ -1,11 +1,13 @@
 package com.stdio.aiofordrivers2019;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -38,6 +40,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -82,8 +85,15 @@ public class MainActivity extends AppCompatActivity
 
     ImageView userFoto;
     CheckBox preOrder;
+    final int REQUEST_PERMISSIONS = 3;
     private CoordinatorLayout coordinatorLayout;
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
+    String[] permissions = new String[]{
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.ACCESS_FINE_LOCATION}; // Here i used multiple permission check
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,27 +168,36 @@ public class MainActivity extends AppCompatActivity
 
         preOrder = (CheckBox) findViewById(R.id.cb_preorders);
 
-        if (!pref.isLoggedIn()) {
-            logout();
-            finish();
-        } else {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                        == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+            if (!pref.isLoggedIn()) {
+                logout();
+                finish();
+            } else {
 
                 city.setText(pref.getDriverCity());
                 startService(new Intent(this, ServiceSendCoords.class));
 
 
-            takeInfo("takeStartInfo");
+                takeInfo("takeStartInfo");
                 driverName.setText(pref.getDriverName());
 
 
 
 
-            if(pref.getPreOrders().equals("1")){
-                preOrder.setChecked(true);
-            } else{
-                preOrder.setChecked(false);
-            }
+                if(pref.getPreOrders().equals("1")){
+                    preOrder.setChecked(true);
+                } else{
+                    preOrder.setChecked(false);
+                }
 
+            }
+        } else {
+            requestReadPermission();
         }
 
 
@@ -222,7 +241,46 @@ public class MainActivity extends AppCompatActivity
 
          n = new NotificationsHelper(this);
         n.createNotification("Такси", MainActivity.class, 0);
+    }
 
+    private void requestReadPermission() {
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSIONS);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (!pref.isLoggedIn()) {
+                        logout();
+                        finish();
+                    } else {
+
+                        city.setText(pref.getDriverCity());
+                        startService(new Intent(this, ServiceSendCoords.class));
+
+
+                        takeInfo("takeStartInfo");
+                        driverName.setText(pref.getDriverName());
+
+
+
+
+                        if(pref.getPreOrders().equals("1")){
+                            preOrder.setChecked(true);
+                        } else{
+                            preOrder.setChecked(false);
+                        }
+
+                    }
+                }
+                else {
+                    //Permission has not been granted. Notify the user.
+                    Toast.makeText(MainActivity.this,"Permission is Required",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
 
