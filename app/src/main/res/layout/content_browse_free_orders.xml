@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".browseFreeOrders"
+    tools:showIn="@layout/activity_browse_free_orders">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/ll_cb"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Текущие заказы"
+            android:id="@+id/cb_now"
+            android:background="@drawable/b_yes"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Предвар. заказы"
+            android:id="@+id/cb_advance"
+            android:background="@drawable/b_red"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:dividerHeight="1dp"
+        android:layout_below="@+id/ll_cb"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_free_orders"
+            android:icon="@drawable/abc_ic_menu_paste_mtrl_am_alpha"
+            android:title="Свободные заказы" />
+
+        <item
+            android:id="@+id/nav_tax"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Таксометр" />
+        <item
+            android:id="@+id/nav_taken_orders"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="Взятые заказы" />
+
+    </group>
+
+    <item android:title="Настройки">
+        <menu>
+
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_edit"
+                android:title="Личные данные" />
+
+            <item
+                android:id="@+id/nav_foto"
+                android:icon="@android:drawable/ic_menu_camera"
+                android:title="Ваши фото" />
+
+
+        </menu>
+    </item>
+
+
+
+    <item android:title="История">
+        <menu>
+            <item
+                android:id="@+id/nav_h_orders"
+                android:icon="@mipmap/ic_send"
+                android:title="Статистика за месяц" />
+
+            <item
+                android:id="@+id/nav_pay"
+                android:icon="@mipmap/ic_ruble"
+                android:title="Оплата заказов" />
+
+
+
+
+        </menu>
+    </item>
+
+</menu>

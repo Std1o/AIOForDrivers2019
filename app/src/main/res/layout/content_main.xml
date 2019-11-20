@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/taxi_tank"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_driver_money"
+
+            android:background="@drawable/b_yes"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+
+            android:layout_weight="1"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:id="@+id/tv_driver_status"
+            android:background="@drawable/b_no"
+            android:onClick="changeDriverStatus"
+
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linearLayout5">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_type_work"
+            android:textColor="@android:color/black"
+            android:background="@drawable/b_no"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:id="@+id/tv_take_orders"
+            android:background="@drawable/b_no"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:onClick="goTakenOrders" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:id="@+id/tv_app"
+            android:background="@drawable/b_no"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:nestedScrollingEnabled="false"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_class_auto"
+        android:textColor="@android:color/black"
+        android:typeface="monospace"
+        android:background="@drawable/b_no"
+        android:textStyle="bold|normal"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvInfo"
+        android:layout_below="@+id/tv_class_auto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#fc0606"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Оповещать о предварительных заказах"
+            android:id="@+id/cb_preorders" />
+    </LinearLayout>
+
+
+</RelativeLayout>

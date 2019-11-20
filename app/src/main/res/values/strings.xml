@@ -1,3 +1,61 @@
 <resources>
-    <string name="app_name">AIOForDrivers2019</string>
+    <string name="app_name">Т-Такси</string>
+    <string name="app_vr">v.2.1</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Выход из программы</string>
+
+
+    <string name="title_activity_registration_driver">kk</string>
+
+    <string name="title_activity_restore_dostup">Регистрация</string>
+    <string name="tv.reg.input.phone">Введите ваш 11-значный номер телефона</string>
+    <string name="tv.reg.input.sms.code">Введите код полученный в СМС</string>
+
+    <string name="err.msg.car.brend">Введите марку вашей машины</string>
+    <string name="err.msg.car.color">Введите цвет вашей машины</string>
+    <string name="err.msg.car.number">Введите регистрационный номер вашей машины</string>
+    <string name="err.msg.sms.code">Введите 4-x значный код из СМС</string>
+    <string name="err.msg.phone">Проверьте правильность набора номера</string>
+
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="err_msg_name">Введите ваше Имя</string>
+    <string name="err_msg_famaly">Введите вашу Фамилию</string>
+
+    <string name="title_activity_choose_city">Выбор города:</string>
+    <string name="title_activity_browse_free_orders">Обзор заказов</string>
+    <string name="title_activity_taxometr">Таксометр</string>
+    <string name="title_activity_browse_taken_orders">Взятые заказы</string>
+    <string name="title_activity_browse_advance_orders">Предварительные заказы</string>
+    <string name="title_activity_activity_for_result_bad_driver_mes">Причина отказа:</string>
+    <string name="title_activity_activity_for_result_driver_status">Выбор статуса:</string>
+    <string name="title_activity_activity_for_result_trip_info">Чек:</string>
+    <string name="title_activity_login_driver">Вход:</string>
+
+    <string name="title_activity_driver_info">Личные данные</string>
+    <string name="title_activity_payment">Внесение средств:</string>
+    <string name="title_activity_robot_dialog">robotDialog</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="company_name">
+        <item>Выберите вашу компанию и город</item>
+        <item>Казань (ТК - 16)</item>
+
+    </string-array>
+
+    <string-array name="company_url">
+        <item>0</item>
+        <item>http://tk-16.ru</item>
+
+    </string-array>
+    <string name="title_activity_upload_foto">Загрузка фото</string>
+    <string name="title_activity_old_orders">Статистика</string>
+
+
 </resources>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Taxometr"
+    tools:showIn="@layout/activity_taxometr">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b_no"
+    android:orientation="vertical"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/b_no"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_tarif_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center"
+            android:text="Тариф: Городской"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/bg" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|fill_horizontal"
+        android:layout_weight="0.35"
+        android:gravity="center"
+        android:textColor="@color/bg"
+        android:textSize="100sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/b_no"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_gps" />
+
+            <TextView
+                android:id="@+id/tv_wait"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/fon_red"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:gravity="center_horizontal"
+                android:layout_weight="0.4" />
+
+            <Chronometer
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/chronometer"
+                android:layout_weight="0.6"
+                android:layout_gravity="center_vertical|right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/b_no"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:id="@+id/textDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/bg"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Километраж"
+                    android:textColorHint="@color/bg"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/b_no"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textTime_wait"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0 мин"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/bg"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ожидание"
+                    android:textColorHint="@color/bg"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/tog_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/b_no"
+            android:text="Старт"
+            android:textColor="@color/bg"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/tog_finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/b_yes"
+            android:text="Завершить"
+            android:textColor="@color/bg"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+    </LinearLayout>
+</LinearLayout>
+
+</RelativeLayout>

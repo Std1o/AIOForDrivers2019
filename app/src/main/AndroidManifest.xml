@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stdio.aiofordrivers2019">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- [START gcm_permission] -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +25,95 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ChooseCity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_choose_city"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".browseFreeOrders"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_browse_free_orders"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Taxometr"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_taxometr"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".browseTakenOrders"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_browse_taken_orders"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".GPSTracker" />
+        <service
+            android:name=".ServiceSendCoords"
+            android:enabled="true" />
+
+        <receiver android:name=".BootCompletedIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activityForResultBadDriverMes"
+            android:label="@string/title_activity_activity_for_result_bad_driver_mes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activityForResultTripInfo"
+            android:label="@string/title_activity_activity_for_result_trip_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".restoreDostup"
+            android:label="@string/title_activity_restore_dostup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".driverInfo"
+            android:label="@string/title_activity_driver_info"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".paymentActivity"
+            android:label="@string/title_activity_payment"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".robotDialog"
+            android:label="@string/title_activity_robot_dialog"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UploadFotoActivity"
+            android:label="@string/title_activity_upload_foto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OldOrdersActivity"
+            android:label="@string/title_activity_old_orders"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
