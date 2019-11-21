@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Т-Такси</string>
+
+
+    <string name="default_notification_channel_id">31</string>
+
+
     <string name="app_vr">v.2.1</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

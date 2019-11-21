@@ -53,7 +53,7 @@ public class restoreDostup extends AppCompatActivity {
     TextInputLayout inputLayoutName, inputLayoutFamaly, inputLayoutPhone, inputLayoutMarka, inputLayoutNumber,
             inputLayoutColor, inputLayoutCode, inputLayoutUrl;
 
-    EditText inputName, inputFamaly, inputPhone, inputMarka, inputNummber, inputColor, inputCode, inputCodeCompany;
+    EditText inputName, inputFamaly, inputPhone, inputMarka, inputNummber, inputColor, inputCode;
 
 
     LinearLayout  LayoutInfo;
@@ -104,8 +104,6 @@ public class restoreDostup extends AppCompatActivity {
         inputLayoutNumber = (TextInputLayout) findViewById(R.id.input_layout_car_number);
         inputLayoutColor = (TextInputLayout) findViewById(R.id.input_layout_color);
 
-
-        inputCodeCompany = (EditText) findViewById(R.id.input_code_company);
 
         inputPhone = (EditText) findViewById(R.id.input_phone);
         inputCode = (EditText) findViewById(R.id.input_code);
@@ -246,8 +244,7 @@ public class restoreDostup extends AppCompatActivity {
 
 
         if (command.equals("get_urls")){
-            map.put("codeCompany", inputCodeCompany.getText().toString().trim());
-            url = "http://transport-116.ru/mytrade/api/driverCompanyUrls.php";
+            url = "http://beerdelivery.ru/mytrade/api/driverCompanyUrls.php";
 
 
         }
@@ -351,11 +348,6 @@ public class restoreDostup extends AppCompatActivity {
                                 inputLayoutPhone.setVisibility(View.VISIBLE);
                                 buttonCheck = 0;
 
-                            }
-                            if (status.equals("-11")) {
-
-                                inputLayoutUrl.setError(response.getString("message"));
-                                requestFocus(inputCodeCompany);
                             }
 
 
