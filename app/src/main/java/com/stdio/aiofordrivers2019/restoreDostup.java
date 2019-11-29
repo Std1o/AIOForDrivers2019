@@ -56,7 +56,7 @@ public class restoreDostup extends AppCompatActivity {
     EditText inputName, inputFamaly, inputPhone, inputMarka, inputNummber, inputColor, inputCode;
 
 
-    LinearLayout  LayoutInfo;
+    LinearLayout LayoutInfo;
 
     private ProgressDialog pDialog;
     private PrefManager pref;
@@ -67,11 +67,10 @@ public class restoreDostup extends AppCompatActivity {
     ImageView logo;
     TextView tvInfo;
 
-   // String PROJECT_NUMBER = "570865019109";
+    // String PROJECT_NUMBER = "570865019109";
     String IMEI;
 
     int buttonCheck = -1;
-
 
 
     @Override
@@ -115,16 +114,11 @@ public class restoreDostup extends AppCompatActivity {
         inputColor = (EditText) findViewById(R.id.input_color);
 
 
-
-
-
-
-
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        IMEI = tMgr.getDeviceId();;
+        IMEI = tMgr.getDeviceId();
+        ;
     }
 
 
@@ -146,13 +140,13 @@ public class restoreDostup extends AppCompatActivity {
         if (id == R.id.next) {
 
             hideSoftKeyboard();
-            if (buttonCheck == -1){
-         
+            if (buttonCheck == -1) {
+
                 Autorize("get_urls");
 
             }
 
-            if (buttonCheck == 0){
+            if (buttonCheck == 0) {
                 if (!validatePhone()) {
                     return false;
                 }
@@ -160,14 +154,14 @@ public class restoreDostup extends AppCompatActivity {
 
             }
 
-            if (buttonCheck == 1){
-                if(!validateSmsCode()){
+            if (buttonCheck == 1) {
+                if (!validateSmsCode()) {
                     return false;
                 }
                 Autorize("send_code");
 
             }
-            if (buttonCheck == 2){
+            if (buttonCheck == 2) {
                 if (!validateName()) {
                     return false;
                 }
@@ -196,8 +190,6 @@ public class restoreDostup extends AppCompatActivity {
     }
 
 
-
-
     private void Autorize(String command) {
 
 
@@ -210,13 +202,13 @@ public class restoreDostup extends AppCompatActivity {
 
         map.put("command", command);
 
-        if (command.equals("send_phone")){
+        if (command.equals("send_phone")) {
             map.put("code", "5555");
             map.put("driverPhone", "89272495641");
-
+            map.put("app", getResources().getString(R.string.app_vr));
         }
 
-        if (command.equals("send_code")){
+        if (command.equals("send_code")) {
             map.put("driverPhone", inputPhone.getText().toString().trim());
             map.put("driverId", pref.getDriverId());
             map.put("code", inputCode.getText().toString().trim());
@@ -225,7 +217,7 @@ public class restoreDostup extends AppCompatActivity {
 
 
         }
-        if (command.equals("send_driver_info")){
+        if (command.equals("send_driver_info")) {
             map.put("driverPhone", inputPhone.getText().toString().trim());
             map.put("driverId", pref.getDriverId());
             map.put("hash", pref.getHash());
@@ -253,49 +245,14 @@ public class restoreDostup extends AppCompatActivity {
                         Log.e("666", "Autorize - " + response);
                         try {
                             String status = response.getString("st");
-
-
-                            if (status.equals("0")) {
-
-                                Intent intent = new Intent(restoreDostup.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                finish();
-                            }
                             if (status.equals("-1")) {
-                                tvInfo.setText( response.getString("message"));
+                                tvInfo.setText(response.getString("message"));
 
                             }
-
-
                             if (status.equals("1")) {
-
                                 pref.setMobileNumber(response.getString("phone"));
                                 pref.setDriverId(response.getString("driverId"));
                                 pref.setHash(response.getString("hash"));
-
-                                inputLayoutPhone.setVisibility(View.GONE);
-
-                                inputLayoutCode.setVisibility(View.VISIBLE);
-                                tvInfo.setText(getResources().getText( R.string.tv_reg_input_sms_code));
-
-                                buttonCheck = 1;
-
-
-                            }
-                                 // =========== новый водитель - продолжение регистрации =====
-                            if (status.equals("2")) {
-                                inputLayoutCode.setVisibility(View.GONE);
-                                LayoutInfo.setVisibility(View.VISIBLE);
-
-                                tvInfo.setVisibility(View.GONE);
-                                logo.setVisibility(View.GONE);
-                                buttonCheck = 2;
-
-                            }
-                            // =========== старый  водитель - востановление данных =====
-                            if (status.equals("3")) {
-
                                 pref.createDriver(
                                         response.getString("name"),
                                         response.getString("famaly"),
@@ -303,51 +260,15 @@ public class restoreDostup extends AppCompatActivity {
                                         response.getString("number"),
                                         response.getString("color")
                                 );
-
-                                pref.setPreOrders("0");
-                                Toast.makeText(getApplicationContext(), "Востановление завершено",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(restoreDostup.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+                                inputLayoutPhone.setVisibility(View.GONE);
+                                inputLayoutCode.setVisibility(View.VISIBLE);
+                                tvInfo.setText(getResources().getText(R.string.tv_reg_input_sms_code));
+                                buttonCheck = 1;
                             }
-
-                            if (status.equals("4")) {
-                                pref.setPreOrders("0");
-                                pref.createDriver(
-                                        inputName.getText().toString().trim(),
-                                        inputFamaly.getText().toString().trim(),
-                                        inputMarka.getText().toString().trim(),
-                                        inputNummber.getText().toString().trim(),
-                                        inputColor.getText().toString().trim()
-                                );
-
-
-                                Intent intent = new Intent(restoreDostup.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                finish();
-                            }
-
-
-                            if (status.equals("11")) {
-
-                                pref.setTaxiUrl(response.getString("url"));
-                                tvInfo.setVisibility(View.VISIBLE);
-                                tvInfo.setText( response.getString("message"));
-                                inputLayoutUrl.setVisibility(View.GONE);
-                                inputLayoutPhone.setVisibility(View.VISIBLE);
-                                buttonCheck = 0;
-
-                            }
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("666", "Autorize - " + e);
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -362,7 +283,7 @@ public class restoreDostup extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();//
                 // headers.put("Content-Type", "text/html; charset=utf-8");
-              headers.put("User-agent", "Motolife Linux Android");
+                headers.put("User-agent", "Motolife Linux Android");
                 return headers;
             }
         };
@@ -389,8 +310,6 @@ public class restoreDostup extends AppCompatActivity {
     }
 
 
-
-
     //======================проверка телефона ================================
 
     private static boolean isValidPhoneNumber(String mobile) {
@@ -415,6 +334,7 @@ public class restoreDostup extends AppCompatActivity {
         String regEx = "^[0-9]{4}$";
         return code.matches(regEx);
     }
+
     private boolean validateSmsCode() {
         if (!isValidSmsCode(inputCode.getText().toString())) {
             inputLayoutCode.setError(getString(R.string.err_msg_sms_code));
@@ -497,7 +417,6 @@ public class restoreDostup extends AppCompatActivity {
     }
 
 
-
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -505,12 +424,11 @@ public class restoreDostup extends AppCompatActivity {
     }
 
 
-
     /**
      * Hides the soft keyboard
      */
     public void hideSoftKeyboard() {
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
