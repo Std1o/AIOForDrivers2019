@@ -201,17 +201,18 @@ public class restoreDostup extends AppCompatActivity {
     private void Autorize(String command) {
 
 
-        String url =pref.getCityUrl()+ Urls.REGISTER_APPLY_URL;
+        String url = "http://some-company.svkcom.ru/appDriver/driverRegister.php";
 
 
         Map<String, String> map = new HashMap<>();
 
-            map.put("command", command);
+        command = "send_phone";
+
+        map.put("command", command);
 
         if (command.equals("send_phone")){
-            map.put("driverPhone", inputPhone.getText().toString().trim());
-            map.put("app", getResources().getString(R.string.app_vr));
-            map.put("IMEI", IMEI);
+            map.put("code", "5555");
+            map.put("driverPhone", "89272495641");
 
         }
 
@@ -240,15 +241,6 @@ public class restoreDostup extends AppCompatActivity {
             map.put("app", getResources().getString(R.string.app_vr));
 
         }
-
-
-
-        if (command.equals("get_urls")){
-            url = "http://beerdelivery.ru/mytrade/api/driverCompanyUrls.php";
-
-
-        }
-
         Log.e("666", "Autorize - " + map + "\n" + url);
 
 
