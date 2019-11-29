@@ -38,7 +38,7 @@
         android:id="@+id/input_layout_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_reg_info"
+        android:layout_below="@+id/input_layout_phone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp"
@@ -53,108 +53,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout_fio"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp"
-        android:visibility="gone">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Ваши данные:"
-            android:gravity="center_vertical|center_horizontal"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ваше Имя" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_famaly"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_famaly"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ваша Фамилия" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Данные об автомобиле:"
-            android:gravity="center_vertical|center_horizontal"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_marka"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_marka"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Марка и модель" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <EditText
-                android:id="@+id/input_color"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Цвет" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_car_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_car_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Регистрационный номер" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -179,21 +77,4 @@
         android:layout_centerHorizontal="true" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_layout_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp">
-
-        <EditText
-            android:id="@+id/input_code_company"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Введите код вашей Диспетчерской"
-            android:numeric="integer" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 </RelativeLayout>

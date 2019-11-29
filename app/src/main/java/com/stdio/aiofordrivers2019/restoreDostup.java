@@ -50,10 +50,9 @@ import com.stdio.aiofordrivers2019.helper.Urls;
 
 public class restoreDostup extends AppCompatActivity {
 
-    TextInputLayout inputLayoutName, inputLayoutFamaly, inputLayoutPhone, inputLayoutMarka, inputLayoutNumber,
-            inputLayoutColor, inputLayoutCode, inputLayoutUrl;
+    TextInputLayout inputLayoutPhone, inputLayoutCode;
 
-    EditText inputName, inputFamaly, inputPhone, inputMarka, inputNummber, inputColor, inputCode;
+    EditText inputPhone, inputCode;
 
 
     LinearLayout LayoutInfo;
@@ -70,7 +69,31 @@ public class restoreDostup extends AppCompatActivity {
     // String PROJECT_NUMBER = "570865019109";
     String IMEI;
 
-    int buttonCheck = -1;
+    int buttonCheck = 0;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.next) {
+
+            hideSoftKeyboard();
+            if (validatePhone() && validateSmsCode()) {
+                Autorize();
+            }
+            else {
+                return false;
+            }
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     @Override
@@ -92,33 +115,19 @@ public class restoreDostup extends AppCompatActivity {
 
         LayoutInfo = (LinearLayout) findViewById(R.id.layout_fio);
 
-        inputLayoutUrl = (TextInputLayout) findViewById(R.id.input_layout_url);
 
         inputLayoutPhone = (TextInputLayout) findViewById(R.id.input_layout_phone);
+        inputLayoutPhone.setVisibility(View.VISIBLE);
         inputLayoutCode = (TextInputLayout) findViewById(R.id.input_layout_code);
-
-        inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
-        inputLayoutFamaly = (TextInputLayout) findViewById(R.id.input_layout_famaly);
-        inputLayoutMarka = (TextInputLayout) findViewById(R.id.input_layout_marka);
-        inputLayoutNumber = (TextInputLayout) findViewById(R.id.input_layout_car_number);
-        inputLayoutColor = (TextInputLayout) findViewById(R.id.input_layout_color);
-
+        inputLayoutCode.setVisibility(View.VISIBLE);
 
         inputPhone = (EditText) findViewById(R.id.input_phone);
         inputCode = (EditText) findViewById(R.id.input_code);
-
-        inputName = (EditText) findViewById(R.id.input_name);
-        inputFamaly = (EditText) findViewById(R.id.input_famaly);
-        inputMarka = (EditText) findViewById(R.id.input_marka);
-        inputNummber = (EditText) findViewById(R.id.input_car_number);
-        inputColor = (EditText) findViewById(R.id.input_color);
-
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         IMEI = tMgr.getDeviceId();
-        ;
     }
 
 
@@ -129,110 +138,15 @@ public class restoreDostup extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.next) {
-
-            hideSoftKeyboard();
-            if (buttonCheck == -1) {
-
-                Autorize("get_urls");
-
-            }
-
-            if (buttonCheck == 0) {
-                if (!validatePhone()) {
-                    return false;
-                }
-                Autorize("send_phone");
-
-            }
-
-            if (buttonCheck == 1) {
-                if (!validateSmsCode()) {
-                    return false;
-                }
-                Autorize("send_code");
-
-            }
-            if (buttonCheck == 2) {
-                if (!validateName()) {
-                    return false;
-                }
-                if (!validateFamaly()) {
-                    return false;
-                }
-                if (!validateCarColor()) {
-                    return false;
-                }
-                if (!validateCar()) {
-                    return false;
-                }
-                if (!validateCarNumber()) {
-                    return false;
-                }
-
-                Autorize("send_driver_info");
-
-            }
-
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    private void Autorize(String command) {
-
-
+    private void Autorize() {
         String url = "http://some-company.svkcom.ru/appDriver/driverRegister.php";
-
-
         Map<String, String> map = new HashMap<>();
 
-        command = "send_phone";
+        map.put("command", "send_phone");
+        map.put("code", "2424");
+        map.put("driverPhone", "89272495641");
+        map.put("app", getResources().getString(R.string.app_vr));
 
-        map.put("command", command);
-
-        if (command.equals("send_phone")) {
-            map.put("code", "5555");
-            map.put("driverPhone", "89272495641");
-            map.put("app", getResources().getString(R.string.app_vr));
-        }
-
-        if (command.equals("send_code")) {
-            map.put("driverPhone", inputPhone.getText().toString().trim());
-            map.put("driverId", pref.getDriverId());
-            map.put("code", inputCode.getText().toString().trim());
-            map.put("hash", pref.getHash());
-            map.put("driverGCM", pref.getGsm());
-
-
-        }
-        if (command.equals("send_driver_info")) {
-            map.put("driverPhone", inputPhone.getText().toString().trim());
-            map.put("driverId", pref.getDriverId());
-            map.put("hash", pref.getHash());
-
-            map.put("driverName", inputName.getText().toString().trim());
-            map.put("driverFamaly", inputFamaly.getText().toString().trim());
-            map.put("driverPhone", inputPhone.getText().toString().trim());
-            map.put("driverCarMarka", inputMarka.getText().toString().trim());
-            map.put("driverCarNummber", inputNummber.getText().toString().trim());
-            map.put("driverCarColor", inputColor.getText().toString().trim());
-
-
-            map.put("app", getResources().getString(R.string.app_vr));
-
-        }
         Log.e("666", "Autorize - " + map + "\n" + url);
 
 
@@ -260,10 +174,14 @@ public class restoreDostup extends AppCompatActivity {
                                         response.getString("number"),
                                         response.getString("color")
                                 );
-                                inputLayoutPhone.setVisibility(View.GONE);
-                                inputLayoutCode.setVisibility(View.VISIBLE);
                                 tvInfo.setText(getResources().getText(R.string.tv_reg_input_sms_code));
                                 buttonCheck = 1;
+
+                                pref.setPreOrders("0");
+                                Intent intent = new Intent(restoreDostup.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -342,75 +260,6 @@ public class restoreDostup extends AppCompatActivity {
             return false;
         } else {
             inputLayoutCode.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-    //======================проверка исходных данных ================================
-
-    private boolean validateName() {
-        if (inputName.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError(getString(R.string.err_msg_name));
-            requestFocus(inputName);
-            return false;
-        } else {
-            inputLayoutName.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-
-    private boolean validateFamaly() {
-        String famaly = inputFamaly.getText().toString().trim();
-
-        if (famaly.isEmpty()) {
-            inputLayoutFamaly.setError(getString(R.string.err_msg_famaly));
-            requestFocus(inputFamaly);
-            return false;
-        } else {
-            inputLayoutFamaly.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-
-    private boolean validateCar() {
-        String car = inputMarka.getText().toString().trim();
-
-        if (car.isEmpty()) {
-            inputLayoutMarka.setError(getString(R.string.err_msg_car_brend));
-            requestFocus(inputMarka);
-            return false;
-        } else {
-            inputLayoutMarka.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-
-    private boolean validateCarColor() {
-        String color = inputColor.getText().toString().trim();
-
-        if (color.isEmpty()) {
-            inputLayoutColor.setError(getString(R.string.err_msg_car_color));
-            requestFocus(inputColor);
-            return false;
-        } else {
-            inputLayoutColor.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-
-    private boolean validateCarNumber() {
-        String number = inputNummber.getText().toString().trim();
-
-        if (number.isEmpty()) {
-            inputLayoutNumber.setError(getString(R.string.err_msg_car_number));
-            requestFocus(inputNummber);
-            return false;
-        } else {
-            inputLayoutNumber.setErrorEnabled(false);
         }
 
         return true;
