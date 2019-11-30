@@ -8,10 +8,17 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.collection.ArrayMap;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
 
 import static com.stdio.aiofordrivers2019.app.AppController.TAG;
 
@@ -30,15 +37,16 @@ public class FCMService extends FirebaseMessagingService {
         System.out.println("AAAAAAAAAAAAAAAAAAA");
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
+            Map data = remoteMessage.getData();
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-            Log.d(TAG, "Message data payload: " + remoteMessage.getMessageType());
+            Log.d(TAG, "Message data payload: " + remoteMessage.getData().get("type"));
+            if (remoteMessage.getData().get("type").equals("info")) createNotification("Диспетчерская:", remoteMessage.getData().get("body"));
 
-            if (remoteMessage.getMessageType().equals("info")) createNotification("Диспетчерская:", remoteMessage.getMessageType());
-
-            if (remoteMessage.getMessageType().equals("robotOrder")) robotDialog(remoteMessage.getMessageType(), "data.getString(orderID)");
+            if (remoteMessage.getData().get("type").equals("robotOrder")) robotDialog(remoteMessage.getData().get("body"), remoteMessage.getData().get("orderID"));
 
         }
 

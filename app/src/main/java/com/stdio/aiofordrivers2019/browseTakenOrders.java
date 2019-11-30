@@ -352,7 +352,7 @@ public class browseTakenOrders extends AppCompatActivity {
             });
 
 
-            builder.setPositiveButton("Клиент вышел", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Еду к клиенту", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
                     takeOrderFromDriver(order, "changeOrderStatus_40", "");

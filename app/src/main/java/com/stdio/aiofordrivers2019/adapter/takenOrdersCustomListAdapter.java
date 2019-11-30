@@ -91,17 +91,17 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
 
 
         if(orderStatus.getText().toString().equals("20")){
-            Status.setText("Клиент ожидает вас");
+            Status.setText("Еду за товаром");
             Status.setTextColor(Color.GREEN);
         }
 
         if(orderStatus.getText().toString().equals("30")){
-            Status.setText("Клиент выходит");
+            Status.setText("Еду к клиенту");
             Status.setTextColor(Color.BLUE);
         }
 
         if(orderStatus.getText().toString().equals("40")){
-            Status.setText("В пути");
+            Status.setText("Прибыл к клиенту");
             Status.setTextColor(Color.BLACK);
         }
 
