@@ -14,7 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 public class AppController extends Application {
 
-    public static final String TAG = "wtff";
+    public static final String TAG = "AIO_APP";
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;

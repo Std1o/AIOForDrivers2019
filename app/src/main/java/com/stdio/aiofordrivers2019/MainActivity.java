@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -59,9 +60,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.stdio.aiofordrivers2019.app.AppController;
 import com.stdio.aiofordrivers2019.app.CustomRequest;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
@@ -105,6 +110,24 @@ public class MainActivity extends AppCompatActivity
         city = (TextView) findViewById(R.id.tv_menu_city);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id
                 .coordinatorLayout);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("tagg", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        pref.setGcm(token);
+                        Log.d("tagg", token);
+                    }
+                });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -384,6 +407,7 @@ public class MainActivity extends AppCompatActivity
         map.put("driverId", pref.getDriverId());
         map.put("hash", pref.getHash());
         map.put("preOrder", pref.getPreOrders());
+        map.put("driverGCM", pref.getGsm());
 
 
         Log.e("666", "Autorize - " + map + "\n" + url);
