@@ -6,11 +6,6 @@
             android:id="@+id/nav_free_orders"
             android:icon="@drawable/abc_ic_menu_paste_mtrl_am_alpha"
             android:title="Свободные заказы" />
-
-        <item
-            android:id="@+id/nav_tax"
-            android:icon="@android:drawable/ic_dialog_dialer"
-            android:title="Таксометр" />
         <item
             android:id="@+id/nav_taken_orders"
             android:icon="@android:drawable/ic_dialog_info"

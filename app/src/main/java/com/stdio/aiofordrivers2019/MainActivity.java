@@ -105,42 +105,6 @@ public class MainActivity extends AppCompatActivity
         city = (TextView) findViewById(R.id.tv_menu_city);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id
                 .coordinatorLayout);
-       // Intent i = new Intent(this, RegistrationIntentService.class);
-      //  startService(i);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar snackbar = Snackbar
-                        .make(coordinatorLayout, "Свободный таксометр", Snackbar.LENGTH_LONG)
-                        .setAction("ЗАПУСК", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                Intent intent = new Intent(MainActivity.this, Taxometr.class);
-                                intent.putExtra("orderId", "0");
-                                intent.putExtra("orderType", "zakazFree");
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                            }
-                        });
-
-                // Changing message text color
-                snackbar.setActionTextColor(Color.RED);
-
-                // Changing action button text color
-                View sbView = snackbar.getView();
-                TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
-                textView.setTextColor(Color.YELLOW);
-
-                snackbar.show();
-            }
-        });
-
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -329,13 +293,6 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(intent);
 
-
-        } else if (id == R.id.nav_tax) {
-            Intent intent = new Intent(MainActivity.this, Taxometr.class);
-            intent.putExtra("orderId", "0");
-            intent.putExtra("orderType", "zakazFree");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
 
         } else if (id == R.id.nav_taken_orders) {
             Intent intent = new Intent(MainActivity.this, browseTakenOrders.class);

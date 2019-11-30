@@ -508,48 +508,12 @@ public class browseTakenOrders extends AppCompatActivity {
 
 
 
-                            if (status.equals("0")) {
-
-                                Intent intent = new Intent(browseTakenOrders.this, Taxometr.class);
-                                intent.putExtra("minPrice", response.getString("minPrice"));
-                                intent.putExtra("minKm", response.getString("minKm"));
-                                intent.putExtra("priceForKm", response.getString("priceForKm"));
-                                intent.putExtra("waitMinut", response.getString("waitMinut"));
-                                intent.putExtra("orderPrice", response.getString("orderPrice"));
-                                intent.putExtra("orderId", order);
-                                intent.putExtra("orderType", "zakaz");
-                                intent.putExtra("fix", response.getString("fix"));
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                finish();
-
-                            }
                             if (status.equals("-1")) {
 
                             }
 
 
                             // ===========
-                            if (status.equals("2")) {
-
-                                Intent intent = new Intent(browseTakenOrders.this, Taxometr.class);
-                                intent.putExtra("minPrice", response.getString("minPrice"));
-                                intent.putExtra("minKm", response.getString("minKm"));
-                                intent.putExtra("priceForKm", response.getString("priceForKm"));
-                                intent.putExtra("waitMinut", response.getString("waitMinut"));
-                                intent.putExtra("orderPrice", response.getString("orderPrice"));
-                                intent.putExtra("orderId", order);
-                                intent.putExtra("orderType", "zakazAgain");
-
-                                intent.putExtra("trip_km", response.getString("trip_km"));
-                                intent.putExtra("trip_wait", response.getString("trip_wait"));
-
-                                intent.putExtra("fix", response.getString("fix"));
-
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                finish();
-                            }
 
                             if (status.equals("3")) {
                                 alertOrderInfo(response.getString("message")
