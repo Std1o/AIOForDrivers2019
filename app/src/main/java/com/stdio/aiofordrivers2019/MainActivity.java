@@ -445,13 +445,6 @@ public class MainActivity extends AppCompatActivity
 
                             if (status.equals("0")) {
 
-
-                                pref.createFreeTarif(
-                                        response.getString("min_price"),
-                                        response.getString("price_for_km"),
-                                        response.getString("min_km"),
-                                        response.getString("minut_price"));
-
                                 tvTypeWork.setText(response.getString("driverTypeWork"));
 
                                 tvDriverMoney.setText("На счете:\n" +response.getInt("driverMoney")+" р.");
