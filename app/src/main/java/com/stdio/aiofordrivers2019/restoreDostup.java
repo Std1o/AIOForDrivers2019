@@ -128,6 +128,7 @@ public class restoreDostup extends AppCompatActivity {
 
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         IMEI = tMgr.getDeviceId();
+        pref.setTaxiUrl("http://some-company.svkcom.ru");
     }
 
 
@@ -139,7 +140,7 @@ public class restoreDostup extends AppCompatActivity {
     }
 
     private void Autorize() {
-        String url = "http://some-company.svkcom.ru/appDriver/driverRegister.php";
+        String url = "http://some-company.svkcom.ru" + Urls.REGISTER_APPLY_URL;
         Map<String, String> map = new HashMap<>();
 
         map.put("command", "send_phone");

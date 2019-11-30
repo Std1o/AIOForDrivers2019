@@ -6,9 +6,9 @@ package com.stdio.aiofordrivers2019.helper;
 public class Urls {
 
 
-    public static final String REGISTER_APPLY_URL =  "/taxi/appDriver/driverRegister.php";
-    public static final String START_INFO_URL =  "/taxi/appDriver/takeDriverStartInfo.php";
-    public static final String SEND_COORS_URL =  "/taxi/appDriver/driverCoords.php";
+    public static final String REGISTER_APPLY_URL =  "/appDriver/driverRegister.php";
+    public static final String START_INFO_URL =  "/appDriver/takeDriverStartInfo.php";
+    public static final String SEND_COORS_URL =  "/appDriver/driverCoords.php";
     public static final String GET_FREE_ORDERS_URL =  "/taxi/appDriver/freeOrdersList.php";
     public static final String TAKE_ORDER_URL =  "/taxi/appDriver/takeOrderByDriver.php";
     public static final String TAKEN_ORDER_LIST_URL =  "/taxi/appDriver/takenOrdersList.php";

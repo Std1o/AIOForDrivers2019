@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity
     private void takeInfo(String command) {
 
 
-        String url =pref.getCityUrl()+ Urls.START_INFO_URL;
+        String url = "http://some-company.svkcom.ru" + Urls.START_INFO_URL;
 
 
         Map<String, String> map = new HashMap<>();
@@ -427,7 +427,6 @@ public class MainActivity extends AppCompatActivity
         map.put("driverId", pref.getDriverId());
         map.put("hash", pref.getHash());
         map.put("preOrder", pref.getPreOrders());
-        map.put("driverGCM", pref.getGsm());
 
 
         Log.e("666", "Autorize - " + map + "\n" + url);
