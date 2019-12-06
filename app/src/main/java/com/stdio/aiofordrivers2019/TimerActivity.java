@@ -25,7 +25,9 @@ public class TimerActivity extends AppCompatActivity {
 
     int seconds = 0;
     int minutes = 0;
-    TextView tvTimer;
+    TextView tvTimer, tvPrice;
+
+    int currentPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
 
         tvTimer = findViewById(R.id.tvTimer);
+        tvPrice = findViewById(R.id.tvPrice);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -52,6 +55,7 @@ public class TimerActivity extends AppCompatActivity {
         }
 
         Log.e("666", minutPrice  + " " + orderPrice + " " + order + " " + waitMinut);
+        tvPrice.setText("Стоимость доставки: " + (orderPrice + currentPrice));
 
         doSomeWork();
     }
@@ -88,6 +92,11 @@ public class TimerActivity extends AppCompatActivity {
                 if (seconds >= 60) {
                     minutes++;
                     seconds = seconds % 60;
+
+                    if (minutes > waitMinut) {
+                        currentPrice += minutPrice;
+                        tvPrice.setText("Стоимость доставки: " + (orderPrice + currentPrice));
+                    }
                 }
                 String strSeconds = (seconds >= 10) ? seconds + "" : "0" + seconds;
                 String strMinutes = (minutes >= 10) ? minutes + "" : "0" + minutes;
