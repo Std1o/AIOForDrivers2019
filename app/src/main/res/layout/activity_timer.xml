@@ -7,7 +7,7 @@
     tools:context=".TimerActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/tvTimer"
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:text="Стоимость доставки: 1000р"/>

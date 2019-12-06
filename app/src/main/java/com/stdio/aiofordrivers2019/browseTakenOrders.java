@@ -515,8 +515,8 @@ public class browseTakenOrders extends AppCompatActivity {
                                 Intent timerIntent = new Intent(browseTakenOrders.this, TimerActivity.class);
                                 timerIntent.putExtra("minutPrice", response.getInt("minutPrice"));
                                 timerIntent.putExtra("orderPrice", response.getInt("orderPrice"));
-                                Log.e("666", order);
                                 timerIntent.putExtra("order", response.getInt("orderId"));
+                                timerIntent.putExtra("waitMinut", response.getInt("waitMinut"));
                                 startActivity(timerIntent);
                             }
 
