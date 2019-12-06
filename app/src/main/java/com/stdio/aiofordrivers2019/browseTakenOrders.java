@@ -558,11 +558,6 @@ public class browseTakenOrders extends AppCompatActivity {
             }
         };
         queue.add(postRequest);
-
-
-
-
-
     }
 
 
