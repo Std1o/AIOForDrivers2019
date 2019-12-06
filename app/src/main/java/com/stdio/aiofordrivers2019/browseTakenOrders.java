@@ -395,9 +395,8 @@ public class browseTakenOrders extends AppCompatActivity {
             });
 
 
-            builder.setPositiveButton("Таксометр", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Ожидание оплаты", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-
                     takeOrderFromDriver(order, "changeOrderStatus_40_2","");
                     dialog.cancel();
                 }
@@ -510,6 +509,15 @@ public class browseTakenOrders extends AppCompatActivity {
 
                             if (status.equals("-1")) {
 
+                            }
+
+                            if (status.equals("2")) {
+                                Intent timerIntent = new Intent(browseTakenOrders.this, TimerActivity.class);
+                                timerIntent.putExtra("minutPrice", response.getInt("minutPrice"));
+                                timerIntent.putExtra("orderPrice", response.getInt("orderPrice"));
+                                Log.e("666", order);
+                                timerIntent.putExtra("order", response.getInt("orderId"));
+                                startActivity(timerIntent);
                             }
 
 
