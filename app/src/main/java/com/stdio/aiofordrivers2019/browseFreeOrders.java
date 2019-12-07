@@ -65,7 +65,6 @@ public class browseFreeOrders extends AppCompatActivity {
     private OrdersCustomListAdapter adapter;
     private PrefManager pref;
     RequestQueue queue;
-    CheckBox now, advance;
 
     int intNow = 1, intAdvance = 0;
     /**
@@ -96,27 +95,7 @@ public class browseFreeOrders extends AppCompatActivity {
         // Showing progress dialog before making http request
         pDialog.setMessage("Отправка запроса...");
 
-        now = (CheckBox) findViewById(R.id.cb_now);
-        now.setChecked(true);
-        now.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    intNow = 1; setBackgroundGreen(now);
-                } else {intNow = 0; setBackgroundRed(now);}
-                getFreeOrders();
-            }
-        });
-
-        advance = (CheckBox) findViewById(R.id.cb_advance);
-        advance.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {intAdvance = 1; setBackgroundGreen(advance);}
-                else {intAdvance = 0; setBackgroundRed(advance);}
-                getFreeOrders();
-            }
-        });
+        intNow = 1;
 
 
         Log.e("666", "onCreate()");

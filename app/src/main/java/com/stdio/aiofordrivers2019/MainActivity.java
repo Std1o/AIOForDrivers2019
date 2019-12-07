@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity
     NotificationsHelper n;
 
     ImageView userFoto;
-    CheckBox preOrder;
     final int REQUEST_PERMISSIONS = 3;
     private CoordinatorLayout coordinatorLayout;
 
@@ -153,8 +152,6 @@ public class MainActivity extends AppCompatActivity
         pref = new PrefManager(getApplicationContext());
         queue = Volley.newRequestQueue(this);
 
-        preOrder = (CheckBox) findViewById(R.id.cb_preorders);
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
                 == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
@@ -172,16 +169,6 @@ public class MainActivity extends AppCompatActivity
 
                 takeInfo("takeStartInfo");
                 driverName.setText(pref.getDriverName());
-
-
-
-
-                if(pref.getPreOrders().equals("1")){
-                    preOrder.setChecked(true);
-                } else{
-                    preOrder.setChecked(false);
-                }
-
             }
         } else {
             requestReadPermission();
@@ -199,30 +186,6 @@ public class MainActivity extends AppCompatActivity
         tvTakeOrders = (TextView)findViewById(R.id.tv_take_orders);
 
         tvClassAuto = (TextView)findViewById(R.id.tv_class_auto);
-
-
-
-
-
-
-
-
-        preOrder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                    pref.setPreOrders("1");
-
-                } else {
-
-                    pref.setPreOrders("0");
-
-                }
-
-                takeInfo("preOrder");
-            }
-        });
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -250,16 +213,6 @@ public class MainActivity extends AppCompatActivity
 
                         takeInfo("takeStartInfo");
                         driverName.setText(pref.getDriverName());
-
-
-
-
-                        if(pref.getPreOrders().equals("1")){
-                            preOrder.setChecked(true);
-                        } else{
-                            preOrder.setChecked(false);
-                        }
-
                     }
                 }
                 else {

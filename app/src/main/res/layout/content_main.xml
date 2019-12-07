@@ -14,15 +14,6 @@
 
 
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView"
-        android:src="@drawable/taxi_tank"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -134,21 +125,6 @@
         android:textColor="#fc0606"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvInfo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Оповещать о предварительных заказах"
-            android:id="@+id/cb_preorders" />
-    </LinearLayout>
 
 
 </RelativeLayout>

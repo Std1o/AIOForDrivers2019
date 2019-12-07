@@ -69,7 +69,6 @@ public class browseTakenOrders extends AppCompatActivity {
     private PrefManager pref;
     RequestQueue queue;
     Toolbar toolbar;
-  LinearLayout cb;
 
 
     @Override
@@ -83,8 +82,6 @@ public class browseTakenOrders extends AppCompatActivity {
 
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
-        cb = (LinearLayout) findViewById(R.id.ll_cb);
-        cb.setVisibility(View.GONE);
 
         listView = (ListView) findViewById(R.id.list);
         adapter = new takenOrdersCustomListAdapter(this, ordersList);
