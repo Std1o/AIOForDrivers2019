@@ -144,8 +144,8 @@ public class restoreDostup extends AppCompatActivity {
         Map<String, String> map = new HashMap<>();
 
         map.put("command", "send_phone");
-        map.put("code", "2424");
-        map.put("driverPhone", "89272495641");
+        map.put("code", inputCode.getText().toString());
+        map.put("driverPhone", inputPhone.getText().toString());
         map.put("app", getResources().getString(R.string.app_vr));
 
         Log.e("666", "Autorize - " + map + "\n" + url);
