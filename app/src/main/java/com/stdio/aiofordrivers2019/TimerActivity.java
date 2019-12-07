@@ -147,7 +147,7 @@ public class TimerActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnComplete:
-                completeOrder(String.valueOf(order), "sendCompliteOrder", String.valueOf(waitPrice + orderPrice), String.valueOf(minutes));
+                completeOrder(String.valueOf(order), "sendCompliteOrder", String.valueOf(waitPrice + orderPrice), String.valueOf(minutes), "");
                 break;
             case R.id.btnCancel:
                 cancel();
@@ -155,7 +155,7 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
-    private void completeOrder(final String order, String command, String money, String waitminut) {
+    private void completeOrder(final String order, String command, String money, String waitminut, String res) {
 
 
         String url = pref.getCityUrl() + Urls.TAKE_ORDER_URL;
@@ -168,8 +168,15 @@ public class TimerActivity extends AppCompatActivity {
         map.put("hash", pref.getHash());
         map.put("command", command);
         map.put("orderId", order);
-        map.put("money", money);
-        map.put("waitminut", waitminut);
+        if (!money.isEmpty()) {
+            map.put("money", money);
+        }
+        if (!waitminut.isEmpty()) {
+            map.put("waitminut", waitminut);
+        }
+        if (!res.isEmpty()) {
+            map.put("res", res);
+        }
 
             Log.e("666", "Autorize - " + map + "\n" + url);
 
@@ -232,7 +239,7 @@ public class TimerActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                completeOrder(String.valueOf(order), "changeOrderStatusDel", "", "", etComments.getText().toString());
             }
         });
 
