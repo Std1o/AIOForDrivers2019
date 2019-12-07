@@ -32,7 +32,7 @@
         android:layout_marginBottom="50dp">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnComplete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -42,11 +42,13 @@
             android:text="Оплачено" />
 
         <Button
+            android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="20dp"
             android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:onClick="onClick"
             android:text="Отказ" />
     </LinearLayout>
 

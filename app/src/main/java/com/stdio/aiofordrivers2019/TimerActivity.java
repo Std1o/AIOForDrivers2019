@@ -1,12 +1,17 @@
 package com.stdio.aiofordrivers2019;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -22,6 +27,7 @@ import com.stdio.aiofordrivers2019.helper.Urls;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -139,7 +145,14 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        completeOrder(String.valueOf(order), "sendCompliteOrder", String.valueOf(waitPrice + orderPrice), String.valueOf(minutes));
+        switch (view.getId()) {
+            case R.id.btnComplete:
+                completeOrder(String.valueOf(order), "sendCompliteOrder", String.valueOf(waitPrice + orderPrice), String.valueOf(minutes));
+                break;
+            case R.id.btnCancel:
+                cancel();
+                break;
+        }
     }
 
     private void completeOrder(final String order, String command, String money, String waitminut) {
@@ -204,5 +217,35 @@ public class TimerActivity extends AppCompatActivity {
             }
         };
         queue.add(postRequest);
+    }
+
+    private void cancel() {
+        final View view = getLayoutInflater().inflate(R.layout.edit_text_dialog, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Отказ");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Причина отказа");
+
+
+        final EditText etComments = (EditText) view.findViewById(R.id.etComments);
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+
+
+        alertDialog.setView(view);
+        alertDialog.show();
     }
 }
