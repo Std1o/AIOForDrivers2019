@@ -171,7 +171,7 @@ public class browseFreeOrders extends AppCompatActivity {
 
 
                                     modelOrders order = new modelOrders();
-                                    order.setStat(obj.getString("prord"));
+                                    order.setStat("");
                                     order.setorderId(obj.getString("orderID"));
                                     order.setorderTime(obj.getString("orderTime"));
                                     order.setorderTarif(obj.getString("orderTarif"));

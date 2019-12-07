@@ -11,6 +11,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,19 +43,21 @@ public class TimerActivity extends AppCompatActivity {
 
     private final CompositeDisposable disposables = new CompositeDisposable();
 
-    int minutPrice = 0;
-    int orderPrice = 0;
-    int order = 0;
-    int waitMinut = 0;
+    public static int minutPrice = 0;
+    public static int orderPrice = 0;
+    public static int order = 0;
+    public static int waitMinut = 0;
 
-    int seconds = 0;
-    int minutes = 0;
+    public static int seconds = 0;
+    public static int minutes = 0;
     TextView tvTimer, tvPrice;
 
-    int waitPrice = 0;
+    public static int waitPrice = 0;
 
     private PrefManager pref;
     RequestQueue queue;
+
+    Intent intentService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,14 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
+        intentService = new Intent(this, MyService.class);
 
         tvTimer = findViewById(R.id.tvTimer);
         tvPrice = findViewById(R.id.tvPrice);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null) {
+            if (extras == null) {
                 minutPrice = 0;
             } else {
                 minutPrice = extras.getInt("minutPrice");
@@ -82,17 +86,45 @@ public class TimerActivity extends AppCompatActivity {
             order = (int) savedInstanceState.getSerializable("order");
             waitMinut = (int) savedInstanceState.getSerializable("waitMinut");
         }
-
-        Log.e("666", minutPrice  + " " + orderPrice + " " + order + " " + waitMinut);
+        Log.e("666", minutPrice + " " + orderPrice + " " + order + " " + waitMinut);
         tvPrice.setText("Стоимость доставки: " + (orderPrice + waitPrice));
-
         doSomeWork();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyService.disposables.clear();
+        stopService(intentService);
+        seconds = 0;
+        minutes = 0;
+        waitPrice = 0;
+
+        minutPrice = 0;
+        orderPrice = 0;
+        order = 0;
+        waitMinut = 0;
         disposables.clear(); // clearing it : do not emit after destroy
+    }
+
+    @Override
+    public void onPause() {
+        disposables.clear(); // clearing it : do not emit after destroy
+        startService(intentService);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e("666", minutPrice + " " + orderPrice + " " + order + " " + waitMinut);
+        tvPrice.setText("Стоимость доставки: " + (orderPrice + waitPrice));
+        String strSeconds = (seconds >= 10) ? seconds + "" : "0" + seconds;
+        String strMinutes = (minutes >= 10) ? minutes + "" : "0" + minutes;
+        tvTimer.setText(strMinutes + ":" + strSeconds);
+        MyService.disposables.clear();
+        stopService(intentService);
+        doSomeWork();
+        super.onResume();
     }
 
     /*
@@ -178,7 +210,7 @@ public class TimerActivity extends AppCompatActivity {
             map.put("res", res);
         }
 
-            Log.e("666", "Autorize - " + map + "\n" + url);
+        Log.e("666", "Autorize - " + map + "\n" + url);
 
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url,
@@ -187,7 +219,7 @@ public class TimerActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                                Log.e("666", "Autorize - " + response);
+                        Log.e("666", "Autorize - " + response);
                         try {
                             String status = response.getString("st");
                             if (status.equals("3")) {
