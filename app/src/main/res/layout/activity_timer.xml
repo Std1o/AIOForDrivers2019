@@ -6,30 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".TimerActivity">
 
-    <TextView
-        android:id="@+id/tvTimer"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="50sp"
         android:layout_centerInParent="true"
-        android:text="00:00" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTimer"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Стоимость доставки: 1000р"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Время ожидания"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Стоимость доставки: 1000р"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="10dp">
 
         <Button
             android:id="@+id/btnComplete"
@@ -39,6 +52,8 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:onClick="onClick"
+            android:background="@drawable/b_yes"
+            android:foreground="?selectableItemBackground"
             android:text="Оплачено" />
 
         <Button
@@ -49,6 +64,8 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:onClick="onClick"
+            android:background="@drawable/b_red"
+            android:foreground="?selectableItemBackground"
             android:text="Отказ" />
     </LinearLayout>
 
