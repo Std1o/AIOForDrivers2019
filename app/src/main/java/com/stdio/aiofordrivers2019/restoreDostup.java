@@ -128,7 +128,7 @@ public class restoreDostup extends AppCompatActivity {
 
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         IMEI = tMgr.getDeviceId();
-        pref.setTaxiUrl("http://some-company.svkcom.ru");
+        pref.setTaxiUrl("http://bdsystem.ru/");
     }
 
 
