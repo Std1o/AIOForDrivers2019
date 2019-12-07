@@ -190,14 +190,12 @@ public class TimerActivity extends AppCompatActivity {
                                 Log.e("666", "Autorize - " + response);
                         try {
                             String status = response.getString("st");
-
-                            if (status.equals("-1")) {
-
+                            if (status.equals("3")) {
+                                Toast.makeText(getApplicationContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                             }
-
-                            if (status.equals("2")) {
-                                TimerActivity.this.finish();
-                            }
+                            Intent intent = new Intent(TimerActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
