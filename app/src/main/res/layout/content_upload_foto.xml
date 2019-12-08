@@ -45,7 +45,7 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Фото вашей машины"
+                android:text="Фото СТС"
                 android:id="@+id/radio1"
 
                 android:textColor="#040404"
@@ -57,7 +57,7 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ваше фото"
+                android:text="Фото ВУ"
                 android:id="@+id/radio2"
                 android:textSize="16sp"
                 android:textStyle="bold"

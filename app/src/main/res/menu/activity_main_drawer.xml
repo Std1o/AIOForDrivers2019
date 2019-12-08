@@ -16,16 +16,10 @@
     <item android:title="Настройки">
         <menu>
 
-
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@android:drawable/ic_menu_edit"
-                android:title="Личные данные" />
-
             <item
                 android:id="@+id/nav_foto"
                 android:icon="@android:drawable/ic_menu_camera"
-                android:title="Ваши фото" />
+                android:title="Документы" />
 
 
         </menu>
@@ -43,7 +37,7 @@
             <item
                 android:id="@+id/nav_pay"
                 android:icon="@mipmap/ic_ruble"
-                android:title="Оплата заказов" />
+                android:title="Пополнения" />
 
 
 

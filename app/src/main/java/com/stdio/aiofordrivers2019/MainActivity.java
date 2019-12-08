@@ -78,10 +78,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-
     private PrefManager pref;
-    TextView city,  driverName, tvTypeWork, tvDriverStatus,  tvDriverMoney, tvClassAuto, tvInfo,
-    tvBlock, tvApp, tvTakeOrders;
+    TextView city, driverName, tvTypeWork, tvDriverStatus, tvDriverMoney, tvClassAuto, tvInfo,
+            tvBlock, tvApp, tvTakeOrders;
     View header;
     RequestQueue queue;
     String driverStatus;
@@ -102,6 +101,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setTitle(R.string.app_name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -145,8 +146,6 @@ public class MainActivity extends AppCompatActivity
         userFoto = (ImageView) header.findViewById(R.id.img_user_foto);
 
 
-
-
         navigationView.addHeaderView(header);
 
         pref = new PrefManager(getApplicationContext());
@@ -186,16 +185,16 @@ public class MainActivity extends AppCompatActivity
 
         tvTypeWork = (TextView) findViewById(R.id.tv_type_work);
 
-        tvDriverMoney = (TextView)findViewById(R.id.tv_driver_money);
+        tvDriverMoney = (TextView) findViewById(R.id.tv_driver_money);
 
-        tvApp = (TextView)findViewById(R.id.tv_app);
-        tvTakeOrders = (TextView)findViewById(R.id.tv_take_orders);
+        tvApp = (TextView) findViewById(R.id.tv_app);
+        tvTakeOrders = (TextView) findViewById(R.id.tv_take_orders);
 
-        tvClassAuto = (TextView)findViewById(R.id.tv_class_auto);
+        tvClassAuto = (TextView) findViewById(R.id.tv_class_auto);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-         n = new NotificationsHelper(this);
+        n = new NotificationsHelper(this);
         n.createNotification("Такси", MainActivity.class, 0);
     }
 
@@ -220,10 +219,9 @@ public class MainActivity extends AppCompatActivity
                         takeInfo("takeStartInfo");
                         driverName.setText(pref.getDriverName());
                     }
-                }
-                else {
+                } else {
                     //Permission has not been granted. Notify the user.
-                    Toast.makeText(MainActivity.this,"Permission is Required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Permission is Required", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -283,25 +281,19 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(intent);
 
-        }
-        else if (id == R.id.nav_share) {
-        Intent intent= new Intent(this, driverInfo.class);
-        startActivity(intent);
-    } else if (id == R.id.nav_pay) {
+        } else if (id == R.id.nav_pay) {
 
-            Intent intent= new Intent(this, paymentActivity.class);
+            Intent intent = new Intent(this, paymentActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         } else if (id == R.id.nav_foto) {
 
-            Intent intent= new Intent(this, UploadFotoActivity.class);
+            Intent intent = new Intent(this, UploadFotoActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        }
+        } else if (id == R.id.nav_h_orders) {
 
-        else if (id == R.id.nav_h_orders) {
-
-            Intent intent= new Intent(this, OldOrdersActivity.class);
+            Intent intent = new Intent(this, OldOrdersActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
@@ -324,13 +316,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @Override
     protected void onRestart() {
         super.onRestart();
-       // takeDriverStartInfo("takeDriverInfo");
+        // takeDriverStartInfo("takeDriverInfo");
         n.createNotification("Такси", MainActivity.class, 0);
-       //  handler.postDelayed(runnable, 100);
+        //  handler.postDelayed(runnable, 100);
         Log.e("666", "onRestart()");
         takeInfo("takeStartInfo");
     }
@@ -343,15 +334,9 @@ public class MainActivity extends AppCompatActivity
         stopService(new Intent(MainActivity.this, ServiceSendCoords.class));
 
         NotificationsHelper.cancelAllNotifications();
-     //   mNotificationManager.cancel(1001);
+        //   mNotificationManager.cancel(1001);
         Log.e("MAIN", "onDestroy()");
     }
-
-
-
-
-
-
 
 
     private void takeInfo(String command) {
@@ -387,27 +372,25 @@ public class MainActivity extends AppCompatActivity
 
                                 tvTypeWork.setText(response.getString("driverTypeWork"));
 
-                                tvDriverMoney.setText("На счете:\n" +response.getInt("driverMoney")+" р.");
+                                tvDriverMoney.setText("Баланс:\n" + response.getInt("driverMoney") + " р.");
 
                                 tvClassAuto.setText(response.getString("classAuto"));
-                                if(response.getInt("driverMoney") > 299){
+                                if (response.getInt("driverMoney") > 299) {
 
                                     tvDriverMoney.setBackgroundResource(R.drawable.b_yes);
 
-                                }
-                                else{
+                                } else {
                                     tvDriverMoney.setBackgroundResource(R.drawable.b_red);
                                 }
 
 
-
-                                if(response.getString("driverStatus").equals("0")){
+                                if (response.getString("driverStatus").equals("0")) {
                                     tvDriverStatus.setText("Статус:\nСвободен");
                                     tvDriverStatus.setBackgroundResource(R.drawable.b_yes);
 
                                 }
 
-                                if(response.getString("driverStatus").equals("1")){
+                                if (response.getString("driverStatus").equals("1")) {
                                     tvDriverStatus.setText("Статус:\nЗанят");
                                     tvDriverStatus.setBackgroundResource(R.drawable.b_red);
                                 }
@@ -415,28 +398,26 @@ public class MainActivity extends AppCompatActivity
                                 driverStatus = response.getString("driverStatus");
 
 
-                                if(!response.getString("appVer").equals(getResources().getString(R.string.app_vr))){
+                                if (!response.getString("appVer").equals(getResources().getString(R.string.app_vr))) {
 
                                     goGooglePlay();
                                     finish();
                                 }
 
 
-                                tvTakeOrders.setText("Взятые\nзаказы:\n"+ response.getInt("takenOrders"));
-                                if(response.getInt("takenOrders") > 0){
+                                tvTakeOrders.setText("Взятые\nзаказы:\n" + response.getInt("takenOrders"));
+                                if (response.getInt("takenOrders") > 0) {
 
                                     tvTakeOrders.setBackgroundResource(R.drawable.b_yes);
 
-                                }
-                                else{
+                                } else {
                                     tvTakeOrders.setBackgroundResource(R.drawable.b_no);
                                 }
 
 
-
-                                if (response.getString("active").equals("0")){
+                                if (response.getString("active").equals("0")) {
                                     tvInfo.setText("Ожидайте активации");
-                                }else {
+                                } else {
                                     tvInfo.setText("");
                                 }
 
@@ -446,15 +427,15 @@ public class MainActivity extends AppCompatActivity
 
                             }
 
-                               // =========== смена Статуса=====
+                            // =========== смена Статуса=====
                             if (status.equals("1")) {
-                                if (response.getString("message").equals("free")){
-                                    driverStatus="0";
+                                if (response.getString("message").equals("free")) {
+                                    driverStatus = "0";
                                     tvDriverStatus.setText("Статус:\nСвободен");
                                     tvDriverStatus.setBackgroundResource(R.drawable.b_yes);
                                 }
-                                if (response.getString("message").equals("busy")){
-                                    driverStatus="1";
+                                if (response.getString("message").equals("busy")) {
+                                    driverStatus = "1";
                                     tvDriverStatus.setText("Статус:\nЗанят");
                                     tvDriverStatus.setBackgroundResource(R.drawable.b_red);
                                 }
@@ -470,8 +451,6 @@ public class MainActivity extends AppCompatActivity
                             }
 
                             if (status.equals("3")) {
-
-
 
 
                             }
@@ -513,25 +492,20 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void changeDriverStatus(View view) {
 
 
-
-
-    public void changeDriverStatus(View view){
-
-
-        if(driverStatus.equals("0")){
+        if (driverStatus.equals("0")) {
             takeInfo("status_busy");
         }
-        if(driverStatus.equals("1")){
+        if (driverStatus.equals("1")) {
             takeInfo("status_free");
         }
 
     }
 
 
-
-    public void goGooglePlay(){
+    public void goGooglePlay() {
 
         final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
         try {
@@ -542,7 +516,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void goTakenOrders(View v){
+    public void goTakenOrders(View v) {
         Intent intent = new Intent(MainActivity.this, browseTakenOrders.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -550,27 +524,27 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-public void noinet(){
+    public void noinet() {
 
 
-    Snackbar snackbar = Snackbar
-            .make(coordinatorLayout, "Ошибка связи с сервером!", Snackbar.LENGTH_LONG)
-            .setAction("ПОВТОР", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    takeInfo("takeStartInfo");
-                }
-            });
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Ошибка связи с сервером!", Snackbar.LENGTH_LONG)
+                .setAction("ПОВТОР", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        takeInfo("takeStartInfo");
+                    }
+                });
 
-    // Changing message text color
-    snackbar.setActionTextColor(Color.RED);
+        // Changing message text color
+        snackbar.setActionTextColor(Color.RED);
 
-    // Changing action button text color
-    View sbView = snackbar.getView();
-    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
-    textView.setTextColor(Color.YELLOW);
+        // Changing action button text color
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+        textView.setTextColor(Color.YELLOW);
 
-    snackbar.show();
+        snackbar.show();
 
 
     }
