@@ -202,17 +202,11 @@ public class TimerActivity extends AppCompatActivity {
 
         if (forComplete) {
             map.put("orderId", order);
+            map.put("money", money);
+            map.put("waitminut", waitminut);
         }
         else {
             map.put("order", order);
-        }
-        if (!money.isEmpty()) {
-            map.put("money", money);
-        }
-        if (!waitminut.isEmpty()) {
-            map.put("waitminut", waitminut);
-        }
-        if (!res.isEmpty()) {
             map.put("res", res);
         }
 
