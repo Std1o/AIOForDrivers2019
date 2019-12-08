@@ -66,6 +66,8 @@ public class PrefManager {
     private static final String IMG_CAR = "img_car";
     private static final String IMG_PRAVA = "img_prava";
 
+    private static final String KEY_IS_FIRST_START = "isFirstStart";
+
 
     public PrefManager(Context context) {
         this._context = context;
@@ -95,7 +97,13 @@ public class PrefManager {
     }
 
 
-
+    public void setIsFirstStart(boolean m) {
+        editor.putBoolean(KEY_IS_FIRST_START, m);
+        editor.commit();
+    }
+    public boolean getIsFirstStart() {
+        return pref.getBoolean(KEY_IS_FIRST_START, true);
+    }
 
 
     public void setIsWaitingForSms(boolean isWaiting) {

@@ -169,6 +169,12 @@ public class MainActivity extends AppCompatActivity
 
                 takeInfo("takeStartInfo");
                 driverName.setText(pref.getDriverName());
+
+                if (pref.getIsFirstStart()) {
+                    pref.setIsFirstStart(false);
+                    Log.e("666", "RECREATE");
+                    recreate();
+                }
             }
         } else {
             requestReadPermission();
