@@ -140,7 +140,7 @@ public class restoreDostup extends AppCompatActivity {
     }
 
     private void Autorize() {
-        String url = "http://some-company.svkcom.ru" + Urls.REGISTER_APPLY_URL;
+        String url = "http://bdsystem.ru/" + Urls.REGISTER_APPLY_URL;
         Map<String, String> map = new HashMap<>();
 
         map.put("command", "send_phone");
