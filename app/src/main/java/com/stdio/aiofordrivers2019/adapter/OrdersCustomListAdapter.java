@@ -18,8 +18,7 @@ import android.widget.TextView;
 
 
 import com.stdio.aiofordrivers2019.R;
-import com.stdio.aiofordrivers2019.app.AppController;
-import com.stdio.aiofordrivers2019.model.modelOrders;
+import com.stdio.aiofordrivers2019.model.ModelOrders;
 
 
 public class OrdersCustomListAdapter extends BaseAdapter
@@ -27,10 +26,10 @@ public class OrdersCustomListAdapter extends BaseAdapter
     {
         private Activity activity;
         private LayoutInflater inflater;
-        private List<modelOrders> ordersItems;
+        private List<ModelOrders> ordersItems;
 
 
-        public OrdersCustomListAdapter(Activity activity, List < modelOrders > cityItems) {
+        public OrdersCustomListAdapter(Activity activity, List <ModelOrders> cityItems) {
         this.activity = activity;
         this.ordersItems = cityItems;
     }
@@ -67,7 +66,7 @@ public class OrdersCustomListAdapter extends BaseAdapter
             //TextView orderInfo = (TextView) convertView.findViewById(R.id.tv_order_info);
 
 
-            modelOrders m = ordersItems.get(position);
+            ModelOrders m = ordersItems.get(position);
 
 
             status.setVisibility(View.GONE);

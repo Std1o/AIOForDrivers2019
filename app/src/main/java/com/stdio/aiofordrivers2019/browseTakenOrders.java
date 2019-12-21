@@ -2,7 +2,6 @@ package com.stdio.aiofordrivers2019;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,14 +9,11 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.PowerManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,12 +28,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,12 +42,9 @@ import java.util.Map;
 
 
 import com.stdio.aiofordrivers2019.adapter.takenOrdersCustomListAdapter;
-import com.stdio.aiofordrivers2019.app.AppController;
-import com.stdio.aiofordrivers2019.app.CustomRequest;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
 import com.stdio.aiofordrivers2019.helper.Urls;
-import com.stdio.aiofordrivers2019.model.modelOrders;
 import com.stdio.aiofordrivers2019.model.modelTakenOrders;
 
 public class browseTakenOrders extends AppCompatActivity {

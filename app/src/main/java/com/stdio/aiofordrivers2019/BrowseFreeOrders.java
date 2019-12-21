@@ -1,42 +1,32 @@
 package com.stdio.aiofordrivers2019;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,24 +37,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.stdio.aiofordrivers2019.adapter.OrdersCustomListAdapter;
-import com.stdio.aiofordrivers2019.app.AppController;
-import com.stdio.aiofordrivers2019.app.CustomRequest;
+import com.stdio.aiofordrivers2019.adapter.RVAdapter;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
 import com.stdio.aiofordrivers2019.helper.Urls;
-import com.stdio.aiofordrivers2019.model.modelOrders;
+import com.stdio.aiofordrivers2019.model.ModelOrders;
 
-public class browseFreeOrders extends AppCompatActivity {
+public class BrowseFreeOrders extends AppCompatActivity {
 
     // Movies json url
     String url;
     private ProgressDialog pDialog;
-    private List<modelOrders> ordersList = new ArrayList<modelOrders>();
-    private ListView listView;
-    private OrdersCustomListAdapter adapter;
+    private List<ModelOrders> ordersList = new ArrayList<ModelOrders>();
+    private RecyclerView rv;
     private PrefManager pref;
     RequestQueue queue;
+    RVAdapter adapter;
 
     int intNow = 1, intAdvance = 0;
     /**
@@ -87,9 +75,7 @@ public class browseFreeOrders extends AppCompatActivity {
 
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
-        listView = (ListView) findViewById(R.id.list);
-        adapter = new OrdersCustomListAdapter(this, ordersList);
-        listView.setAdapter(adapter);
+        initRecyclerView();
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -106,28 +92,22 @@ public class browseFreeOrders extends AppCompatActivity {
         handler = new Handler();
         handler.postDelayed(runnable, 100);
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                // TODO Auto-generated method stub
-
-                String orderId = ((TextView) arg1.findViewById(R.id.orderIdText)).getText().toString();
-
-                alertOrderInfo(((TextView) arg1.findViewById(R.id.textFrom)).getText().toString()
-                        , "Взять заказ № " + orderId, 0, orderId);
-
-            }
-        });
-
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        NotificationsHelper.createNotification("Обзор заказов", browseFreeOrders.class, 0);
+        NotificationsHelper.createNotification("Обзор заказов", BrowseFreeOrders.class, 0);
 
+    }
+
+    private void initRecyclerView() {
+        rv = findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        initializeAdapter();
+    }
+
+    private void initializeAdapter(){
+        adapter = new RVAdapter(ordersList, BrowseFreeOrders.this);
+        rv.setAdapter(adapter);
     }
 
 
@@ -170,7 +150,7 @@ public class browseFreeOrders extends AppCompatActivity {
                                     JSONObject obj = jArr.getJSONObject(i);
 
 
-                                    modelOrders order = new modelOrders();
+                                    ModelOrders order = new ModelOrders();
                                     order.setStat("");
                                     order.setorderId(obj.getString("orderID"));
                                     order.setorderTime(obj.getString("orderTime"));
@@ -248,7 +228,7 @@ public class browseFreeOrders extends AppCompatActivity {
 
 
     public void alertOrderInfo(String mes, String title, int t, final String order) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(browseFreeOrders.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(BrowseFreeOrders.this);
 
 
         builder.setTitle(title)
@@ -355,7 +335,7 @@ public class browseFreeOrders extends AppCompatActivity {
     };
 
 
-    private void takeOrderFromDriver(final String order) {
+    public void takeOrderFromDriver(final String order) {
 
 
         String url = pref.getCityUrl() + Urls.TAKE_ORDER_URL;

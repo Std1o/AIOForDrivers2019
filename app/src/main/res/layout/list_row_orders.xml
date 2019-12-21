@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -9,10 +10,10 @@
     app:cardElevation="12dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
         android:id="@+id/tv_order_status"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
         android:visibility="gone" />
 
     <LinearLayout
@@ -22,11 +23,11 @@
 
         <TextView
             android:id="@+id/tv_status_desc"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/orderIdText"

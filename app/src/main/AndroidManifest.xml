@@ -89,7 +89,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".browseFreeOrders"
+            android:name=".BrowseFreeOrders"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_browse_free_orders"
             android:launchMode="singleTop"

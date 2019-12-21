@@ -1,16 +1,10 @@
 package com.stdio.aiofordrivers2019;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -34,12 +28,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.stdio.aiofordrivers2019.app.AppController;
-import com.stdio.aiofordrivers2019.app.CustomRequest;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
 import com.stdio.aiofordrivers2019.helper.Urls;
-import com.stdio.aiofordrivers2019.model.modelOrders;
 
 public class paymentActivity extends AppCompatActivity {
 
