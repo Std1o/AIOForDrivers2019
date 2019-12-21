@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     private PrefManager pref;
     TextView city, driverName, tvTypeWork, tvDriverStatus, tvDriverMoney, tvClassAuto, tvInfo,
             tvBlock, tvApp, tvTakeOrders;
+    Switch onlineOfflineSwitch;
     View header;
     RequestQueue queue;
     String driverStatus;
@@ -141,6 +143,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             requestReadPermission();
         }
+
+        onlineOfflineSwitch = findViewById(R.id.onlineOfflineSwitch);
 
 
        /* tvInfo = (TextView) findViewById(R.id.tvInfo);
@@ -348,19 +352,16 @@ public class MainActivity extends AppCompatActivity
 
                                 } else {
                                     tvDriverMoney.setBackgroundResource(R.drawable.b_red);
-                                }
+                                }*/
 
 
                                 if (response.getString("driverStatus").equals("0")) {
-                                    tvDriverStatus.setText("Статус:\nСвободен");
-                                    tvDriverStatus.setBackgroundResource(R.drawable.b_yes);
-
+                                    onlineOfflineSwitch.setChecked(true);
                                 }
 
                                 if (response.getString("driverStatus").equals("1")) {
-                                    tvDriverStatus.setText("Статус:\nЗанят");
-                                    tvDriverStatus.setBackgroundResource(R.drawable.b_red);
-                                }*/
+                                    onlineOfflineSwitch.setChecked(false);
+                                }
 
                                 driverStatus = response.getString("driverStatus");
 
@@ -398,13 +399,11 @@ public class MainActivity extends AppCompatActivity
                             if (status.equals("1")) {
                                 if (response.getString("message").equals("free")) {
                                     driverStatus = "0";
-                                    tvDriverStatus.setText("Статус:\nСвободен");
-                                    tvDriverStatus.setBackgroundResource(R.drawable.b_yes);
+                                    onlineOfflineSwitch.setChecked(true);
                                 }
                                 if (response.getString("message").equals("busy")) {
                                     driverStatus = "1";
-                                    tvDriverStatus.setText("Статус:\nЗанят");
-                                    tvDriverStatus.setBackgroundResource(R.drawable.b_red);
+                                    onlineOfflineSwitch.setChecked(false);
                                 }
 
 

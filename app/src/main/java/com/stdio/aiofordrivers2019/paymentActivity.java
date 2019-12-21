@@ -117,6 +117,8 @@ public class paymentActivity extends AppCompatActivity {
                                 for (int i = 0; i < jArr.length(); i++) {
                                     JSONObject obj = jArr.getJSONObject(i);
 
+                                    System.out.println(obj);
+
 
                                     pay = new HashMap<String, String>();
                                     pay.put("Name", obj.getString("t1"));
