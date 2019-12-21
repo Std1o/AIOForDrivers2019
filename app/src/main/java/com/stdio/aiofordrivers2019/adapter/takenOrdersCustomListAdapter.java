@@ -60,37 +60,37 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row_orders, null);
 
-        /*TextView id = (TextView) convertView.findViewById(R.id.tv_order_id);
-        TextView orderTime = (TextView) convertView.findViewById(R.id.tv_order_time);
-        TextView orderTarif = (TextView) convertView.findViewById(R.id.tv_order_tarif);
-        TextView clientPlace = (TextView) convertView.findViewById(R.id.tv_clent_point);
-        TextView clientRoute = (TextView) convertView.findViewById(R.id.tv_client_route);
-        TextView orderInfo = (TextView) convertView.findViewById(R.id.tv_order_info);
+        TextView id = (TextView) convertView.findViewById(R.id.orderIdText);
+        TextView orderTime = (TextView) convertView.findViewById(R.id.textDateTime);
+        TextView orderTarif = (TextView) convertView.findViewById(R.id.priceValue);
+        TextView clientPlace = (TextView) convertView.findViewById(R.id.textFrom);
+        TextView clientRoute = (TextView) convertView.findViewById(R.id.textTo);
+        //TextView orderInfo = (TextView) convertView.findViewById(R.id.tv_order_info);
 
-        TextView clientPhone = (TextView) convertView.findViewById(R.id.tv_client_phone);
-        TextView orderStatus = (TextView) convertView.findViewById(R.id.tv_order_status);
+        //TextView clientPhone = (TextView) convertView.findViewById(R.id.tv_client_phone);
+        //TextView orderStatus = (TextView) convertView.findViewById(R.id.tv_order_status);
 
-        TextView Status = (TextView) convertView.findViewById(R.id.tv_status_desc);
+        //TextView Status = (TextView) convertView.findViewById(R.id.tv_status_desc);
 
 
 
         modelTakenOrders m = ordersItems.get(position);
 
         id.setText(m.getorderId());
-        orderInfo.setText(m.getorderInfo());
+        //orderInfo.setText(m.getorderInfo());
         orderTime.setText(m.getorderTime());
         orderTarif.setText(m.getorderTarif());
         clientPlace.setText(m.getclientPlace());
         clientRoute.setText( m.getclientRoute());
 
-        clientPhone.setText(m.getclientPhone());
+        //clientPhone.setText(m.getclientPhone());
 
-        orderStatus.setText(m.getorderStatus());
-
-
+        //orderStatus.setText(m.getorderStatus());
 
 
-        if(orderStatus.getText().toString().equals("20")){
+
+
+        /*if(orderStatus.getText().toString().equals("20")){
             Status.setText("Еду за товаром");
             Status.setTextColor(Color.GREEN);
         }
@@ -108,8 +108,7 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
         if(orderStatus.getText().toString().equals("80")){
             Status.setText("Заказ удален");
             Status.setTextColor(Color.RED);
-        }
-*/
+        }*/
 
 
         return convertView;
