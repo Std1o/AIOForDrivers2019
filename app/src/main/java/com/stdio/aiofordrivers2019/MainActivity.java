@@ -53,9 +53,10 @@ public class MainActivity extends AppCompatActivity
 
 
     private PrefManager pref;
-    TextView city, driverName, tvTypeWork, tvDriverStatus, tvDriverMoney, tvClassAuto, tvInfo,
+    TextView city, driverName, tvTypeWork, tvDriverMoney, tvInfo,
             tvBlock, tvApp, tvTakeOrders;
     Switch onlineOfflineSwitch;
+    Toolbar toolbar;
     View header;
     RequestQueue queue;
     String driverStatus;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
         setTitle(R.string.app_name);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         city = (TextView) findViewById(R.id.tv_menu_city);
@@ -148,16 +149,13 @@ public class MainActivity extends AppCompatActivity
 
 
        /* tvInfo = (TextView) findViewById(R.id.tvInfo);
-        tvDriverStatus = (TextView) findViewById(R.id.tv_driver_status);
 
         tvTypeWork = (TextView) findViewById(R.id.tv_type_work);
 
         tvDriverMoney = (TextView) findViewById(R.id.tv_driver_money);
 
         tvApp = (TextView) findViewById(R.id.tv_app);
-        tvTakeOrders = (TextView) findViewById(R.id.tv_take_orders);
-
-        tvClassAuto = (TextView) findViewById(R.id.tv_class_auto);*/
+        tvTakeOrders = (TextView) findViewById(R.id.tv_take_orders);*/
 
         CardView btnOrders = findViewById(R.id.btnOrders);
         btnOrders.setOnClickListener(new View.OnClickListener() {
@@ -340,12 +338,12 @@ public class MainActivity extends AppCompatActivity
 
 
                             if (status.equals("0")) {
+                                toolbar.setTitle(response.getString("classAuto"));
 
                                 /*tvTypeWork.setText(response.getString("driverTypeWork"));
 
                                 tvDriverMoney.setText("Баланс:\n" + response.getInt("driverMoney") + " р.");
 
-                                tvClassAuto.setText(response.getString("classAuto"));
                                 if (response.getInt("driverMoney") > 299) {
 
                                     tvDriverMoney.setBackgroundResource(R.drawable.b_yes);
