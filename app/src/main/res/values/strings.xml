@@ -82,7 +82,7 @@
     <string name="iconFinance"></string>
     <string name="iconFinishedOrder"></string>
     <string name="iconNewOrder"></string>
-    <string name="iconSupport"></string>
+    <string name="iconSupport"></string>
 
     <string name="dispetcher">Диспетчер</string>
     <string name="driver_license_text">Водительское удостоверение:</string>
@@ -107,7 +107,7 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stop_move">Закончил движение</string>
     <string name="submit">Выбрать</string>
-    <string name="support">Поддержка</string>
+    <string name="statistics">Статистика</string>
     <string name="take_order">Взять заказ</string>
     <string name="tarif">Тариф</string>
     <string name="tarif_busines">Бизнес</string>
