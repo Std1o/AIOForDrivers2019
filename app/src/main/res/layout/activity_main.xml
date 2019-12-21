@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginRight="13dp"
+                android:onClick="exit"
                 android:background="@drawable/ic_logout" />
         </androidx.appcompat.widget.Toolbar>
 
