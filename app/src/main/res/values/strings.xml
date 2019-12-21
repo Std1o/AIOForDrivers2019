@@ -62,5 +62,57 @@
     <string name="title_activity_upload_foto">Загрузка фото</string>
     <string name="title_activity_old_orders">Статистика</string>
 
+    <!--***********************************-->
+
+    <string name="manager">Менеджер</string>
+    <string name="manual">Вручную</string>
+    <string name="menu">Меню</string>
+    <string name="navigation">Навигация:</string>
+    <string name="near_the_client">Прибыл к клиенту</string>
+    <string name="newOrder">Новые заказы</string>
+    <string name="newOrders">Новые заказы</string>
+    <string name="newReport">Новое обращение</string>
+    <string name="news">Новости</string>
+    <string name="orderWithId">Заказ №</string>
+    <string name="order_history">История заказов</string>
+    <string name="order_search">Поиск заказов...</string>
+    <string name="order_search_time">Ориентировочное время - 5 минут</string>
+    <string name="orders">Заказы</string>
+
+    <string name="iconFinance"></string>
+    <string name="iconFinishedOrder"></string>
+    <string name="iconNewOrder"></string>
+    <string name="iconSupport"></string>
+
+    <string name="dispetcher">Диспетчер</string>
+    <string name="driver_license_text">Водительское удостоверение:</string>
+    <string name="driver_text">Водитель</string>
+    <string name="enter">Перейти</string>
+    <string name="enter_amount">Сумма пополнения баланса</string>
+    <string name="exit">Выход</string>
+    <string name="fcm_fallback_notification_channel_label">Miscellaneous</string>
+    <string name="finance">Финансы</string>
+    <string name="finishedOrder">Завершенные заказы</string>
+
+    <string name="accept">Принять</string>
+    <string name="account">Личный кабинет</string>
+    <string name="account_settings">Настройки аккаунта</string>
+    <string name="activeOrder">Активный заказ</string>
+    <string name="activeOrderPoint">Место отправление</string>
+    <string name="add_service">Дополнительные услуги:</string>
+
+    <string name="send">Отправить</string>
+    <string name="start">Продолжить</string>
+    <string name="start_move">Начал движение</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="stop_move">Закончил движение</string>
+    <string name="submit">Выбрать</string>
+    <string name="support">Поддержка</string>
+    <string name="take_order">Взять заказ</string>
+    <string name="tarif">Тариф</string>
+    <string name="tarif_busines">Бизнес</string>
+    <string name="tarif_comfort">Комфорт</string>
+    <string name="tarif_ekonom">Эконом</string>
+
 
 </resources>

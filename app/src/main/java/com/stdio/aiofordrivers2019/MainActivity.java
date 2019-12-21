@@ -129,15 +129,6 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
 
         header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
 
@@ -146,7 +137,6 @@ public class MainActivity extends AppCompatActivity
         userFoto = (ImageView) header.findViewById(R.id.img_user_foto);
 
 
-        navigationView.addHeaderView(header);
 
         pref = new PrefManager(getApplicationContext());
         queue = Volley.newRequestQueue(this);
@@ -166,7 +156,7 @@ public class MainActivity extends AppCompatActivity
                 startService(new Intent(this, ServiceSendCoords.class));
 
 
-                takeInfo("takeStartInfo");
+              //  takeInfo("takeStartInfo");
                 driverName.setText(pref.getDriverName());
 
                 if (pref.getIsFirstStart()) {
@@ -180,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        tvInfo = (TextView) findViewById(R.id.tvInfo);
+       /* tvInfo = (TextView) findViewById(R.id.tvInfo);
         tvDriverStatus = (TextView) findViewById(R.id.tv_driver_status);
 
         tvTypeWork = (TextView) findViewById(R.id.tv_type_work);
@@ -190,7 +180,7 @@ public class MainActivity extends AppCompatActivity
         tvApp = (TextView) findViewById(R.id.tv_app);
         tvTakeOrders = (TextView) findViewById(R.id.tv_take_orders);
 
-        tvClassAuto = (TextView) findViewById(R.id.tv_class_auto);
+        tvClassAuto = (TextView) findViewById(R.id.tv_class_auto);*/
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -225,40 +215,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            finish();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -298,8 +254,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -319,9 +273,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onRestart() {
         super.onRestart();
-        // takeDriverStartInfo("takeDriverInfo");
         n.createNotification("Такси", MainActivity.class, 0);
-        //  handler.postDelayed(runnable, 100);
         Log.e("666", "onRestart()");
         takeInfo("takeStartInfo");
     }
@@ -334,7 +286,6 @@ public class MainActivity extends AppCompatActivity
         stopService(new Intent(MainActivity.this, ServiceSendCoords.class));
 
         NotificationsHelper.cancelAllNotifications();
-        //   mNotificationManager.cancel(1001);
         Log.e("MAIN", "onDestroy()");
     }
 
@@ -482,7 +433,6 @@ public class MainActivity extends AppCompatActivity
 
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();//
-                // headers.put("Content-Type", "text/html; charset=utf-8");
                 headers.put("User-agent", "Motolife Linux Android");
                 return headers;
             }
