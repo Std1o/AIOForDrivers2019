@@ -41,17 +41,16 @@
                 android:textSize="12dp" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:id="@+id/llAddress"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -105,30 +104,17 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/priceValue"
                 android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19dp"
+                android:layout_toRightOf="@+id/llAddress"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="24dp" />
 
-                <TextView
-                    android:id="@+id/priceValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="27dp"
-                    android:layout_marginRight="19dp"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="24dp" />
-
-                <TextView
-                    android:id="@+id/paymentTypeText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="22dp"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="11dp" />
-            </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
