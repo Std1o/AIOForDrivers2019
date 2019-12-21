@@ -58,7 +58,7 @@ public class OrdersCustomListAdapter extends BaseAdapter
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row_orders, null);
-            //TextView status = (TextView) convertView.findViewById(R.id.tv_status_desc);
+            TextView status = (TextView) convertView.findViewById(R.id.tv_status_desc);
             TextView id = (TextView) convertView.findViewById(R.id.orderIdText);
             TextView orderTime = (TextView) convertView.findViewById(R.id.textDateTime);
             TextView orderTarif = (TextView) convertView.findViewById(R.id.priceValue);
@@ -69,6 +69,8 @@ public class OrdersCustomListAdapter extends BaseAdapter
 
             modelOrders m = ordersItems.get(position);
 
+
+            status.setVisibility(View.GONE);
             /*if (m.getStat().equals("1")){
                 status.setText("ПРЕДВАРИТЕЛЬНЫЙ");
             }

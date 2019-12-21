@@ -68,9 +68,9 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
         //TextView orderInfo = (TextView) convertView.findViewById(R.id.tv_order_info);
 
         //TextView clientPhone = (TextView) convertView.findViewById(R.id.tv_client_phone);
-        //TextView orderStatus = (TextView) convertView.findViewById(R.id.tv_order_status);
+        TextView orderStatus = (TextView) convertView.findViewById(R.id.tv_order_status);
 
-        //TextView Status = (TextView) convertView.findViewById(R.id.tv_status_desc);
+        TextView Status = (TextView) convertView.findViewById(R.id.tv_status_desc);
 
 
 
@@ -85,12 +85,12 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
 
         //clientPhone.setText(m.getclientPhone());
 
-        //orderStatus.setText(m.getorderStatus());
+        orderStatus.setText(m.getorderStatus());
 
 
 
 
-        /*if(orderStatus.getText().toString().equals("20")){
+        if(orderStatus.getText().toString().equals("20")){
             Status.setText("Еду за товаром");
             Status.setTextColor(Color.GREEN);
         }
@@ -108,7 +108,7 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
         if(orderStatus.getText().toString().equals("80")){
             Status.setText("Заказ удален");
             Status.setTextColor(Color.RED);
-        }*/
+        }
 
 
         return convertView;
