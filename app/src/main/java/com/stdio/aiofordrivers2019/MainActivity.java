@@ -188,6 +188,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        CardView btnStatistics = findViewById(R.id.btnStatistics);
+        btnStatistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OldOrdersActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         n = new NotificationsHelper(this);

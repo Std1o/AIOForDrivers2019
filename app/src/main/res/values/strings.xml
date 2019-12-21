@@ -92,7 +92,7 @@
     <string name="exit">Выход</string>
     <string name="fcm_fallback_notification_channel_label">Miscellaneous</string>
     <string name="finance">Финансы</string>
-    <string name="finishedOrder">Завершенные заказы</string>
+    <string name="finishedOrder">Взятые заказы</string>
 
     <string name="accept">Принять</string>
     <string name="account">Личный кабинет</string>
