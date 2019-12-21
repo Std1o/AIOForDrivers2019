@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -103,6 +105,20 @@ public class BrowseFreeOrders extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         initializeAdapter();
+
+        rv.addOnItemTouchListener(
+                new RecyclerItemClickListener(BrowseFreeOrders.this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        String orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
+
+                        alertOrderInfo(((TextView) view.findViewById(R.id.textFrom)).getText().toString()
+                                , "Взять заказ № " + orderId, 0, orderId);
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                }));
     }
 
     private void initializeAdapter(){
