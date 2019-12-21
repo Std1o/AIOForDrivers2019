@@ -1,142 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/ll_order">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tv_status_desc"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        android:text="Gh"
-        android:textColor="#fc0606" />
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="12dp">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-
-                android:src="@mipmap/ic_clock_v_2"
-                android:layout_gravity="center_horizontal" />
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/orderIdText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/tv_order_time"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="#040404"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:textColor="@color/lightBlue"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/textDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/darkGrey"
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                android:src="@mipmap/ic_ruble"
-                android:layout_gravity="center_horizontal" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/tv_order_tarif"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="#040404" />
+                    <ImageView
+                        android:layout_width="11dp"
+                        android:layout_height="11dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_start_route_point" />
+
+                    <TextView
+                        android:id="@+id/textFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="1.5dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="19.23dp"
+                    android:background="@color/lightBlue" />
+
+                <LinearLayout
+                    android:id="@+id/endRoutePointLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="11dp"
+                        android:layout_height="11dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_end_route_point" />
+
+                    <TextView
+                        android:id="@+id/textTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/priceValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:layout_marginRight="19dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/paymentTypeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="22dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="11dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/imageView2"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_home" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Казань ул. Академика Глушко, 24 под. 5 "
-
-            android:id="@+id/tv_clent_point"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="#010101"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/imageView3"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_arrow_down_green" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/tv_client_route"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="#010101"
-            android:gravity="center" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/tv_order_id"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tv_order_info" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/tv_client_phone"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/tv_order_status"
-        android:visibility="gone" />
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

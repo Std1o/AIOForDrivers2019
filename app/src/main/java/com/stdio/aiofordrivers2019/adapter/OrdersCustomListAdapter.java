@@ -58,27 +58,27 @@ public class OrdersCustomListAdapter extends BaseAdapter
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row_orders, null);
-            TextView status = (TextView) convertView.findViewById(R.id.tv_status_desc);
-            TextView id = (TextView) convertView.findViewById(R.id.tv_order_id);
-            TextView orderTime = (TextView) convertView.findViewById(R.id.tv_order_time);
-            TextView orderTarif = (TextView) convertView.findViewById(R.id.tv_order_tarif);
-            TextView clientPlace = (TextView) convertView.findViewById(R.id.tv_clent_point);
-            TextView clientRoute = (TextView) convertView.findViewById(R.id.tv_client_route);
-            TextView orderInfo = (TextView) convertView.findViewById(R.id.tv_order_info);
+            //TextView status = (TextView) convertView.findViewById(R.id.tv_status_desc);
+            TextView id = (TextView) convertView.findViewById(R.id.orderIdText);
+            TextView orderTime = (TextView) convertView.findViewById(R.id.textDateTime);
+            TextView orderTarif = (TextView) convertView.findViewById(R.id.priceValue);
+            TextView clientPlace = (TextView) convertView.findViewById(R.id.textFrom);
+            TextView clientRoute = (TextView) convertView.findViewById(R.id.textTo);
+            //TextView orderInfo = (TextView) convertView.findViewById(R.id.tv_order_info);
 
 
             modelOrders m = ordersItems.get(position);
 
-            if (m.getStat().equals("1")){
+            /*if (m.getStat().equals("1")){
                 status.setText("ПРЕДВАРИТЕЛЬНЫЙ");
             }
                 else {
                 status.setText("");
-            }
+            }*/
 
 
             id.setText(m.getorderId());
-            orderInfo.setText(m.getorderInfo());
+            //orderInfo.setText(m.getorderInfo());
             orderTime.setText(m.getorderTime());
             orderTarif.setText(m.getorderTarif());
             clientPlace.setText(m.getclientPlace());

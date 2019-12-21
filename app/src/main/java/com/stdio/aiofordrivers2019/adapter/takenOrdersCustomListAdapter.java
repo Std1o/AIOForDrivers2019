@@ -60,7 +60,7 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row_orders, null);
 
-        TextView id = (TextView) convertView.findViewById(R.id.tv_order_id);
+        /*TextView id = (TextView) convertView.findViewById(R.id.tv_order_id);
         TextView orderTime = (TextView) convertView.findViewById(R.id.tv_order_time);
         TextView orderTarif = (TextView) convertView.findViewById(R.id.tv_order_tarif);
         TextView clientPlace = (TextView) convertView.findViewById(R.id.tv_clent_point);
@@ -109,7 +109,7 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
             Status.setText("Заказ удален");
             Status.setTextColor(Color.RED);
         }
-
+*/
 
 
         return convertView;

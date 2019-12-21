@@ -40,6 +40,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity
                 startService(new Intent(this, ServiceSendCoords.class));
 
 
-              //  takeInfo("takeStartInfo");
+              takeInfo("takeStartInfo");
                 driverName.setText(pref.getDriverName());
 
                 if (pref.getIsFirstStart()) {
@@ -181,6 +182,17 @@ public class MainActivity extends AppCompatActivity
         tvTakeOrders = (TextView) findViewById(R.id.tv_take_orders);
 
         tvClassAuto = (TextView) findViewById(R.id.tv_class_auto);*/
+
+        CardView btnOrders = findViewById(R.id.btnOrders);
+        btnOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, browseFreeOrders.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent);
+            }
+        });
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -321,7 +333,7 @@ public class MainActivity extends AppCompatActivity
 
                             if (status.equals("0")) {
 
-                                tvTypeWork.setText(response.getString("driverTypeWork"));
+                                /*tvTypeWork.setText(response.getString("driverTypeWork"));
 
                                 tvDriverMoney.setText("Баланс:\n" + response.getInt("driverMoney") + " р.");
 
@@ -344,7 +356,7 @@ public class MainActivity extends AppCompatActivity
                                 if (response.getString("driverStatus").equals("1")) {
                                     tvDriverStatus.setText("Статус:\nЗанят");
                                     tvDriverStatus.setBackgroundResource(R.drawable.b_red);
-                                }
+                                }*/
 
                                 driverStatus = response.getString("driverStatus");
 
@@ -356,7 +368,7 @@ public class MainActivity extends AppCompatActivity
                                 }
 
 
-                                tvTakeOrders.setText("Взятые\nзаказы:\n" + response.getInt("takenOrders"));
+                                /*tvTakeOrders.setText("Взятые\nзаказы:\n" + response.getInt("takenOrders"));
                                 if (response.getInt("takenOrders") > 0) {
 
                                     tvTakeOrders.setBackgroundResource(R.drawable.b_yes);
@@ -370,7 +382,7 @@ public class MainActivity extends AppCompatActivity
                                     tvInfo.setText("Ожидайте активации");
                                 } else {
                                     tvInfo.setText("");
-                                }
+                                }*/
 
 
                             }

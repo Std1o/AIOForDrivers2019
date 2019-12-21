@@ -115,9 +115,9 @@ public class browseFreeOrders extends AppCompatActivity {
                                     long arg3) {
                 // TODO Auto-generated method stub
 
-                String orderId = ((TextView) arg1.findViewById(R.id.tv_order_id)).getText().toString();
+                String orderId = ((TextView) arg1.findViewById(R.id.orderIdText)).getText().toString();
 
-                alertOrderInfo(((TextView) arg1.findViewById(R.id.tv_clent_point)).getText().toString()
+                alertOrderInfo(((TextView) arg1.findViewById(R.id.textFrom)).getText().toString()
                         , "Взять заказ № " + orderId, 0, orderId);
 
             }

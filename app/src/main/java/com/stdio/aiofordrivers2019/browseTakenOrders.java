@@ -107,15 +107,13 @@ public class browseTakenOrders extends AppCompatActivity {
                                     long arg3) {
                 // TODO Auto-generated method stub
 
-                String orderId = ((TextView) arg1.findViewById(R.id.tv_order_id)).getText().toString();
+                String orderId = ((TextView) arg1.findViewById(R.id.orderIdText)).getText().toString();
 
-                alertOrderInfo(((TextView) arg1.findViewById(R.id.tv_clent_point)).getText().toString()
+                alertOrderInfo(((TextView) arg1.findViewById(R.id.textFrom)).getText().toString()
                         , "№ "
                                 + orderId,
-                        ((TextView) arg1.findViewById(R.id.tv_order_status)).getText().toString(),
-                        orderId,
-                        ((TextView) arg1.findViewById(R.id.tv_client_phone)).getText().toString()
-                );
+                        "",
+                        "","");
 
             }
         });
