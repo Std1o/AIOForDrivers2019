@@ -10,11 +10,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +19,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -41,20 +40,21 @@ import java.util.List;
 import java.util.Map;
 
 
-import com.stdio.aiofordrivers2019.adapter.takenOrdersCustomListAdapter;
+import com.stdio.aiofordrivers2019.adapter.OrdersRVAdapter;
+import com.stdio.aiofordrivers2019.adapter.TakenOrdersRVAdapter;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
 import com.stdio.aiofordrivers2019.helper.Urls;
-import com.stdio.aiofordrivers2019.model.modelTakenOrders;
+import com.stdio.aiofordrivers2019.model.ModelTakenOrders;
 
-public class browseTakenOrders extends AppCompatActivity {
+public class BrowseTakenOrders extends AppCompatActivity {
 
     // Movies json url
     String url;
     private ProgressDialog pDialog;
-    private List<modelTakenOrders> ordersList = new ArrayList<modelTakenOrders>();
-    private ListView listView;
-    private takenOrdersCustomListAdapter adapter;
+    private List<ModelTakenOrders> ordersList = new ArrayList<ModelTakenOrders>();
+    private RecyclerView rv;
+    TakenOrdersRVAdapter adapter;
     private PrefManager pref;
     RequestQueue queue;
     Toolbar toolbar;
@@ -72,9 +72,7 @@ public class browseTakenOrders extends AppCompatActivity {
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
 
-        listView = (ListView) findViewById(R.id.list);
-        adapter = new takenOrdersCustomListAdapter(this, ordersList);
-        listView.setAdapter(adapter);
+        initRecyclerView();
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -87,44 +85,44 @@ public class browseTakenOrders extends AppCompatActivity {
 
         getTakenOrders();
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                // TODO Auto-generated method stub
-
-                String orderId = ((TextView) arg1.findViewById(R.id.orderIdText)).getText().toString();
-
-                alertOrderInfo(((TextView) arg1.findViewById(R.id.textFrom)).getText().toString()
-                        , "№ "
-                                + orderId,
-                        "",
-                        "","");
-
-            }
-        });
-
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        NotificationsHelper.createNotification("Взятые заказы", browseTakenOrders.class, 0);
+        NotificationsHelper.createNotification("Взятые заказы", BrowseTakenOrders.class, 0);
 
     }
 
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    private void initRecyclerView() {
+        rv = findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        initializeAdapter();
+
+        rv.addOnItemTouchListener(
+                new RecyclerItemClickListener(BrowseTakenOrders.this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        String orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
+
+                        alertOrderInfo(((TextView) view.findViewById(R.id.textFrom)).getText().toString()
+                                , "№ "
+                                        + orderId,
+                                ((TextView) view.findViewById(R.id.tv_order_status)).getText().toString(),
+                                orderId,
+                                ((TextView) view.findViewById(R.id.tv_client_phone)).getText().toString()
+                        );
+
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                }));
     }
 
+    private void initializeAdapter(){
+        adapter = new TakenOrdersRVAdapter(ordersList, BrowseTakenOrders.this);
+        rv.setAdapter(adapter);
+    }
 
     private void getTakenOrders() {
 
@@ -168,7 +166,7 @@ public class browseTakenOrders extends AppCompatActivity {
                                     JSONObject obj = jArr.getJSONObject(i);
 
 
-                                    modelTakenOrders order = new modelTakenOrders();
+                                    ModelTakenOrders order = new ModelTakenOrders();
 
                                     order.setorderId(obj.getString("orderID"));
                                     order.setorderTime(obj.getString("orderTime"));
@@ -247,7 +245,7 @@ public class browseTakenOrders extends AppCompatActivity {
 
 
     public void alertOrderInfo(String mes, String title, String t, final String order, final String clientPhone) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(browseTakenOrders.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(BrowseTakenOrders.this);
         builder.setTitle(title).setMessage(mes);
         if (t.equals("1")) {
 
@@ -266,7 +264,7 @@ public class browseTakenOrders extends AppCompatActivity {
             builder.setNeutralButton("Отказаться", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
-                    Intent intent = new Intent(browseTakenOrders.this, activityForResultBadDriverMes.class);
+                    Intent intent = new Intent(BrowseTakenOrders.this, activityForResultBadDriverMes.class);
                     intent.putExtra("orderId", order);
                     startActivityForResult(intent, 1);
 
@@ -278,7 +276,7 @@ public class browseTakenOrders extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
 
                     String number = String.format("tel:%s", clientPhone);
-                    if (ActivityCompat.checkSelfPermission(browseTakenOrders.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(BrowseTakenOrders.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
                         // here to request the missing permissions, and then overriding
@@ -310,7 +308,7 @@ public class browseTakenOrders extends AppCompatActivity {
 
             builder.setNeutralButton("Отказаться", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(browseTakenOrders.this, activityForResultBadDriverMes.class);
+                    Intent intent = new Intent(BrowseTakenOrders.this, activityForResultBadDriverMes.class);
                     intent.putExtra("orderId", order);
                     startActivityForResult(intent, 1);
                     dialog.cancel();
@@ -321,7 +319,7 @@ public class browseTakenOrders extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
 
                     String number = String.format("tel:%s", clientPhone);
-                    if (ActivityCompat.checkSelfPermission(browseTakenOrders.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(BrowseTakenOrders.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
                         // here to request the missing permissions, and then overriding
@@ -353,7 +351,7 @@ public class browseTakenOrders extends AppCompatActivity {
 
             builder.setNeutralButton("Отказаться", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(browseTakenOrders.this, activityForResultBadDriverMes.class);
+                    Intent intent = new Intent(BrowseTakenOrders.this, activityForResultBadDriverMes.class);
                     intent.putExtra("orderId", order);
                     startActivityForResult(intent, 1);
                     dialog.cancel();
@@ -364,7 +362,7 @@ public class browseTakenOrders extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
 
                     String number = String.format("tel:%s", clientPhone);
-                    if (ActivityCompat.checkSelfPermission(browseTakenOrders.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(BrowseTakenOrders.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
                         // here to request the missing permissions, and then overriding
@@ -498,7 +496,7 @@ public class browseTakenOrders extends AppCompatActivity {
                             }
 
                             if (status.equals("2")) {
-                                Intent timerIntent = new Intent(browseTakenOrders.this, TimerActivity.class);
+                                Intent timerIntent = new Intent(BrowseTakenOrders.this, TimerActivity.class);
                                 timerIntent.putExtra("minutPrice", response.getInt("minutPrice"));
                                 timerIntent.putExtra("orderPrice", response.getInt("orderPrice"));
                                 timerIntent.putExtra("order", response.getInt("orderId"));

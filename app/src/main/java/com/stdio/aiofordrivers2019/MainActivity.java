@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         btnFinishedOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, browseTakenOrders.class);
+                Intent intent = new Intent(MainActivity.this, BrowseTakenOrders.class);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_taken_orders) {
-            Intent intent = new Intent(MainActivity.this, browseTakenOrders.class);
+            Intent intent = new Intent(MainActivity.this, BrowseTakenOrders.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -463,7 +463,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void goTakenOrders(View v) {
-        Intent intent = new Intent(MainActivity.this, browseTakenOrders.class);
+        Intent intent = new Intent(MainActivity.this, BrowseTakenOrders.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 

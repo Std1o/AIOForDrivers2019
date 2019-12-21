@@ -10,6 +10,13 @@
     app:cardElevation="12dp">
 
     <TextView
+        android:id="@+id/tv_client_phone"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/tv_order_status"
         android:layout_width="wrap_content"
 

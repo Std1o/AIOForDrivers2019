@@ -3,15 +3,15 @@ package com.stdio.aiofordrivers2019.model;
 /**
  * Created by LordRus on 24.01.2016.
  */
-public class modelTakenOrders{
+public class ModelTakenOrders {
     private String orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, orderStatus, clentPhone;
 
 
-    public modelTakenOrders () {
+    public ModelTakenOrders() {
     }
 
-    public modelTakenOrders(String ordertime,String  ordertarif,String  clientplace,String clientroute,
-                            String  orderinfo,String  orderid, String orderstatus, String clientphone) {
+    public ModelTakenOrders(String ordertime, String  ordertarif, String  clientplace, String clientroute,
+                            String  orderinfo, String  orderid, String orderstatus, String clientphone) {
         this.orderTime = ordertime;
         this.orderTarif = ordertarif;
         this.clientPlace = clientplace;

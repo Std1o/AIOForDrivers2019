@@ -103,7 +103,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".browseTakenOrders"
+            android:name=".BrowseTakenOrders"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_browse_taken_orders"
             android:launchMode="singleTop"

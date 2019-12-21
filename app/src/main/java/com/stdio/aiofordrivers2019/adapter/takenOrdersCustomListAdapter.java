@@ -13,14 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 
 import com.stdio.aiofordrivers2019.R;
-import com.stdio.aiofordrivers2019.app.AppController;
-import com.stdio.aiofordrivers2019.model.modelTakenOrders;
+import com.stdio.aiofordrivers2019.model.ModelTakenOrders;
 
 
 public class takenOrdersCustomListAdapter extends BaseAdapter
@@ -28,10 +26,10 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
 {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<modelTakenOrders> ordersItems;
+    private List<ModelTakenOrders> ordersItems;
 
 
-    public takenOrdersCustomListAdapter(Activity activity, List < modelTakenOrders > cityItems) {
+    public takenOrdersCustomListAdapter(Activity activity, List <ModelTakenOrders> cityItems) {
         this.activity = activity;
         this.ordersItems = cityItems;
     }
@@ -74,7 +72,7 @@ public class takenOrdersCustomListAdapter extends BaseAdapter
 
 
 
-        modelTakenOrders m = ordersItems.get(position);
+        ModelTakenOrders m = ordersItems.get(position);
 
         id.setText(m.getorderId());
         //orderInfo.setText(m.getorderInfo());

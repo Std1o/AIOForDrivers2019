@@ -1,23 +1,19 @@
 package com.stdio.aiofordrivers2019.adapter;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stdio.aiofordrivers2019.R;
-import com.stdio.aiofordrivers2019.BrowseFreeOrders;
 import com.stdio.aiofordrivers2019.model.ModelOrders;
 
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DataViewHolder> {
+public class OrdersRVAdapter extends RecyclerView.Adapter<OrdersRVAdapter.DataViewHolder> {
 
     public static class DataViewHolder extends RecyclerView.ViewHolder {
 
@@ -37,7 +33,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DataViewHolder> {
     public Activity activity;
     public static List<ModelOrders> ordersItems;
 
-    public RVAdapter(List<ModelOrders> dataList, Activity activity){
+    public OrdersRVAdapter(List<ModelOrders> dataList, Activity activity){
         this.activity = activity;
         this.ordersItems = dataList;
     }

@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.stdio.aiofordrivers2019.adapter.RVAdapter;
+import com.stdio.aiofordrivers2019.adapter.OrdersRVAdapter;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
 import com.stdio.aiofordrivers2019.helper.Urls;
@@ -54,7 +54,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
     private RecyclerView rv;
     private PrefManager pref;
     RequestQueue queue;
-    RVAdapter adapter;
+    OrdersRVAdapter adapter;
 
     int intNow = 1, intAdvance = 0;
     /**
@@ -122,7 +122,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
     }
 
     private void initializeAdapter(){
-        adapter = new RVAdapter(ordersList, BrowseFreeOrders.this);
+        adapter = new OrdersRVAdapter(ordersList, BrowseFreeOrders.this);
         rv.setAdapter(adapter);
     }
 
