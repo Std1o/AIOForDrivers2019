@@ -82,9 +82,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDm-hzfaXVdy31dvzwAXBGyl_kcYR3UoFI" />
 
         <activity
             android:name=".ChooseCity"
