@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
@@ -70,6 +72,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
     private Point destinationPoint;
     private Point originPoint;
 
+    public static LatLng origin, destination;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,7 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
     }
 
     @Override
@@ -94,11 +99,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
                     markerView.remove();
                 // draw marker
                 markerView = mapboxMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(55.7522, 37.6156))
+                        .position(destination)
                         .title("Eiffel Tower "));
-
-                LatLng destination = new LatLng(55.7522, 37.7156);
-                LatLng origin = new LatLng(55.7522, 37.6156);
 
                 destinationPoint = Point.fromLngLat(destination.getLongitude(), destination.getLatitude());
                 originPoint = Point.fromLngLat(origin.getLongitude(), origin.getLatitude());
@@ -107,6 +109,12 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
                 getRoute(originPoint, destinationPoint);
             }
         });
+
+        LatLngBounds bounds = new LatLngBounds.Builder()
+                .include(origin)
+                .include(destination).build();
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, PointHelper.getPoint().x, 250, 30));
+        mapboxMap.setLatLngBoundsForCameraTarget(bounds);
     }
 
     private void getRoute(Point origin, Point destination) {

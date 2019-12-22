@@ -2,6 +2,7 @@ package com.stdio.aiofordrivers2019;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -39,6 +40,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.stdio.aiofordrivers2019.adapter.OrdersRVAdapter;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
@@ -113,6 +115,21 @@ public class BrowseFreeOrders extends AppCompatActivity {
 
                         alertOrderInfo(((TextView) view.findViewById(R.id.textFrom)).getText().toString()
                                 , "Взять заказ № " + orderId, 0, orderId);
+                        String[] coords_store;
+                        String[] coords_client;
+
+                        coords_store = ordersList.get(position).getCoords_store().split(",");
+                        coords_client = ordersList.get(position).getCoords_client().split(",");
+
+                        System.out.println(coords_client[0]);
+                        System.out.println(coords_client[1]);
+                        System.out.println(coords_store[0]);
+                        System.out.println(coords_store[1]);
+
+                        OrderReviewActivity.origin = new LatLng(55.058497, 82.980707);
+                        OrderReviewActivity.destination = new LatLng(55.11208256960866, 82.95617349999988);
+
+                        startActivity(new Intent(BrowseFreeOrders.this, OrderReviewActivity.class));
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -165,6 +182,8 @@ public class BrowseFreeOrders extends AppCompatActivity {
                                 for (int i = 0; i < jArr.length(); i++) {
                                     JSONObject obj = jArr.getJSONObject(i);
 
+                                    System.out.println(obj);
+
 
                                     ModelOrders order = new ModelOrders();
                                     order.setStat("");
@@ -174,6 +193,8 @@ public class BrowseFreeOrders extends AppCompatActivity {
                                     order.setclientPlace(obj.getString("orderPlace"));
                                     order.setclientRoute(obj.getString("orderRoute"));
                                     order.setorderInfo(obj.getString("orderInfo"));
+                                    order.setCoords_store(obj.getString("coords"));
+                                    order.setCoords_client(obj.getString("coords_2"));
 
                                     ordersList.add(order);
 

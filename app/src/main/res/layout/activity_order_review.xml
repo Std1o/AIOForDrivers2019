@@ -16,7 +16,7 @@
         mapbox:mapbox_cameraTargetLat="10.762622"
         mapbox:mapbox_cameraTargetLng="106.660172"
         mapbox:mapbox_cameraTilt="50.25"
-        mapbox:mapbox_cameraZoom="13"
+        mapbox:mapbox_cameraZoom="5"
         mapbox:mapbox_cameraZoomMax="18"
         mapbox:mapbox_cameraZoomMin="1"
         mapbox:mapbox_uiRotateGestures="false" />
