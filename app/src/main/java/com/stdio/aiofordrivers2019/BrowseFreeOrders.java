@@ -121,13 +121,17 @@ public class BrowseFreeOrders extends AppCompatActivity {
                         coords_store = ordersList.get(position).getCoords_store().split(",");
                         coords_client = ordersList.get(position).getCoords_client().split(",");
 
-                        System.out.println(coords_client[0]);
-                        System.out.println(coords_client[1]);
-                        System.out.println(coords_store[0]);
-                        System.out.println(coords_store[1]);
+                        double originLatitude = Double.parseDouble(coords_store[0]);
+                        double originLongitude = Double.parseDouble(coords_store[1]);
 
-                        OrderReviewActivity.origin = new LatLng(55.058497, 82.980707);
-                        OrderReviewActivity.destination = new LatLng(55.11208256960866, 82.95617349999988);
+                        System.out.println(originLatitude);
+                        System.out.println(originLongitude);
+
+                        double destinationLatitude = Double.parseDouble(coords_client[0]);
+                        double destinationLongitude = Double.parseDouble(coords_client[1]);
+
+                        OrderReviewActivity.origin = new LatLng(originLatitude, originLongitude);
+                        OrderReviewActivity.destination = new LatLng(destinationLatitude, destinationLongitude);
 
                         startActivity(new Intent(BrowseFreeOrders.this, OrderReviewActivity.class));
                     }
