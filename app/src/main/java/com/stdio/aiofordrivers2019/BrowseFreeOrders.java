@@ -111,10 +111,6 @@ public class BrowseFreeOrders extends AppCompatActivity {
         rv.addOnItemTouchListener(
                 new RecyclerItemClickListener(BrowseFreeOrders.this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        String orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
-
-                        alertOrderInfo(((TextView) view.findViewById(R.id.textFrom)).getText().toString()
-                                , "Взять заказ № " + orderId, 0, orderId);
                         String[] coords_store;
                         String[] coords_client;
 
@@ -132,6 +128,11 @@ public class BrowseFreeOrders extends AppCompatActivity {
 
                         OrderReviewActivity.origin = new LatLng(originLatitude, originLongitude);
                         OrderReviewActivity.destination = new LatLng(destinationLatitude, destinationLongitude);
+                        OrderReviewActivity.orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
+                        OrderReviewActivity.from = ((TextView) view.findViewById(R.id.textFrom)).getText().toString();
+                        OrderReviewActivity.toAddress = ((TextView) view.findViewById(R.id.textTo)).getText().toString();
+                        OrderReviewActivity.time = ((TextView) view.findViewById(R.id.textDateTime)).getText().toString();
+                        OrderReviewActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
 
                         startActivity(new Intent(BrowseFreeOrders.this, OrderReviewActivity.class));
                     }

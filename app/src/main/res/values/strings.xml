@@ -113,6 +113,7 @@
     <string name="tarif_busines">Бизнес</string>
     <string name="tarif_comfort">Комфорт</string>
     <string name="tarif_ekonom">Эконом</string>
+    <string name="decline">Отклонить</string>
 
     <!--Location tracking activity permission toasts-->
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
