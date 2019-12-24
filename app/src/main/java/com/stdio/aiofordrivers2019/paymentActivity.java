@@ -1,16 +1,21 @@
 package com.stdio.aiofordrivers2019;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,21 +33,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.stdio.aiofordrivers2019.adapter.OrdersRVAdapter;
+import com.stdio.aiofordrivers2019.adapter.PaymentAdapter;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
 import com.stdio.aiofordrivers2019.helper.Urls;
+import com.stdio.aiofordrivers2019.model.ModelOrders;
+import com.stdio.aiofordrivers2019.model.ModelPayment;
 
 public class paymentActivity extends AppCompatActivity {
 
 
     private PrefManager pref;
-
-    ListView listView;
-    ArrayList<HashMap<String, String>> ArrList;
+    private RecyclerView rv;
+    ArrayList<ModelPayment> list = new ArrayList<>();
+    PaymentAdapter adapter;
     RequestQueue queue;
-    SimpleAdapter adapter;
-
-    HashMap<String, String> pay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,19 +61,24 @@ public class paymentActivity extends AppCompatActivity {
 
         pref = new PrefManager(getApplicationContext());
         queue = Volley.newRequestQueue(this);
-         listView = (ListView)findViewById(R.id.listView);
-
-        ArrList = new ArrayList<HashMap<String, String>>();
-
-        adapter = new SimpleAdapter(this, ArrList, android.R.layout.simple_list_item_2,
-                new String[] {"Name", "Tel"},
-                new int[] {android.R.id.text1, android.R.id.text2});
-        listView.setAdapter(adapter);
+        initRecyclerView();
 
         NotificationsHelper.createNotification("Оплата заказов", paymentActivity.class, 0);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         getPayments();
+    }
+
+    private void initRecyclerView() {
+        rv = findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        initializeAdapter();
+    }
+
+    private void initializeAdapter(){
+        adapter = new PaymentAdapter(list, paymentActivity.this);
+        rv.setAdapter(adapter);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -118,12 +130,7 @@ public class paymentActivity extends AppCompatActivity {
                                     JSONObject obj = jArr.getJSONObject(i);
 
                                     System.out.println(obj);
-
-
-                                    pay = new HashMap<String, String>();
-                                    pay.put("Name", obj.getString("t1"));
-                                    pay.put("Tel", obj.getString("t2"));
-                                    ArrList.add(pay);
+                                    list.add(new ModelPayment(obj.getString("t1"), obj.getString("t3"), obj.getString("t2")));
 
 
                                 }

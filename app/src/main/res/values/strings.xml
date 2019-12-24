@@ -42,7 +42,7 @@
     <string name="title_activity_login_driver">Вход:</string>
 
     <string name="title_activity_driver_info">Личные данные</string>
-    <string name="title_activity_payment">Внесение средств:</string>
+    <string name="title_activity_payment">Финансы</string>
     <string name="title_activity_robot_dialog">robotDialog</string>
 
 
