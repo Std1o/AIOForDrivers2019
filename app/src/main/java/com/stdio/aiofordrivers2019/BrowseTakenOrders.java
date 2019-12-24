@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 
-import com.stdio.aiofordrivers2019.adapter.OrdersRVAdapter;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.stdio.aiofordrivers2019.adapter.TakenOrdersRVAdapter;
 import com.stdio.aiofordrivers2019.helper.NotificationsHelper;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
@@ -122,6 +122,31 @@ public class BrowseTakenOrders extends AppCompatActivity {
                                 ((TextView) view.findViewById(R.id.tv_client_phone)).getText().toString()
                         );
 
+                        String[] coords_store;
+                        String[] coords_client;
+
+                        coords_store = ordersList.get(position).getCoords_store().split(",");
+                        coords_client = ordersList.get(position).getCoords_client().split(",");
+
+                        double originLatitude = Double.parseDouble(coords_store[0]);
+                        double originLongitude = Double.parseDouble(coords_store[1]);
+
+                        System.out.println(originLatitude);
+                        System.out.println(originLongitude);
+
+                        double destinationLatitude = Double.parseDouble(coords_client[0]);
+                        double destinationLongitude = Double.parseDouble(coords_client[1]);
+
+                        TakenOrderActivity.origin = new LatLng(originLatitude, originLongitude);
+                        TakenOrderActivity.destination = new LatLng(destinationLatitude, destinationLongitude);
+                        TakenOrderActivity.orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
+                        TakenOrderActivity.from = ((TextView) view.findViewById(R.id.textFrom)).getText().toString();
+                        TakenOrderActivity.toAddress = ((TextView) view.findViewById(R.id.textTo)).getText().toString();
+                        TakenOrderActivity.time = ((TextView) view.findViewById(R.id.textDateTime)).getText().toString();
+                        TakenOrderActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
+
+                        startActivity(new Intent(BrowseTakenOrders.this, TakenOrderActivity.class));
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -189,6 +214,8 @@ public class BrowseTakenOrders extends AppCompatActivity {
                                     order.setorderStatus(obj.getString("status"));
 
                                     order.setclientPhone(obj.getString("clientPhone"));
+                                    order.setCoords_store(obj.getString("coords"));
+                                    order.setCoords_client(obj.getString("coords_2"));
 
                                     ordersList.add(order);
                                 }

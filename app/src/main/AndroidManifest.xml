@@ -24,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderReviewActivity"></activity>
+        <activity android:name=".TakenOrderActivity"></activity>
+        <activity android:name=".OrderReviewActivity" />
 
         <service
             android:name=".MyService"
