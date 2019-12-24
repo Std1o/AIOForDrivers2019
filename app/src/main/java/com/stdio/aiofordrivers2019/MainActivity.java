@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private PrefManager pref;
-    TextView city, driverName, tvTypeWork, tvDriverMoney, tvInfo,
-            tvBlock, tvApp, tvTakeOrders;
+    TextView city, driverName,userName;
     Switch onlineOfflineSwitch;
     Toolbar toolbar;
     View header;
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         city = (TextView) findViewById(R.id.tv_menu_city);
+        userName = findViewById(R.id.userName);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id
                 .coordinatorLayout);
 
@@ -345,6 +345,7 @@ public class MainActivity extends AppCompatActivity
                                 toolbar.setTitle(response.getString("classAuto"));
 
                                 driverMoney = response.getInt("driverMoney")+" \u20BD";
+                                userName.setText(pref.getDriverName());
 
                                 /*tvTypeWork.setText(response.getString("driverTypeWork"));
 
