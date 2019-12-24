@@ -48,12 +48,15 @@ public class paymentActivity extends AppCompatActivity {
     private PrefManager pref;
     private RecyclerView rv;
     ArrayList<ModelPayment> list = new ArrayList<>();
+    TextView amountBalanceText;
     PaymentAdapter adapter;
     RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        amountBalanceText = findViewById(R.id.amountBalanceText);
+        amountBalanceText.setText(MainActivity.driverMoney);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

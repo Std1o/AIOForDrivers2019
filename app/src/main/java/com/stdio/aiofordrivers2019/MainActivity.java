@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity
     RequestQueue queue;
     String driverStatus;
 
+    public static String  driverMoney;
+
     NotificationsHelper n;
 
     ImageView userFoto;
@@ -341,6 +343,8 @@ public class MainActivity extends AppCompatActivity
 
                             if (status.equals("0")) {
                                 toolbar.setTitle(response.getString("classAuto"));
+
+                                driverMoney = response.getInt("driverMoney")+" \u20BD";
 
                                 /*tvTypeWork.setText(response.getString("driverTypeWork"));
 
