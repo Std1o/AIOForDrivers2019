@@ -61,6 +61,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
@@ -95,6 +96,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
     public static String from, toAddress, time, price;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
 
+    CardView btnTakeOrderAuto, btnDeclineOrder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_ToolBar);
@@ -114,7 +117,7 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
 
         initViews();
         setInfo();
-
+        setButtonListeners();
     }
 
     private void initViews() {
@@ -123,6 +126,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
         textTo = findViewById(R.id.textTo);
         priceValue = findViewById(R.id.priceValue);
         paymentTypeText = findViewById(R.id.paymentTypeText);
+        btnTakeOrderAuto = findViewById(R.id.btnTakeOrderAuto);
+        btnDeclineOrder = findViewById(R.id.btnDeclineOrder);
     }
 
     private void setInfo() {
@@ -130,6 +135,23 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
         textFrom.setText(from);
         textTo.setText(toAddress);
         priceValue.setText(price);
+    }
+
+    private void setButtonListeners() {
+        btnTakeOrderAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeOrderFromDriver(orderId);
+                finish();
+            }
+        });
+
+        btnDeclineOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
