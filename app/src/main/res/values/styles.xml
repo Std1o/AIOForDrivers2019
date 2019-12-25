@@ -29,5 +29,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.EditText">
+        <item name="colorAccent">@color/grey</item>
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorPrimaryDark">@color/grey</item>
+    </style>
+
 
 </resources>

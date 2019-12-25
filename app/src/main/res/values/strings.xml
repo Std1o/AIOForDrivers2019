@@ -117,6 +117,7 @@
 
     <string name="balance">Баланс</string>
     <string name="topupbalance">Пополнить баланс</string>
+    <string name="auth">Авторизация</string>
 
     <!--Location tracking activity permission toasts-->
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>

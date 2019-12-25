@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -50,12 +51,11 @@ import com.stdio.aiofordrivers2019.helper.Urls;
 
 public class restoreDostup extends AppCompatActivity {
 
-    TextInputLayout inputLayoutPhone, inputLayoutCode;
-
     EditText inputPhone, inputCode;
 
 
     LinearLayout LayoutInfo;
+    CardView btnContinue;
 
     private ProgressDialog pDialog;
     private PrefManager pref;
@@ -64,37 +64,11 @@ public class restoreDostup extends AppCompatActivity {
 
 
     ImageView logo;
-    TextView tvInfo;
 
     // String PROJECT_NUMBER = "570865019109";
     String IMEI;
 
     int buttonCheck = 0;
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.next) {
-
-            hideSoftKeyboard();
-            if (validatePhone() && validateSmsCode()) {
-                Autorize();
-            }
-            else {
-                return false;
-            }
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,15 +85,8 @@ public class restoreDostup extends AppCompatActivity {
 
 
         logo = (ImageView) findViewById(R.id.imageView);
-        tvInfo = (TextView) findViewById(R.id.tv_reg_info);
 
         LayoutInfo = (LinearLayout) findViewById(R.id.layout_fio);
-
-
-        inputLayoutPhone = (TextInputLayout) findViewById(R.id.input_layout_phone);
-        inputLayoutPhone.setVisibility(View.VISIBLE);
-        inputLayoutCode = (TextInputLayout) findViewById(R.id.input_layout_code);
-        inputLayoutCode.setVisibility(View.VISIBLE);
 
         inputPhone = (EditText) findViewById(R.id.input_phone);
         inputCode = (EditText) findViewById(R.id.input_code);
@@ -129,14 +96,17 @@ public class restoreDostup extends AppCompatActivity {
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         IMEI = tMgr.getDeviceId();
         pref.setTaxiUrl("http://bdsystem.ru/");
-    }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_reg, menu);
-        return true;
+        btnContinue = findViewById(R.id.btnContinue);
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+                if (validatePhone() && validateSmsCode()) {
+                    Autorize();
+                }
+            }
+        });
     }
 
     private void Autorize() {
@@ -161,8 +131,7 @@ public class restoreDostup extends AppCompatActivity {
                         try {
                             String status = response.getString("st");
                             if (status.equals("-1")) {
-                                tvInfo.setText(response.getString("message"));
-
+                                Toast.makeText(restoreDostup.this, response.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                             if (status.equals("1")) {
                                 pref.setMobileNumber(response.getString("phone"));
@@ -175,7 +144,7 @@ public class restoreDostup extends AppCompatActivity {
                                         response.getString("number"),
                                         response.getString("color")
                                 );
-                                tvInfo.setText(getResources().getText(R.string.tv_reg_input_sms_code));
+                                Toast.makeText(restoreDostup.this, getResources().getText(R.string.tv_reg_input_sms_code), Toast.LENGTH_SHORT).show();
                                 buttonCheck = 1;
 
                                 pref.setPreOrders("0");
@@ -238,11 +207,9 @@ public class restoreDostup extends AppCompatActivity {
 
     private boolean validatePhone() {
         if (!isValidPhoneNumber(inputPhone.getText().toString())) {
-            inputLayoutPhone.setError(getString(R.string.err_msg_phone));
+            inputPhone.setError(getString(R.string.err_msg_phone));
             requestFocus(inputPhone);
             return false;
-        } else {
-            inputLayoutPhone.setErrorEnabled(false);
         }
 
         return true;
@@ -256,11 +223,9 @@ public class restoreDostup extends AppCompatActivity {
 
     private boolean validateSmsCode() {
         if (!isValidSmsCode(inputCode.getText().toString())) {
-            inputLayoutCode.setError(getString(R.string.err_msg_sms_code));
+            inputCode.setError(getString(R.string.err_msg_sms_code));
             requestFocus(inputCode);
             return false;
-        } else {
-            inputLayoutCode.setErrorEnabled(false);
         }
 
         return true;
