@@ -3,10 +3,12 @@ package com.stdio.aiofordrivers2019;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +17,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
@@ -37,8 +43,16 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 import com.stdio.aiofordrivers2019.helper.PrefManager;
+import com.stdio.aiofordrivers2019.helper.Urls;
+import com.stdio.aiofordrivers2019.model.ModelTakenOrders;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,12 +78,14 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     private Point originPoint;
 
     public static LatLng origin, destination;
-    public static String orderId;
+    public static String orderId, statusOrder;
     private PrefManager pref;
     RequestQueue queue;
     public static String from, toAddress, time, price;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
     Toolbar toolbar;
+    CardView btnChangeOrderStatus;
+    TextView orderStatusText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +102,24 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 TakenOrderActivity.super.onBackPressed();
+            }
+        });
+
+        btnChangeOrderStatus = findViewById(R.id.btnChangeOrderStatus);
+        btnChangeOrderStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String command = "";
+                if (statusOrder.equals("20")) {
+                    command = "changeOrderStatus_30";
+                }
+                else if (statusOrder.equals("30")) {
+                    command = "changeOrderStatus_40";
+                }
+                else if (statusOrder.equals("40")) {
+                    command = "changeOrderStatus_40_2";
+                }
+                takeOrderFromDriver(orderId, command, "");
             }
         });
 
@@ -137,6 +171,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         textTo = findViewById(R.id.textTo);
         priceValue = findViewById(R.id.priceValue);
         paymentTypeText = findViewById(R.id.paymentTypeText);
+        orderStatusText = findViewById(R.id.orderStatusText);
     }
 
     private void setInfo() {
@@ -144,6 +179,21 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         textFrom.setText(from);
         textTo.setText(toAddress);
         priceValue.setText(price);
+        setNextOrderStatus(statusOrder);
+    }
+
+    private void setNextOrderStatus(String status) {
+        if(status.equals("20")){
+            orderStatusText.setText("Еду к клиенту");
+        }
+
+        if(status.equals("30")){
+            orderStatusText.setText("Прибыл к клиенту");
+        }
+
+        if(status.equals("40")){
+            orderStatusText.setText("Ожидание оплаты");
+        }
     }
 
     @Override
@@ -211,6 +261,163 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
                         Log.e(TAG, "Error: " + throwable.getMessage());
                     }
                 });
+    }
+
+    private void takeOrderFromDriver(final String order, String command, String res) {
+
+
+        String url = pref.getCityUrl() + Urls.TAKE_ORDER_URL;
+
+
+        Map<String, String> map = new HashMap<>();
+
+
+        map.put("driverId", pref.getDriverId());
+        map.put("hash", pref.getHash());
+        map.put("command", command);
+        map.put("order", order);
+        map.put("res", res);
+
+        Log.e("666", "Autorize - " + map + "\n" + url);
+
+
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url,
+
+                new JSONObject(map),
+                new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("666", "Autorize - " + response);
+                        try {
+                            String status = response.getString("st");
+
+
+
+                            if (status.equals("-1")) {
+
+                            }
+
+                            if (status.equals("2")) {
+                                Intent timerIntent = new Intent(TakenOrderActivity.this, TimerActivity.class);
+                                timerIntent.putExtra("minutPrice", response.getInt("minutPrice"));
+                                timerIntent.putExtra("orderPrice", response.getInt("orderPrice"));
+                                timerIntent.putExtra("order", response.getInt("orderId"));
+                                timerIntent.putExtra("waitMinut", response.getInt("waitMinut"));
+                                startActivity(timerIntent);
+                            }
+
+
+                            // ===========
+
+                            if (status.equals("3")) {
+                                Toast.makeText(TakenOrderActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+
+                            getTakenOrders();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("666", "Autorize - " + e);
+                            Toast.makeText(getApplicationContext(), "Ошибка связи с сервером", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Ошибка связи с сервером", Toast.LENGTH_SHORT).show();
+                        Log.e("666", "Autorize - " + error);
+                    }
+                }) {
+            @Override
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();//
+                // headers.put("Content-Type", "text/html; charset=utf-8");
+                headers.put("User-agent", "Motolife Linux Android");
+                return headers;
+            }
+        };
+        queue.add(postRequest);
+    }
+
+    private void getTakenOrders() {
+
+
+
+        String url = pref.getCityUrl() + Urls.TAKEN_ORDER_LIST_URL;
+
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("command", "getDriverOrders");
+        map.put("driverId", pref.getDriverId());
+        map.put("hash", pref.getHash());
+
+
+        //    Log.e("666", "Autorize - " + map + "\n" + url);
+
+
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url,
+
+                new JSONObject(map),
+                new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //          Log.e("666", "Autorize - " + response);
+                        try {
+                            String status = response.getString("st");
+
+                            System.out.println(response);
+
+
+
+                            if (status.equals("0")) {
+
+                                JSONArray jArr = response.getJSONArray("orders");
+                                for (int i = 0; i < jArr.length(); i++) {
+                                    JSONObject obj = jArr.getJSONObject(i);
+                                    if (orderId.equals(obj.getString("orderID"))) {
+                                        statusOrder = obj.getString("status");
+                                        setNextOrderStatus(statusOrder);
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("666", "Autorize - " + e);
+                            Toast.makeText(getApplicationContext(), "Ошибка связи с сервером", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Ошибка связи с сервером", Toast.LENGTH_SHORT).show();
+                        Log.e("666", "Autorize - " + error);
+                    }
+                }) {
+            @Override
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();//
+                // headers.put("Content-Type", "text/html; charset=utf-8");
+                headers.put("User-agent", "Motolife Linux Android");
+                return headers;
+            }
+        };
+        queue.add(postRequest);
+
+
+        //===================================================================================
+
+
+
+
+
+
     }
 
     @SuppressWarnings( {"MissingPermission"})

@@ -112,15 +112,6 @@ public class BrowseTakenOrders extends AppCompatActivity {
         rv.addOnItemTouchListener(
                 new RecyclerItemClickListener(BrowseTakenOrders.this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        String orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
-
-                        alertOrderInfo(((TextView) view.findViewById(R.id.textFrom)).getText().toString()
-                                , "№ "
-                                        + orderId,
-                                ((TextView) view.findViewById(R.id.tv_order_status)).getText().toString(),
-                                orderId,
-                                ((TextView) view.findViewById(R.id.tv_client_phone)).getText().toString()
-                        );
 
                         String[] coords_store;
                         String[] coords_client;
@@ -144,6 +135,7 @@ public class BrowseTakenOrders extends AppCompatActivity {
                         TakenOrderActivity.toAddress = ((TextView) view.findViewById(R.id.textTo)).getText().toString();
                         TakenOrderActivity.time = ((TextView) view.findViewById(R.id.textDateTime)).getText().toString();
                         TakenOrderActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
+                        TakenOrderActivity.statusOrder = ((TextView) view.findViewById(R.id.tv_order_status)).getText().toString();
 
                         startActivity(new Intent(BrowseTakenOrders.this, TakenOrderActivity.class));
 
