@@ -2,9 +2,15 @@ package com.stdio.aiofordrivers2019;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +69,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     RequestQueue queue;
     public static String from, toAddress, time, price;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,17 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         //access tokens of your account in strings.xml
         Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_taken_order);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Заказ №" + orderId);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TakenOrderActivity.super.onBackPressed();
+            }
+        });
 
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
@@ -80,6 +98,37 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
 
         initViews();
         setInfo();
+    }
+
+    public void startNavigator(View view) {
+        startNavigator(String.valueOf(origin.getLatitude()), String.valueOf(origin.getLongitude()));
+    }
+
+    public final void startNavigator(String latitude, String longitude) {
+        Uri uri;
+        boolean z = true;
+        StringBuilder sb = new StringBuilder();
+        sb.append("yandexnavi://build_route_on_map?lat_to=");
+        sb.append(latitude);
+        sb.append("&lon_to=");
+        sb.append(longitude);
+        uri = Uri.parse(sb.toString());
+        Intent intent = new Intent("android.intent.action.VIEW", uri);
+        Context context = getApplicationContext();
+        List list = null;
+        PackageManager packageManager = context != null ? context.getPackageManager() : null;
+        if (packageManager != null) {
+            list = packageManager.queryIntentActivities(intent, 0);
+        }
+        if (list == null) {
+            Toast.makeText(this, "Не удалось запустить навигатор, т. к. на смартфоне не установлена программа Яндекс.Навигатор", Toast.LENGTH_SHORT).show();
+        }
+        if (list.size() <= 0) {
+            z = false;
+        }
+        if (z) {
+            startActivity(intent);
+        }
     }
 
     private void initViews() {

@@ -3,10 +3,12 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grayWhite"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".TakenOrderActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginRight="14dp"
-            android:background="@drawable/ic_navigation" />
+            android:onClick="startNavigator"
+            android:background="@drawable/ic_navigation2" />
     </androidx.appcompat.widget.Toolbar>
 
     <View
