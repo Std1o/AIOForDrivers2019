@@ -24,7 +24,6 @@
             android:layout_height="25dp"
             android:layout_gravity="end"
             android:layout_marginRight="14dp"
-            android:onClick="showInfo"
             android:background="@drawable/info" />
     </androidx.appcompat.widget.Toolbar>
 

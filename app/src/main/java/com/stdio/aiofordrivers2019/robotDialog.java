@@ -1,6 +1,7 @@
 package com.stdio.aiofordrivers2019;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,10 +67,11 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
     String IdOrderToBuy;
     RequestQueue queue;
     private PrefManager pref;
-    public static String from, toAddress, time, price;
+    public static String from, toAddress, time, price, info;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
+    ImageButton infoButton;
 
     private Marker markerView;
     private Point destinationPoint;
@@ -126,6 +129,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
         paymentTypeText = findViewById(R.id.paymentTypeText);
         btnTakeOrderAuto = findViewById(R.id.btnTakeOrderAuto);
         btnDeclineOrder = findViewById(R.id.btnDeclineOrder);
+        infoButton = findViewById(R.id.infoButton);
     }
 
     private void setInfo() {
@@ -157,6 +161,23 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(robotDialog.this);
+                builder.setMessage(info)
+                        .setIcon(R.drawable.info)
+                        .setNegativeButton("Ок",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }
