@@ -51,6 +51,8 @@ public class paymentActivity extends AppCompatActivity {
     TextView amountBalanceText;
     PaymentAdapter adapter;
     RequestQueue queue;
+    TextView tvCommission;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,8 @@ public class paymentActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         getPayments();
+        tvCommission = findViewById(R.id.tvCommission);
+        tvCommission.setText(MainActivity.commission);
     }
 
     private void initRecyclerView() {

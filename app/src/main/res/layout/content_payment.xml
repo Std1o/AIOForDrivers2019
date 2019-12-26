@@ -10,7 +10,7 @@
     tools:context=".paymentActivity"
     tools:showIn="@layout/activity_payment"
     android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -41,35 +41,31 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginBottom="21dp"
-            android:layout_weight="1"
-            android:gravity="right">
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="25dp"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/topUpBalanceBtn"
-                android:layout_width="165dp"
-                android:layout_height="38dp"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/blue"
-                app:cardElevation="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/commission"
+                android:textColor="@color/darkGrey"
+                android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/topUpBalanceText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/topupbalance"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textScaleX="1.0357"
-                    android:textSize="11dp" />
-            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvCommission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center_horizontal"
+                android:textSize="38dp" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

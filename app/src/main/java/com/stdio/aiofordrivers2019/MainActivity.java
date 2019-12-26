@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity
     RequestQueue queue;
     String driverStatus;
 
+    public static String commission;
+
     public static String  driverMoney;
 
     NotificationsHelper n;
@@ -346,6 +348,7 @@ public class MainActivity extends AppCompatActivity
 
                                 driverMoney = response.getInt("driverMoney")+" \u20BD";
                                 userName.setText(pref.getDriverName());
+                                commission = response.getString("driverTypeWork").replace("Комиссия:\n", "").replace(" ", "").replace("\nзазаказ", "");
 
                                 /*tvTypeWork.setText(response.getString("driverTypeWork"));
 
