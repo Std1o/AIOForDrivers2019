@@ -334,6 +334,22 @@ public class BrowseFreeOrders extends AppCompatActivity {
         //   myThread.run();
 
         Log.e("666", "onResume()");
+        System.out.println(OrderReviewActivity.orderIsTaken);
+        if (OrderReviewActivity.orderIsTaken) {
+            OrderReviewActivity.orderIsTaken = false;
+
+            TakenOrderActivity.origin = OrderReviewActivity.origin;
+            TakenOrderActivity.destination = OrderReviewActivity.destination;
+            TakenOrderActivity.orderId = OrderReviewActivity.orderId;
+            TakenOrderActivity.from = OrderReviewActivity.from;
+            TakenOrderActivity.toAddress = OrderReviewActivity.toAddress;
+            TakenOrderActivity.time = OrderReviewActivity.time;
+            TakenOrderActivity.price = OrderReviewActivity.price;
+            TakenOrderActivity.statusOrder = "20";
+            startActivity(new Intent(this, BrowseTakenOrders.class));
+            startActivity(new Intent(this, TakenOrderActivity.class));
+            finish();
+        }
     }
 
 

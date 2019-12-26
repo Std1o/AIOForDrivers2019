@@ -98,6 +98,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
 
+    public static boolean orderIsTaken = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_ToolBar);
@@ -142,7 +144,6 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
             @Override
             public void onClick(View v) {
                 takeOrderFromDriver(orderId);
-                finish();
             }
         });
 
@@ -330,8 +331,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
                             String status = response.getString("st");
 
                             Toast.makeText(OrderReviewActivity.this, response.getString("message"), Toast.LENGTH_LONG).show();
-
-
+                            orderIsTaken = true;
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("666", "Autorize - " + e);
