@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +87,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     Toolbar toolbar;
     CardView btnChangeOrderStatus;
     TextView orderStatusText;
+    ImageView callBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,6 +174,16 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         priceValue = findViewById(R.id.priceValue);
         paymentTypeText = findViewById(R.id.paymentTypeText);
         orderStatusText = findViewById(R.id.orderStatusText);
+
+        callBtn = findViewById(R.id.callBtn);
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:89529339193"));
+                startActivity(intent);
+            }
+        });
     }
 
     private void setInfo() {
