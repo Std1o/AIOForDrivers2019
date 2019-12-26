@@ -52,6 +52,7 @@ public class GPSTracker extends Service implements
     private GoogleApiClient googleApiClient;
     private PrefManager pref;
     RequestQueue queue;
+    public static Location myPosition;
 
     @Override
     public void onCreate() {
@@ -190,6 +191,7 @@ public class GPSTracker extends Service implements
 
             if (location.getAccuracy() < 500.0f) {
                 stopLocationUpdates();
+                myPosition = location;
                 sendLocationDataToWebsite(location);
 
             }

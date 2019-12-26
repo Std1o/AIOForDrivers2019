@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,7 +62,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
+public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, View.OnClickListener {
 
     // variables for adding location layer
     private MapView mapView;
@@ -88,6 +91,8 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     CardView btnChangeOrderStatus;
     TextView orderStatusText;
     ImageView callBtn;
+
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +142,31 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     public void startNavigator(View view) {
-        startNavigator(String.valueOf(origin.getLatitude()), String.valueOf(origin.getLongitude()));
+        showDialogForSelectNavigationPoint();
+    }
+
+    public final void showDialogForSelectNavigationPoint() {
+        dialog = new Dialog(this, R.style.CustomDialog);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_for_select_navigation_point);
+        Context context = this;
+        AssetManager assetManager = null;
+        Typeface createFromAsset = Typeface.createFromAsset(context != null ? context.getAssets() : null, "font/roboto_regular.ttf");
+        Context context2 =this;
+        if (context2 != null) {
+            assetManager = context2.getAssets();
+        }
+        Typeface createFromAsset2 = Typeface.createFromAsset(assetManager, "font/roboto_medium.ttf");
+        TextView textView = dialog.findViewById(R.id.title);
+        TextView textView2 = dialog.findViewById(R.id.firstButtonText);
+        TextView textView3 = dialog.findViewById(R.id.secondButtonText);
+        textView.setTypeface(createFromAsset2);
+        textView2.setTypeface(createFromAsset);
+        textView3.setTypeface(createFromAsset);
+        textView2.setOnClickListener(this);
+        textView3.setOnClickListener(this);
+        dialog.show();
+        return;
     }
 
     public final void startNavigator(String latitude, String longitude) {
@@ -164,6 +193,17 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         }
         if (z) {
             startActivity(intent);
+        }
+    }
+
+    public final void onClick(View view) {
+        dialog.dismiss();
+
+        if (view.getId() == R.id.firstButtonText) {
+            startNavigator(String.valueOf(origin.getLatitude()), String.valueOf(origin.getLongitude()));
+        }
+        else if (view.getId() == R.id.secondButtonText) {
+            startNavigator(String.valueOf(destination.getLatitude()), String.valueOf(destination.getLongitude()));
         }
     }
 

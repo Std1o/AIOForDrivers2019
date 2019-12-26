@@ -15,4 +15,6 @@
     <color name="red">#d94c4c</color>
     <color name="black">#000</color>
     <color name="grey">#dadada</color>
+    <color name="lght_grey">#f6f8f8</color>
+    <color name="transparent">#90000000</color>
 </resources>
