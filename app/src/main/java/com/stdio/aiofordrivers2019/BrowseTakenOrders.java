@@ -136,6 +136,7 @@ public class BrowseTakenOrders extends AppCompatActivity {
                         TakenOrderActivity.time = ((TextView) view.findViewById(R.id.textDateTime)).getText().toString();
                         TakenOrderActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
                         TakenOrderActivity.statusOrder = ((TextView) view.findViewById(R.id.tv_order_status)).getText().toString();
+                        TakenOrderActivity.info = ordersList.get(position).getorderInfo();
 
                         startActivity(new Intent(BrowseTakenOrders.this, TakenOrderActivity.class));
 

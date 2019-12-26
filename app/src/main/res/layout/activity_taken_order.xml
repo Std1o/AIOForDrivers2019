@@ -21,9 +21,18 @@
         app:titleTextColor="@color/white">
 
         <ImageButton
+            android:id="@+id/infoButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="14dp"
+            android:onClick="showInfo"
+            android:background="@drawable/info" />
+
+        <ImageButton
             android:id="@+id/navigatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="end"
             android:layout_marginRight="14dp"
             android:onClick="startNavigator"

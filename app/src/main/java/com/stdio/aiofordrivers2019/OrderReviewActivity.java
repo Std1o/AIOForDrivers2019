@@ -1,6 +1,8 @@
 package com.stdio.aiofordrivers2019;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
@@ -61,6 +63,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
@@ -93,8 +96,9 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
     public static String orderId;
     private PrefManager pref;
     RequestQueue queue;
-    public static String from, toAddress, time, price;
+    public static String from, toAddress, time, price, info;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
+    Toolbar toolbar;
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
 
@@ -102,13 +106,15 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme_ToolBar);
-
         super.onCreate(savedInstanceState);
         //access tokens of your account in strings.xml
         Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_order_review);
-        setTitle("Заказ №" + orderId);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Заказ №" + orderId);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
@@ -153,6 +159,20 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
                 finish();
             }
         });
+    }
+
+    public void showInfo(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(info)
+                .setIcon(R.drawable.info)
+                .setNegativeButton("Ок",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

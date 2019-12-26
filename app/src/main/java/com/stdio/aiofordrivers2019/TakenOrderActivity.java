@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -86,7 +88,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     public static String orderId, statusOrder;
     private PrefManager pref;
     RequestQueue queue;
-    public static String from, toAddress, time, price;
+    public static String from, toAddress, time, price, info;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
     Toolbar toolbar;
     CardView btnChangeOrderStatus;
@@ -168,6 +170,20 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         textView3.setOnClickListener(this);
         dialog.show();
         return;
+    }
+
+    public void showInfo(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(info)
+                .setIcon(R.drawable.info)
+                .setNegativeButton("Ок",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public final void startNavigatorForStore(String latitude, String longitude) {

@@ -8,6 +8,26 @@
     android:orientation="vertical"
     tools:context=".OrderReviewActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="@string/orderWithId"
+        app:titleTextColor="@color/white">
+
+        <ImageButton
+            android:id="@+id/infoButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="14dp"
+            android:onClick="showInfo"
+            android:background="@drawable/info" />
+    </androidx.appcompat.widget.Toolbar>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
