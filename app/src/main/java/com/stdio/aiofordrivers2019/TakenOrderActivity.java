@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -169,7 +170,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         return;
     }
 
-    public final void startNavigator(String latitude, String longitude) {
+    public final void startNavigatorForStore(String latitude, String longitude) {
         Uri uri;
         boolean z = true;
         StringBuilder sb = new StringBuilder();
@@ -185,25 +186,48 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         if (packageManager != null) {
             list = packageManager.queryIntentActivities(intent, 0);
         }
-        if (list == null) {
-            Toast.makeText(this, "Не удалось запустить навигатор, т. к. на смартфоне не установлена программа Яндекс.Навигатор", Toast.LENGTH_SHORT).show();
+        if (list == null || list.size() == 0) {
+            // Если нет - будем открывать страничку Навигатора в Google Play
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=ru.yandex.yandexnavi"));
         }
-        if (list.size() <= 0) {
-            z = false;
-        }
-        if (z) {
+        else {
             startActivity(intent);
         }
+    }
+
+    private void startNavigatorForClient() {
+        // Создаем интент для построения маршрута
+        Intent intent = new Intent("ru.yandex.yandexnavi.action.BUILD_ROUTE_ON_MAP");
+        intent.setPackage("ru.yandex.yandexnavi");
+
+        PackageManager pm = getPackageManager();
+        List<ResolveInfo> infos = pm.queryIntentActivities(intent, 0);
+
+        // Проверяем, установлен ли Яндекс.Навигатор
+        if (infos == null || infos.size() == 0) {
+            // Если нет - будем открывать страничку Навигатора в Google Play
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=ru.yandex.yandexnavi"));
+        } else {
+            intent.putExtra("lat_from", origin.getLatitude());
+            intent.putExtra("lon_from", origin.getLongitude());
+            intent.putExtra("lat_to", destination.getLatitude());
+            intent.putExtra("lon_to", destination.getLongitude());
+        }
+
+        // Запускаем нужную Activity
+        startActivity(intent);
     }
 
     public final void onClick(View view) {
         dialog.dismiss();
 
         if (view.getId() == R.id.firstButtonText) {
-            startNavigator(String.valueOf(origin.getLatitude()), String.valueOf(origin.getLongitude()));
+            startNavigatorForStore(String.valueOf(origin.getLatitude()), String.valueOf(origin.getLongitude()));
         }
         else if (view.getId() == R.id.secondButtonText) {
-            startNavigator(String.valueOf(destination.getLatitude()), String.valueOf(destination.getLongitude()));
+            startNavigatorForClient();
         }
     }
 
