@@ -115,6 +115,12 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OrderReviewActivity.super.onBackPressed();
+            }
+        });
 
         pref = new PrefManager(this);
         queue = Volley.newRequestQueue(this);
