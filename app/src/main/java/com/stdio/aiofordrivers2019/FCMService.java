@@ -142,6 +142,7 @@ public class FCMService extends FirebaseMessagingService {
                                         robotDialog.from = obj.getString("orderPlace");
                                         robotDialog.toAddress = obj.getString("orderRoute");
                                         robotDialog.info = obj.getString("orderInfo");
+                                        robotDialog.orderId = obj.getString("orderID");
 
                                         String[] coords_store;
                                         String[] coords_client;

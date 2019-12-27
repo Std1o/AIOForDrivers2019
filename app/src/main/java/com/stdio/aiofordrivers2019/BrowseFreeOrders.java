@@ -347,6 +347,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
             TakenOrderActivity.time = OrderReviewActivity.time;
             TakenOrderActivity.price = OrderReviewActivity.price;
             TakenOrderActivity.statusOrder = "20";
+            TakenOrderActivity.info = OrderReviewActivity.info;
             startActivity(new Intent(this, BrowseTakenOrders.class));
             startActivity(new Intent(this, TakenOrderActivity.class));
             finish();

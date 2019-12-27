@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.android.volley.AuthFailureError;
@@ -67,7 +68,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
     String IdOrderToBuy;
     RequestQueue queue;
     private PrefManager pref;
-    public static String from, toAddress, time, price, info;
+    public static String orderId, from, toAddress, time, price, info;
     TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
@@ -88,6 +89,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
     private DirectionsRoute currentRoute;
     private static final String TAG = "DirectionsActivity";
     private NavigationMapRoute navigationMapRoute;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,8 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
         //access tokens of your account in strings.xml
         Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_order_review);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Заказ №" + orderId);
         playDefaultNotificationSound();
 
         pref = new PrefManager(this);
@@ -152,6 +156,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
                 TakenOrderActivity.time = time;
                 TakenOrderActivity.price = price;
                 TakenOrderActivity.statusOrder = "20";
+                TakenOrderActivity.info = info;
                 startActivity(new Intent(robotDialog.this, TakenOrderActivity.class));
                 finish();
             }
