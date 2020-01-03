@@ -134,6 +134,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
                         OrderReviewActivity.time = ((TextView) view.findViewById(R.id.textDateTime)).getText().toString();
                         OrderReviewActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
                         OrderReviewActivity.info = ordersList.get(position).getorderInfo();
+                        OrderReviewActivity.orderPrice = ordersList.get(position).getOrderPrice();
 
                         startActivity(new Intent(BrowseFreeOrders.this, OrderReviewActivity.class));
                     }

@@ -69,7 +69,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
     RequestQueue queue;
     private PrefManager pref;
     public static String orderId, from, toAddress, time, price, info;
-    TextView textDateTime, textFrom, textTo, priceValue, paymentTypeText;
+    TextView textDateTime, textFrom, textTo, priceValue;
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
     ImageButton infoButton;
@@ -130,7 +130,6 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
         textFrom = findViewById(R.id.textFrom);
         textTo = findViewById(R.id.textTo);
         priceValue = findViewById(R.id.priceValue);
-        paymentTypeText = findViewById(R.id.paymentTypeText);
         btnTakeOrderAuto = findViewById(R.id.btnTakeOrderAuto);
         btnDeclineOrder = findViewById(R.id.btnDeclineOrder);
         infoButton = findViewById(R.id.infoButton);

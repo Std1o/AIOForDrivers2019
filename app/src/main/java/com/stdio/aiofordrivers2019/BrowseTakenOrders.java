@@ -137,6 +137,7 @@ public class BrowseTakenOrders extends AppCompatActivity {
                         TakenOrderActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
                         TakenOrderActivity.statusOrder = ((TextView) view.findViewById(R.id.tv_order_status)).getText().toString();
                         TakenOrderActivity.info = ordersList.get(position).getorderInfo();
+                        TakenOrderActivity.orderPrice = ordersList.get(position).getOrderPrice();
 
                         startActivity(new Intent(BrowseTakenOrders.this, TakenOrderActivity.class));
 
