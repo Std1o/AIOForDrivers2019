@@ -4,13 +4,13 @@ package com.stdio.aiofordrivers2019.model;
  * Created by LordRus on 17.01.2016.
  */
 public class ModelOrders {
-    private String status, orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, coords_store, coords_client;
+    private String status, orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, coords_store, coords_client, orderPrice;
 
 
     public ModelOrders() {
     }
 
-    public ModelOrders(String status, String ordertime, String  ordertarif, String  clientplace, String clientroute, String  orderinfo, String  orderid, String coords_store, String coords_client) {
+    public ModelOrders(String status, String ordertime, String  ordertarif, String  clientplace, String clientroute, String  orderinfo, String  orderid, String coords_store, String coords_client, String orderPrice) {
         this.orderTime = ordertime;
         this.orderTarif = ordertarif;
         this.clientPlace = clientplace;
@@ -20,6 +20,7 @@ public class ModelOrders {
         this.status = status;
         this.coords_store = coords_store;
         this.coords_client = coords_client;
+        this.orderPrice = orderPrice;
     }
 
       public String getorderTime() {return orderTime;}
@@ -48,4 +49,7 @@ public class ModelOrders {
 
     public String getCoords_client() {return coords_client;}
     public void setCoords_client(String v) {this.coords_client = v;}
+
+    public String getOrderPrice() {return orderPrice;}
+    public void setOrderPrice(String v) {this.orderPrice = v;}
 }

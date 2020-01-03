@@ -201,6 +201,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
                                     order.setorderInfo(obj.getString("orderInfo"));
                                     order.setCoords_store(obj.getString("coords"));
                                     order.setCoords_client(obj.getString("coords_2"));
+                                    order.setOrderPrice(obj.getString("stzakaz"));
 
                                     ordersList.add(order);
 

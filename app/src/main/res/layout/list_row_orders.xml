@@ -29,6 +29,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/darkGrey"
+            android:textSize="12dp" />
+
+        <TextView
             android:id="@+id/tv_status_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,31 +46,33 @@
             android:layout_marginTop="10dp"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/orderIdText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/lightBlue"
-            android:textSize="12dp" />
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <LinearLayout
                 android:id="@+id/llAddress"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/orderIdText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="16dp"
+                    android:textColor="@color/lightBlue"
+                    android:textSize="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -108,27 +120,41 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/priceValue"
-                android:layout_width="130dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:orientation="vertical"
                 android:layout_marginRight="19dp"
-                android:layout_toRightOf="@+id/llAddress"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textSize="24dp" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:id="@+id/orderPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/orderText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Заказ"/>
+
+                <TextView
+                    android:id="@+id/priceValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Доставка"/>
+
+            </LinearLayout>
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/textDateTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="2dp"
-            android:textColor="@color/darkGrey"
-            android:textSize="12dp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -17,7 +17,7 @@ public class OrdersRVAdapter extends RecyclerView.Adapter<OrdersRVAdapter.DataVi
 
     public static class DataViewHolder extends RecyclerView.ViewHolder {
 
-        TextView status, id, orderTime, orderTarif, clientPlace, clientRoute;
+        TextView status, id, orderTime, orderTarif, clientPlace, clientRoute, orderPrice;
 
         DataViewHolder(View itemView) {
             super(itemView);
@@ -27,6 +27,7 @@ public class OrdersRVAdapter extends RecyclerView.Adapter<OrdersRVAdapter.DataVi
             orderTarif = (TextView) itemView.findViewById(R.id.priceValue);
             clientPlace = (TextView) itemView.findViewById(R.id.textFrom);
             clientRoute = (TextView) itemView.findViewById(R.id.textTo);
+            orderPrice = (TextView) itemView.findViewById(R.id.orderPrice);
         }
     }
 
@@ -62,6 +63,7 @@ public class OrdersRVAdapter extends RecyclerView.Adapter<OrdersRVAdapter.DataVi
         dataViewHolder.orderTarif.setText(modelOrders.getorderTarif());
         dataViewHolder.clientPlace.setText(modelOrders.getclientPlace());
         dataViewHolder.clientRoute.setText( modelOrders.getclientRoute());
+        dataViewHolder.orderPrice.setText( modelOrders.getOrderPrice());
     }
 
     @Override

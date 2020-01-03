@@ -4,7 +4,7 @@ package com.stdio.aiofordrivers2019.model;
  * Created by LordRus on 24.01.2016.
  */
 public class ModelTakenOrders {
-    private String orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, orderStatus, clentPhone, coords_store, coords_client;
+    private String orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, orderStatus, clentPhone, coords_store, coords_client, orderPrice;
 
 
     public ModelTakenOrders() {
@@ -12,7 +12,7 @@ public class ModelTakenOrders {
 
     public ModelTakenOrders(String ordertime, String  ordertarif, String  clientplace, String clientroute,
                             String  orderinfo, String  orderid, String orderstatus, String clientphone,
-                            String coords_store, String coords_client) {
+                            String coords_store, String coords_client, String orderPrice) {
         this.orderTime = ordertime;
         this.orderTarif = ordertarif;
         this.clientPlace = clientplace;
@@ -25,6 +25,8 @@ public class ModelTakenOrders {
 
         this.coords_store = coords_store;
         this.coords_client = coords_client;
+
+        this.orderPrice = orderPrice;
     }
 
     public String getorderTime() {return orderTime;}
@@ -57,5 +59,6 @@ public class ModelTakenOrders {
     public String getCoords_client() {return coords_client;}
     public void setCoords_client(String v) {this.coords_client = v;}
 
-
+    public String getOrderPrice() {return orderPrice;}
+    public void setOrderPrice(String v) {this.orderPrice = v;}
 }

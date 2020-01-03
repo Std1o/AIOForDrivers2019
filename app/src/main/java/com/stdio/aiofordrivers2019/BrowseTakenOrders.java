@@ -209,6 +209,7 @@ public class BrowseTakenOrders extends AppCompatActivity {
                                     order.setclientPhone(obj.getString("clientPhone"));
                                     order.setCoords_store(obj.getString("coords"));
                                     order.setCoords_client(obj.getString("coords_2"));
+                                    order.setOrderPrice(obj.getString("stzakaz"));
 
                                     ordersList.add(order);
                                 }
