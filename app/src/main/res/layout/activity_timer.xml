@@ -39,34 +39,61 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layoutTakeOrderAuto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp">
+        android:orientation="horizontal">
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/btnComplete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:onClick="onClick"
-            android:background="@drawable/b_yes"
+            app:cardBackgroundColor="@color/main_green"
             android:foreground="?selectableItemBackground"
-            android:text="Оплачено" />
+            app:cardElevation="3dp">
 
-        <Button
+            <TextView
+                android:id="@+id/textTakeOrderAuto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Оплачено"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textScaleX="1.0357"
+                android:textSize="14dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:onClick="onClick"
-            android:background="@drawable/b_red"
+            app:cardBackgroundColor="@color/red"
             android:foreground="?selectableItemBackground"
-            android:text="Отказ" />
+            app:cardElevation="3dp">
+
+            <TextView
+                android:id="@+id/textDeclineOrder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Отказ"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textScaleX="1.0357"
+                android:textSize="14dp" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </RelativeLayout>

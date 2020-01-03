@@ -211,6 +211,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/main_green"
+                android:foreground="?selectableItemBackground"
                 app:cardElevation="3dp">
 
                 <TextView
@@ -235,6 +236,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/red"
+                android:foreground="?selectableItemBackground"
                 app:cardElevation="3dp">
 
                 <TextView

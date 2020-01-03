@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,7 +40,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class TimerActivity extends AppCompatActivity {
+public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final CompositeDisposable disposables = new CompositeDisposable();
 
@@ -88,7 +89,7 @@ public class TimerActivity extends AppCompatActivity {
         }
         Log.e("666", minutPrice + " " + orderPrice + " " + order + " " + waitMinut);
         tvPrice.setText("Стоимость доставки: " + (orderPrice + waitPrice));
-        doSomeWork();
+        setButtonsOnClick();
     }
 
     @Override
@@ -108,10 +109,10 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPause() {
+    protected void onStop() {
         disposables.clear(); // clearing it : do not emit after destroy
         startService(intentService);
-        super.onPause();
+        super.onStop();
     }
 
     @Override
@@ -149,7 +150,8 @@ public class TimerActivity extends AppCompatActivity {
 
             @Override
             public void onNext(Long value) {
-                seconds += 1;
+                System.out.println(seconds);
+                seconds++;
                 if (seconds >= 60) {
                     minutes++;
                     seconds = seconds % 60;
@@ -176,6 +178,13 @@ public class TimerActivity extends AppCompatActivity {
         };
     }
 
+    private void setButtonsOnClick() {
+        CardView btnComplete, btnCancel;
+        btnComplete = findViewById(R.id.btnComplete);
+        btnCancel = findViewById(R.id.btnCancel);
+        btnComplete.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+    }
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnComplete:
