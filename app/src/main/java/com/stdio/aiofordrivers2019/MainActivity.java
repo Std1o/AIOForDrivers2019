@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity
     private void takeInfo(String command) {
 
 
-        String url = "http://bdsystem.ru/" + Urls.START_INFO_URL;
+        String url = pref.getCityUrl() + Urls.START_INFO_URL;
 
 
         Map<String, String> map = new HashMap<>();

@@ -95,7 +95,7 @@ public class restoreDostup extends AppCompatActivity {
 
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         IMEI = tMgr.getDeviceId();
-        pref.setTaxiUrl("http://bdsystem.ru/");
+        pref.setTaxiUrl("https://bdsystem.ru");
 
         btnContinue = findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +110,7 @@ public class restoreDostup extends AppCompatActivity {
     }
 
     private void Autorize() {
-        String url = "http://bdsystem.ru/" + Urls.REGISTER_APPLY_URL;
+        String url = pref.getCityUrl() + Urls.REGISTER_APPLY_URL;
         Map<String, String> map = new HashMap<>();
 
         map.put("command", "send_phone");
