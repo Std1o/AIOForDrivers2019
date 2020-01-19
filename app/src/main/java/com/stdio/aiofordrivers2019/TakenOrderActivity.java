@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.KeyFactory;
+import java.security.Signature;
+import java.security.spec.EncodedKeySpec;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +101,13 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     ImageView callBtn;
 
     Dialog dialog;
+    private final String PRIVATE_KEY = "MIIBOgIBAAJBAJKSzm8Zi1jw5XyUYZrhapoowd3bdNIWWkgbM26JyWthrKrXUSs5\n" +
+            "cqUAhok4r4BxhP7+F6Mv12mCsJsyegzmP9MCAwEAAQJANqGHVfuUZ6sqLfv0QVEh\n" +
+            "daIZWELS0PdJ4TRaQCoVK/NkjI5TMvdk5pFWpqshx4l2O/85tGvKuv8BCyTXGXDL\n" +
+            "GQIhAMJIl7CH1h9ID9XSWHW8xBarfc7wDyCDOhyGf7y7rs3PAiEAwSJczpSVbtJT\n" +
+            "lEgPeegdV0vd4BcKdqBs3Em1U1lUUr0CIQCWRROepNIHC/PDjJiDKGf6qNX8M01f\n" +
+            "9mACJD20uu3vnQIgYYqESsUaD4VkNtCKGGyVXQBxB3s7ipwNPthvHrBP+RUCIGzq\n" +
+            "VolA40fGYs4K/fCUNysjMDYF8doAYrrIhHo74Kos";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +198,25 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         alert.show();
     }
 
+    public String sha256rsa(String key, String data) throws SecurityException {
+        String trimmedKey = key.replaceAll("-----\\w+ PRIVATE KEY-----", "")
+                .replaceAll("\\s", "");
+
+        try {
+            byte[]         result    = Base64.decode(trimmedKey, Base64.DEFAULT);
+            KeyFactory factory   = KeyFactory.getInstance("RSA");
+            EncodedKeySpec keySpec   = new PKCS8EncodedKeySpec(result);
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initSign(factory.generatePrivate(keySpec));
+            signature.update(data.getBytes());
+
+            byte[] encrypted = signature.sign();
+            return Base64.encodeToString(encrypted, Base64.NO_WRAP);
+        } catch (Exception e) {
+            throw new SecurityException("Error calculating cipher data. SIC!");
+        }
+    }
+
     public final void startNavigatorForStore(String latitude, String longitude) {
         Uri uri;
         boolean z = true;
@@ -194,6 +225,9 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         sb.append(latitude);
         sb.append("&lon_to=");
         sb.append(longitude);
+        sb.append("&client=211");
+        uri = Uri.parse(sb.toString());
+        sb.append(("&signature=" + sha256rsa(PRIVATE_KEY, uri.toString())));
         uri = Uri.parse(sb.toString());
         Intent intent = new Intent("android.intent.action.VIEW", uri);
         Context context = getApplicationContext();
@@ -213,27 +247,33 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     private void startNavigatorForClient() {
-        // Создаем интент для построения маршрута
-        Intent intent = new Intent("ru.yandex.yandexnavi.action.BUILD_ROUTE_ON_MAP");
-        intent.setPackage("ru.yandex.yandexnavi");
-
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> infos = pm.queryIntentActivities(intent, 0);
-
-        // Проверяем, установлен ли Яндекс.Навигатор
-        if (infos == null || infos.size() == 0) {
+        Uri uri;
+        StringBuilder sb = new StringBuilder();
+        sb.append("yandexnavi://build_route_on_map?");
+        sb.append("lat_from="+origin.getLatitude());
+        sb.append("&lon_from="+origin.getLongitude());
+        sb.append("&lat_to=" + destination.getLatitude());
+        sb.append("&lon_to=");
+        sb.append(destination.getLongitude());
+        sb.append("&client=211");
+        uri = Uri.parse(sb.toString());
+        sb.append(("&signature=" + sha256rsa(PRIVATE_KEY, uri.toString())));
+        uri = Uri.parse(sb.toString());
+        Intent intent = new Intent("android.intent.action.VIEW", uri);
+        Context context = getApplicationContext();
+        List list = null;
+        PackageManager packageManager = context != null ? context.getPackageManager() : null;
+        if (packageManager != null) {
+            list = packageManager.queryIntentActivities(intent, 0);
+        }
+        if (list == null || list.size() == 0) {
             // Если нет - будем открывать страничку Навигатора в Google Play
             intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("market://details?id=ru.yandex.yandexnavi"));
-        } else {
-            intent.putExtra("lat_from", origin.getLatitude());
-            intent.putExtra("lon_from", origin.getLongitude());
-            intent.putExtra("lat_to", destination.getLatitude());
-            intent.putExtra("lon_to", destination.getLongitude());
         }
-
-        // Запускаем нужную Activity
-        startActivity(intent);
+        else {
+            startActivity(intent);
+        }
     }
 
     public final void onClick(View view) {
