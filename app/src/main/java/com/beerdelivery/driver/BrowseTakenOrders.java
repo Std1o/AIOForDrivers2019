@@ -138,6 +138,7 @@ public class BrowseTakenOrders extends AppCompatActivity {
                         TakenOrderActivity.statusOrder = ((TextView) view.findViewById(R.id.tv_order_status)).getText().toString();
                         TakenOrderActivity.info = ordersList.get(position).getorderInfo();
                         TakenOrderActivity.orderPrice = ordersList.get(position).getOrderPrice();
+                        TakenOrderActivity.textTariff = ordersList.get(position).getTextTariff();
 
                         startActivity(new Intent(BrowseTakenOrders.this, TakenOrderActivity.class));
 
@@ -211,6 +212,7 @@ public class BrowseTakenOrders extends AppCompatActivity {
                                     order.setCoords_store(obj.getString("coords"));
                                     order.setCoords_client(obj.getString("coords_2"));
                                     order.setOrderPrice(obj.getString("stzakaz"));
+                                    order.setTextTariff(obj.getString("tarif"));
 
                                     ordersList.add(order);
                                 }

@@ -88,8 +88,8 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     public static String orderId, statusOrder;
     private PrefManager pref;
     RequestQueue queue;
-    public static String from, toAddress, time, price, info, orderPrice;
-    TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice;
+    public static String from, toAddress, time, price, info, orderPrice, textTariff;
+    TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice, tvTextTariff;
     Toolbar toolbar;
     CardView btnChangeOrderStatus;
     TextView orderStatusText;
@@ -254,6 +254,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         priceValue = findViewById(R.id.priceValue);
         orderStatusText = findViewById(R.id.orderStatusText);
         tvOrderPrice = findViewById(R.id.orderPrice);
+        tvTextTariff = findViewById(R.id.textTariff);
 
         callBtn = findViewById(R.id.callBtn);
         callBtn.setOnClickListener(new View.OnClickListener() {
@@ -272,6 +273,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         textTo.setText(toAddress);
         priceValue.setText(price);
         tvOrderPrice.setText(orderPrice);
+        tvTextTariff.setText(textTariff);
         setNextOrderStatus(statusOrder);
     }
 

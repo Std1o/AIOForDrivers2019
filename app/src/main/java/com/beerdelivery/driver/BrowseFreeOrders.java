@@ -135,6 +135,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
                         OrderReviewActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
                         OrderReviewActivity.info = ordersList.get(position).getorderInfo();
                         OrderReviewActivity.orderPrice = ordersList.get(position).getOrderPrice();
+                        OrderReviewActivity.textTariff = ordersList.get(position).getTextTariff();
 
                         startActivity(new Intent(BrowseFreeOrders.this, OrderReviewActivity.class));
                     }
@@ -203,6 +204,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
                                     order.setCoords_store(obj.getString("coords"));
                                     order.setCoords_client(obj.getString("coords_2"));
                                     order.setOrderPrice(obj.getString("stzakaz"));
+                                    order.setTextTariff(obj.getString("tarif"));
 
                                     ordersList.add(order);
 
@@ -350,6 +352,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
             TakenOrderActivity.price = OrderReviewActivity.price;
             TakenOrderActivity.statusOrder = "20";
             TakenOrderActivity.info = OrderReviewActivity.info;
+            TakenOrderActivity.textTariff = OrderReviewActivity.textTariff;
             startActivity(new Intent(this, BrowseTakenOrders.class));
             startActivity(new Intent(this, TakenOrderActivity.class));
             finish();

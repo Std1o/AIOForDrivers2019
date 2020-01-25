@@ -68,8 +68,8 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
     String IdOrderToBuy;
     RequestQueue queue;
     private PrefManager pref;
-    public static String orderId, from, toAddress, time, price, info, orderPrice;
-    TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice;
+    public static String orderId, from, toAddress, time, price, info, orderPrice, textTariff;
+    TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice, tvTextTariff;
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
     ImageButton infoButton;
@@ -134,6 +134,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
         btnDeclineOrder = findViewById(R.id.btnDeclineOrder);
         infoButton = findViewById(R.id.infoButton);
         tvOrderPrice = findViewById(R.id.orderPrice);
+        tvTextTariff = findViewById(R.id.textTariff);
     }
 
     private void setInfo() {
@@ -142,6 +143,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
         textTo.setText(toAddress);
         priceValue.setText(price);
         tvOrderPrice.setText(orderPrice);
+        tvTextTariff.setText(textTariff);
     }
 
     private void setButtonListeners() {
@@ -158,6 +160,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
                 TakenOrderActivity.price = price;
                 TakenOrderActivity.statusOrder = "20";
                 TakenOrderActivity.info = info;
+                TakenOrderActivity.textTariff = textTariff;
                 startActivity(new Intent(robotDialog.this, TakenOrderActivity.class));
                 finish();
             }

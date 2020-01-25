@@ -97,8 +97,8 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
     public static String orderId;
     private PrefManager pref;
     RequestQueue queue;
-    public static String from, toAddress, time, price, info, orderPrice;
-    TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice;
+    public static String from, toAddress, time, price, info, orderPrice, textTariff;
+    TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice, tvTextTariff;
     Toolbar toolbar;
 
     CardView btnTakeOrderAuto, btnDeclineOrder;
@@ -143,6 +143,7 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
         btnTakeOrderAuto = findViewById(R.id.btnTakeOrderAuto);
         btnDeclineOrder = findViewById(R.id.btnDeclineOrder);
         tvOrderPrice = findViewById(R.id.orderPrice);
+        tvTextTariff = findViewById(R.id.textTariff);
     }
 
     private void setInfo() {
@@ -151,6 +152,7 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
         textTo.setText(toAddress);
         priceValue.setText(price);
         tvOrderPrice.setText(orderPrice);
+        tvTextTariff.setText(textTariff);
     }
 
     private void setButtonListeners() {

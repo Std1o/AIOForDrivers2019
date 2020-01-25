@@ -4,13 +4,13 @@ package com.beerdelivery.driver.model;
  * Created by BeerDelivery on 01.12.2019.
  */
 public class ModelOrders {
-    private String status, orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, coords_store, coords_client, orderPrice;
+    private String status, orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, coords_store, coords_client, orderPrice, textTariff;
 
 
     public ModelOrders() {
     }
 
-    public ModelOrders(String status, String ordertime, String  ordertarif, String  clientplace, String clientroute, String  orderinfo, String  orderid, String coords_store, String coords_client, String orderPrice) {
+    public ModelOrders(String status, String ordertime, String  ordertarif, String  clientplace, String clientroute, String  orderinfo, String  orderid, String coords_store, String coords_client, String orderPrice, String textTariff) {
         this.orderTime = ordertime;
         this.orderTarif = ordertarif;
         this.clientPlace = clientplace;
@@ -21,6 +21,7 @@ public class ModelOrders {
         this.coords_store = coords_store;
         this.coords_client = coords_client;
         this.orderPrice = orderPrice;
+        this.textTariff = textTariff;
     }
 
       public String getorderTime() {return orderTime;}
@@ -52,4 +53,7 @@ public class ModelOrders {
 
     public String getOrderPrice() {return orderPrice;}
     public void setOrderPrice(String v) {this.orderPrice = v;}
+
+    public String getTextTariff() {return textTariff;}
+    public void setTextTariff(String v) {this.textTariff = v;}
 }
