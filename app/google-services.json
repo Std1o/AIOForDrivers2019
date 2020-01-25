@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "985354850213",
-    "firebase_url": "https://aiofordrivers2019-2b509.firebaseio.com",
-    "project_id": "aiofordrivers2019-2b509",
-    "storage_bucket": "aiofordrivers2019-2b509.appspot.com"
+    "project_number": "180309602018",
+    "firebase_url": "https://beerdelivery-f6b47.firebaseio.com",
+    "project_id": "beerdelivery-f6b47",
+    "storage_bucket": "beerdelivery-f6b47.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:985354850213:android:2220670c7aefa1b37ce24c",
+        "mobilesdk_app_id": "1:180309602018:android:e691bd05a25f254143b8bb",
         "android_client_info": {
-          "package_name": "com.stdio.aiofordrivers2019"
+          "package_name": "com.beerdelivery.driver"
         }
       },
       "oauth_client": [
         {
-          "client_id": "985354850213-cg9ggdsnf1qlm1r9vlgpi2pbkcomhkpd.apps.googleusercontent.com",
+          "client_id": "180309602018-mqp3o0pp8j53ee6ofkkgqekp9777apht.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.stdio.aiofordrivers2019",
-            "certificate_hash": "9bc2d0956073633b340b7adfcfc5b16833007d4b"
+            "package_name": "com.beerdelivery.driver",
+            "certificate_hash": "1442100bc1a97d52922b944477e0c1eeef57921c"
           }
         },
         {
-          "client_id": "985354850213-1q8c9vt1vshgk0vc69shterdai40b3p5.apps.googleusercontent.com",
+          "client_id": "180309602018-bjsgpc14nha3sisirrg1mqinvq8k4avp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAfB0LowoSgQOFuH6cWAyp8WulnM8nF3wQ"
+          "current_key": "AIzaSyBD5iNs4toxVnVc0NQVDoAv017uSx8mnog"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "985354850213-1q8c9vt1vshgk0vc69shterdai40b3p5.apps.googleusercontent.com",
+              "client_id": "180309602018-bjsgpc14nha3sisirrg1mqinvq8k4avp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
