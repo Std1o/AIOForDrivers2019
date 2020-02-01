@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,6 +53,7 @@ import com.beerdelivery.driver.helper.Urls;
 
 import ru.yandex.money.android.sdk.Amount;
 import ru.yandex.money.android.sdk.Checkout;
+import ru.yandex.money.android.sdk.PaymentMethodType;
 import ru.yandex.money.android.sdk.PaymentParameters;
 import ru.yandex.money.android.sdk.SavePaymentMethod;
 import ru.yandex.money.android.sdk.TokenizationResult;
@@ -225,13 +227,15 @@ public class MainActivity extends AppCompatActivity
 
     void timeToStartCheckout() {
         PaymentParameters paymentParameters = new PaymentParameters(
-                new Amount(BigDecimal.TEN, Currency.getInstance("RUB")),
+                new Amount(BigDecimal.valueOf(15), Currency.getInstance("RUB")),
                 "Название товара",
                 "Описание товара",
-                "live_AAAAAAAAAAAAAAAAAAAA",
-                "12345",
+                "test_NjY5NTU4i1zMoAhzhlJJvYCzWheTY8qwLHSP9A46nN8",
+                "664994",
                 SavePaymentMethod.OFF
         );
+        paymentParameters.paymentMethodTypes.clear();
+        paymentParameters.paymentMethodTypes.add(PaymentMethodType.BANK_CARD);
         Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
         startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
     }
