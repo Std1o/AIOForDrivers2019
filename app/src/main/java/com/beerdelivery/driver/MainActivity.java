@@ -1,6 +1,7 @@
 package com.beerdelivery.driver;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -34,6 +35,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +49,12 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.beerdelivery.driver.helper.NotificationsHelper;
 import com.beerdelivery.driver.helper.PrefManager;
 import com.beerdelivery.driver.helper.Urls;
+
+import ru.yandex.money.android.sdk.Amount;
+import ru.yandex.money.android.sdk.Checkout;
+import ru.yandex.money.android.sdk.PaymentParameters;
+import ru.yandex.money.android.sdk.SavePaymentMethod;
+import ru.yandex.money.android.sdk.TokenizationResult;
 
 
 public class MainActivity extends AppCompatActivity
@@ -74,6 +83,7 @@ public class MainActivity extends AppCompatActivity
             Manifest.permission.CALL_PHONE,
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.ACCESS_FINE_LOCATION}; // Here i used multiple permission check
+    int REQUEST_CODE_TOKENIZE = 4513;
 
 
     @Override
@@ -210,6 +220,37 @@ public class MainActivity extends AppCompatActivity
 
         n = new NotificationsHelper(this);
         n.createNotification("СЛУЖБА ДОСТАВКИ", MainActivity.class, 0);
+        timeToStartCheckout();
+    }
+
+    void timeToStartCheckout() {
+        PaymentParameters paymentParameters = new PaymentParameters(
+                new Amount(BigDecimal.TEN, Currency.getInstance("RUB")),
+                "Название товара",
+                "Описание товара",
+                "live_AAAAAAAAAAAAAAAAAAAA",
+                "12345",
+                SavePaymentMethod.OFF
+        );
+        Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
+        startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_TOKENIZE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    // successful tokenization
+                    TokenizationResult result = Checkout.createTokenizationResult(data);
+                    break;
+                case RESULT_CANCELED:
+                    // user canceled tokenization
+                    break;
+            }
+        }
     }
 
     private void requestReadPermission() {

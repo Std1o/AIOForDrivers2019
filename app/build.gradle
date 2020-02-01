@@ -8,9 +8,11 @@ android {
         applicationId "com.beerdelivery.driver"
         minSdkVersion 16
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [YANDEX_CLIENT_ID:"bb1762f7fb734cecb839fa9c62ad5479"]
     }
     buildTypes {
         release {
@@ -41,4 +43,9 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:0.3.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.4'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.4'
+    implementation 'com.yandex.money:checkout:3.0.2'
+    implementation "com.yandex.android:authsdk:2.1.1"
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
+    implementation 'com.android.support:multidex:1.0.3'
 }
