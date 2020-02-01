@@ -60,7 +60,7 @@
 
     </string-array>
     <string name="title_activity_upload_foto">Загрузка фото</string>
-    <string name="title_activity_old_orders">Статистика</string>
+    <string name="title_activity_old_orders">Обзор заказов</string>
 
     <!--***********************************-->
 

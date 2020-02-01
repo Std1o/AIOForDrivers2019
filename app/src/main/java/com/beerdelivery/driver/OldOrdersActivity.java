@@ -104,43 +104,6 @@ public class OldOrdersActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         initializeAdapter();
-
-        rv.addOnItemTouchListener(
-                new RecyclerItemClickListener(OldOrdersActivity.this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        String[] coords_store;
-                        String[] coords_client;
-
-                        coords_store = ordersList.get(position).getCoords_store().split(",");
-                        coords_client = ordersList.get(position).getCoords_client().split(",");
-
-                        double originLatitude = Double.parseDouble(coords_store[0]);
-                        double originLongitude = Double.parseDouble(coords_store[1]);
-
-                        System.out.println(originLatitude);
-                        System.out.println(originLongitude);
-
-                        double destinationLatitude = Double.parseDouble(coords_client[0]);
-                        double destinationLongitude = Double.parseDouble(coords_client[1]);
-
-                        OrderReviewActivity.origin = new LatLng(originLatitude, originLongitude);
-                        OrderReviewActivity.destination = new LatLng(destinationLatitude, destinationLongitude);
-                        OrderReviewActivity.orderId = ((TextView) view.findViewById(R.id.orderIdText)).getText().toString();
-                        OrderReviewActivity.from = ((TextView) view.findViewById(R.id.textFrom)).getText().toString();
-                        OrderReviewActivity.toAddress = ((TextView) view.findViewById(R.id.textTo)).getText().toString();
-                        OrderReviewActivity.time = ((TextView) view.findViewById(R.id.textDateTime)).getText().toString();
-                        OrderReviewActivity.price = ((TextView) view.findViewById(R.id.priceValue)).getText().toString();
-                        OrderReviewActivity.info = ordersList.get(position).getorderInfo();
-                        OrderReviewActivity.orderPrice = ordersList.get(position).getOrderPrice();
-                        OrderReviewActivity.textTariff = ordersList.get(position).getTextTariff();
-
-                        startActivity(new Intent(OldOrdersActivity.this, OrderReviewActivity.class));
-                    }
-
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
-                }));
     }
 
     private void initializeAdapter(){
@@ -206,7 +169,7 @@ public class OldOrdersActivity extends AppCompatActivity {
                                 }
 
 
-                                toolbar.setSubtitle("Свободных: " + all);
+                                toolbar.setSubtitle("Завершенных: " + all);
                                 adapter.notifyDataSetChanged();
 
                             }
