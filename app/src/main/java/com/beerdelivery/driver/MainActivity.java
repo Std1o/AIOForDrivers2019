@@ -249,6 +249,7 @@ public class MainActivity extends AppCompatActivity
                 case RESULT_OK:
                     // successful tokenization
                     TokenizationResult result = Checkout.createTokenizationResult(data);
+                    System.out.println(result);
                     break;
                 case RESULT_CANCELED:
                     // user canceled tokenization
