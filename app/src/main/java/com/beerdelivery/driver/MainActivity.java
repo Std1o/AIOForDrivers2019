@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity
         PaymentParameters paymentParameters = new PaymentParameters(
                 new Amount(BigDecimal.valueOf(15), Currency.getInstance("RUB")),
                 "Название товара",
-                "Описание товара",
+                pref.getDriverId(),
                 "test_NjY5NTU4i1zMoAhzhlJJvYCzWheTY8qwLHSP9A46nN8",
                 "664994",
                 SavePaymentMethod.OFF
