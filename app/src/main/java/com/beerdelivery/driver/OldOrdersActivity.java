@@ -151,7 +151,7 @@ public class OldOrdersActivity extends AppCompatActivity {
 
     private void getOldOrders() {
 
-        String url = pref.getCityUrl() + Urls.GET_FREE_ORDERS_URL;
+        String url = pref.getCityUrl() + Urls.INFO_OLD_ORDERS_URL;
 
 
         Map<String, String> map = new HashMap<>();
@@ -175,8 +175,6 @@ public class OldOrdersActivity extends AppCompatActivity {
                         try {
                             String status = response.getString("st");
 
-                            if (response.getString("beep").equals("yes")){playDefaultNotificationSound();}
-
                             if (status.equals("0")) {
                                 ordersList.clear();
 
@@ -198,8 +196,8 @@ public class OldOrdersActivity extends AppCompatActivity {
                                     order.setclientPlace(obj.getString("orderPlace"));
                                     order.setclientRoute(obj.getString("orderRoute"));
                                     order.setorderInfo(obj.getString("orderInfo"));
-                                    order.setCoords_store(obj.getString("coords"));
-                                    order.setCoords_client(obj.getString("coords_2"));
+                                   // order.setCoords_store(obj.getString("coords"));
+                                   // order.setCoords_client(obj.getString("coords_2"));
                                     order.setOrderPrice(obj.getString("stzakaz"));
                                     order.setTextTariff(obj.getString("tarif"));
 
