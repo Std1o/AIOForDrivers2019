@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity
         n = new NotificationsHelper(this);
         n.createNotification("СЛУЖБА ДОСТАВКИ", MainActivity.class, 0);
         //timeToStartCheckout();
-        startActivity(new Intent(this, ChatActivity.class));
+        //startActivity(new Intent(this, ChatActivity.class));
     }
 
     void timeToStartCheckout() {

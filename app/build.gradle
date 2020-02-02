@@ -9,8 +9,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         multiDexEnabled true
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [YANDEX_CLIENT_ID: "bb1762f7fb734cecb839fa9c62ad5479"]
     }
