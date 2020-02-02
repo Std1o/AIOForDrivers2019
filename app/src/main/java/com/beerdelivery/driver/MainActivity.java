@@ -53,9 +53,11 @@ import com.beerdelivery.driver.helper.Urls;
 
 import ru.yandex.money.android.sdk.Amount;
 import ru.yandex.money.android.sdk.Checkout;
+import ru.yandex.money.android.sdk.MockConfiguration;
 import ru.yandex.money.android.sdk.PaymentMethodType;
 import ru.yandex.money.android.sdk.PaymentParameters;
 import ru.yandex.money.android.sdk.SavePaymentMethod;
+import ru.yandex.money.android.sdk.TestParameters;
 import ru.yandex.money.android.sdk.TokenizationResult;
 
 
@@ -231,12 +233,13 @@ public class MainActivity extends AppCompatActivity
                 "Название товара",
                 pref.getDriverId(),
                 "test_NjY5NTU4i1zMoAhzhlJJvYCzWheTY8qwLHSP9A46nN8",
-                "664994",
+                "669558",
                 SavePaymentMethod.OFF
         );
+        TestParameters testParameters = new TestParameters(true, false);
         paymentParameters.paymentMethodTypes.clear();
         paymentParameters.paymentMethodTypes.add(PaymentMethodType.BANK_CARD);
-        Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
+        Intent intent = Checkout.createTokenizeIntent(this, paymentParameters, testParameters);
         startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
     }
 
@@ -253,6 +256,7 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case RESULT_CANCELED:
                     // user canceled tokenization
+                    System.out.println("canceled");
                     break;
             }
         }

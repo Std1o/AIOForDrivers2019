@@ -84,9 +84,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-        <meta-data
-            android:name="com.google.android.gms.wallet.api.enabled"
-            tools:node="remove" />
 
         <activity
             android:name=".ChooseCity"
