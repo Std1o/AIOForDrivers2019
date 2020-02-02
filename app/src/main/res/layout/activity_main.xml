@@ -254,7 +254,7 @@
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/font_awesome"
                             android:gravity="center"
-                            android:text="@string/iconFinishedOrder"
+                            android:text="@string/iconTakenOrders"
                             android:textColor="@color/white"
                             android:textSize="36dp" />
 
@@ -338,7 +338,7 @@
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/font_awesome"
                             android:gravity="center"
-                            android:text="@string/iconSupport"
+                            android:text="@string/iconCompleted"
                             android:textColor="@color/white"
                             android:textSize="36dp" />
 
