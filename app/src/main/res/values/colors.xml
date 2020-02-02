@@ -17,4 +17,9 @@
     <color name="grey">#dadada</color>
     <color name="lght_grey">#f6f8f8</color>
     <color name="transparent">#90000000</color>
+
+    <color name="textColor">#1C2E56</color>
+    <color name="main_white">#e2e6e6</color>
+    <color name="main_gray">#acacac</color>
+    <color name="main_orange">#fe9201</color>
 </resources>

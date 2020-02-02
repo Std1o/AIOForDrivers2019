@@ -101,7 +101,6 @@
     <string name="activeOrderPoint">Место отправление</string>
     <string name="add_service">Дополнительные услуги:</string>
 
-    <string name="send">Отправить</string>
     <string name="start">Продолжить</string>
     <string name="start_move">Начал движение</string>
     <string name="status_bar_notification_info_overflow">999+</string>
@@ -125,6 +124,11 @@
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="access_token">pk.eyJ1IjoidHVtZW8xMjMiLCJhIjoiY2szeWlvYTg0MDh2ajNscGE2a3lodnJzbiJ9.PaBMOrBA8LGoy8V2FPQ9cg</string>
+
+    <string name="sign_out">Sign Out</string>
+    <string name="chat">Чат</string>
+    <string name="write_message_hint">Напишите сообщение</string>
+    <string name="send">Отправить</string>
 
 
 </resources>
