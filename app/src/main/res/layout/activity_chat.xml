@@ -84,7 +84,7 @@
                 android:layout_marginRight="5dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:src="@drawable/attachment" />
+                android:src="@drawable/dispatcher" />
 
             <EditText
                 android:id="@+id/messageEditText"
