@@ -1,6 +1,7 @@
 package com.beerdelivery.driver;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,9 @@ import com.beerdelivery.driver.adapter.ChatAdapter;
 import com.beerdelivery.driver.model.ChatMessageModel;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.recyclerview.animators.SlideInDownAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +39,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         rv=(RecyclerView)findViewById(R.id.rvChat);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+        rv.setItemAnimator(new SlideInUpAnimator());
         initializeData();
         initializeAdapter();
     }
@@ -61,7 +66,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.sendButton:
                 dataList.add(new ChatMessageModel(messageEditText.getText().toString(), "Stdio"));
-                adapter.notifyDataSetChanged();
+                adapter.notifyItemInserted(dataList.size()-1);
+                rv.smoothScrollToPosition(dataList.size()-1);
                 break;
             case R.id.ivClose:
                 finish();
