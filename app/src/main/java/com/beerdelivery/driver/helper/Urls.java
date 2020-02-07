@@ -15,5 +15,6 @@ public class Urls {
     public static final String UPLOAD_FOTO_URL =  "/appDriver/uploadDriverFoto.php";
     public static final String INFO_OLD_ORDERS_URL =  "/appDriver/infoOldOrders.php";
     public static final String INFO_PAYMENT_URL =  "/appDriver/infoPayments.php";
+    public static final String MESSAGES_URL =  "/appDriver/chatDriver.php";
 }
 
