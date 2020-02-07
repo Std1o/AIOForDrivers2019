@@ -34,7 +34,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.recyclerview.animators.SlideInDownAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
@@ -48,6 +54,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     ChatAdapter adapter;
     PrefManager prefManager;
     RequestQueue queue;
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
         setListeners();
         getMessages();
+        doSomeWork();
     }
 
     private void initRecyclerView() {
@@ -102,15 +110,16 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                             String status = response.getString("st");
 
                             if (status.equals("0")) {
-                                dataList.clear();
                                 JSONArray jArr = response.getJSONArray("chat");
                                 for (int i = 0; i < jArr.length(); i++) {
                                     JSONObject obj = jArr.getJSONObject(i);
+                                    if (dataList.size()-1 < i) {
+                                        dataList.add(new ChatMessageModel(obj.getString("mess"), obj.getString("name")));
+                                        adapter.notifyItemInserted(dataList.size() - 1);
+                                        rv.smoothScrollToPosition(dataList.size() - 1);
+                                    }
 
-                                    System.out.println(obj);
-                                    dataList.add(new ChatMessageModel(obj.getString("mess"), obj.getString("name")));
                                 }
-                                adapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -189,6 +198,40 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
         }
+    }
+
+    private void doSomeWork() {
+        disposables.add(getObservable()
+                // Run on a background thread
+                .subscribeOn(Schedulers.io())
+                // Be notified on the main thread
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(getObserver()));
+    }
+
+    private Observable<? extends Long> getObservable() {
+        return Observable.interval(0, 5, TimeUnit.SECONDS);
+    }
+
+    private DisposableObserver<Long> getObserver() {
+        return new DisposableObserver<Long>() {
+
+            @Override
+            public void onNext(Long value) {
+                getMessages();
+                System.out.println(dataList.size());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     private void initializeAdapter() {
