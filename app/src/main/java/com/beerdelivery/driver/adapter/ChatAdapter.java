@@ -24,8 +24,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.DataViewHolder
 
         DataViewHolder(View itemView) {
             super(itemView);
-            tvMessage = (TextView)itemView.findViewById(R.id.messageTextView);
-            tvSender = (TextView)itemView.findViewById(R.id.messengerTextView);
+            tvMessage = (TextView)itemView.findViewById(R.id.textMessage);
+            //tvSender = (TextView)itemView.findViewById(R.id.textName);
         }
     }
 
@@ -52,7 +52,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.DataViewHolder
     @Override
     public void onBindViewHolder(DataViewHolder dataViewHolder, final int position) {
         dataViewHolder.tvMessage.setText(dataList.get(position).message);
-        dataViewHolder.tvSender.setText(dataList.get(position).sender);
+        //dataViewHolder.tvSender.setText(dataList.get(position).sender);
     }
 
     @Override
