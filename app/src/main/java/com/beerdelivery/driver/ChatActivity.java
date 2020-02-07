@@ -1,6 +1,7 @@
 package com.beerdelivery.driver;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<ChatMessageModel> dataList;
     private RecyclerView rv;
     ImageView sendButton, ivClose;
+    CardView leftBtn;
     EditText messageEditText;
     ChatAdapter adapter;
 
@@ -47,12 +49,14 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         sendButton = findViewById(R.id.sendButton);
         ivClose = findViewById(R.id.ivClose);
+        leftBtn = findViewById(R.id.leftBtn);
         messageEditText = findViewById(R.id.messageEditText);
     }
 
     private void setListeners() {
         sendButton.setOnClickListener(this);
         ivClose.setOnClickListener(this);
+        leftBtn.setOnClickListener(this);
     }
 
     private void initializeData(){
@@ -68,8 +72,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 dataList.add(new ChatMessageModel(messageEditText.getText().toString(), "Stdio"));
                 adapter.notifyItemInserted(dataList.size()-1);
                 rv.smoothScrollToPosition(dataList.size()-1);
+                messageEditText.setText("");
                 break;
             case R.id.ivClose:
+            case R.id.leftBtn:
                 finish();
                 break;
         }
