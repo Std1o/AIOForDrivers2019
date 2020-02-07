@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/flMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
@@ -47,6 +48,54 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_bubble_blue" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flMessageLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_gravity="start"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginStart="4.4dp"
+            android:layout_marginBottom="3dp"
+            app:cardBackgroundColor="@color/lightBlue"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/textMessageLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="8dp"
+                android:maxWidth="270dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_bubble_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="-1"
                 android:src="@drawable/ic_bubble_blue" />
         </LinearLayout>
     </FrameLayout>
