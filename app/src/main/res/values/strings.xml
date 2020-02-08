@@ -83,6 +83,8 @@
     <string name="iconTakenOrders"></string>
     <string name="iconNewOrder"></string>
     <string name="iconCompleted"></string>
+    <string name="iconChat"></string>
+    <string name="iconServices"></string>
 
     <string name="dispetcher">Диспетчер</string>
     <string name="driver_license_text">Водительское удостоверение:</string>
@@ -106,7 +108,9 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stop_move">Закончил движение</string>
     <string name="submit">Выбрать</string>
-    <string name="statistics">Завершенные заказы</string>
+    <string name="completed_orders">Завершенные заказы</string>
+    <string name="chat_button">Чат с диспетчером</string>
+    <string name="useful_services">Полезные сервисы</string>
     <string name="take_order">Взять заказ</string>
     <string name="tarif">Тариф</string>
     <string name="tarif_busines">Бизнес</string>

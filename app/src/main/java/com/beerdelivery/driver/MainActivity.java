@@ -62,12 +62,13 @@ import ru.yandex.money.android.sdk.TokenizationResult;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
 
     private PrefManager pref;
     TextView city, driverName,userName;
     Switch onlineOfflineSwitch;
+    CardView btnOrders, btnTakenOrders, btnMoney, btnCompletedOrders, btnChat, btnUsefulServices;
     Toolbar toolbar;
     View header;
     RequestQueue queue;
@@ -167,65 +168,68 @@ public class MainActivity extends AppCompatActivity
 
         onlineOfflineSwitch = findViewById(R.id.onlineOfflineSwitch);
 
-
-       /* tvInfo = (TextView) findViewById(R.id.tvInfo);
-
-        tvTypeWork = (TextView) findViewById(R.id.tv_type_work);
-
-        tvDriverMoney = (TextView) findViewById(R.id.tv_driver_money);
-
-        tvApp = (TextView) findViewById(R.id.tv_app);
-        tvTakeOrders = (TextView) findViewById(R.id.tv_take_orders);*/
-
-        CardView btnOrders = findViewById(R.id.btnOrders);
-        btnOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BrowseFreeOrders.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                startActivity(intent);
-            }
-        });
-
-        CardView btnFinishedOrders = findViewById(R.id.btnFinishedOrders);
-        btnFinishedOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BrowseTakenOrders.class);
-
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                startActivity(intent);
-            }
-        });
-
-        CardView btnMoney = findViewById(R.id.btnMoney);
-        btnMoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, paymentActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-
-        CardView btnStatistics = findViewById(R.id.btnStatistics);
-        btnStatistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OldOrdersActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         n = new NotificationsHelper(this);
         n.createNotification("СЛУЖБА ДОСТАВКИ", MainActivity.class, 0);
         //timeToStartCheckout();
-        startActivity(new Intent(this, ChatActivity.class));
+        initViews();
+        setButtonListeners();
+    }
+
+    private void initViews() {
+        btnOrders = findViewById(R.id.btnOrders);
+        btnTakenOrders = findViewById(R.id.btnTakenOrders);
+        btnMoney = findViewById(R.id.btnMoney);
+        btnCompletedOrders = findViewById(R.id.btnCompletedOrders);
+        btnChat = findViewById(R.id.btnChat);
+        btnUsefulServices = findViewById(R.id.btnUsefulServices);
+    }
+
+    private void setButtonListeners() {
+        btnOrders.setOnClickListener(this);
+        btnTakenOrders.setOnClickListener(this);
+        btnMoney.setOnClickListener(this);
+        btnCompletedOrders.setOnClickListener(this);
+        btnChat.setOnClickListener(this);
+        btnUsefulServices.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.btnOrders:
+                intent = new Intent(MainActivity.this, BrowseFreeOrders.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent);
+                break;
+            case R.id.btnTakenOrders:
+                intent = new Intent(MainActivity.this, BrowseTakenOrders.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent);
+                break;
+            case R.id.btnMoney:
+                intent = new Intent(MainActivity.this, paymentActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.btnCompletedOrders:
+                intent = new Intent(MainActivity.this, OldOrdersActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.btnChat:
+                intent = new Intent(MainActivity.this, ChatActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent);
+                break;
+            case R.id.btnUsefulServices:
+                break;
+        }
     }
 
     void timeToStartCheckout() {
