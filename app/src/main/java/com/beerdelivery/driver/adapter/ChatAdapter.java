@@ -61,7 +61,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.DataViewHolder
 
     @Override
     public void onBindViewHolder(DataViewHolder dataViewHolder, final int position) {
-        if (dataList.get(position).message.equals(new PrefManager(mContext).getDriverName())) {
+        if (dataList.get(position).sender.equals(new PrefManager(mContext).getDriverName())) {
             dataViewHolder.flMessage.setVisibility(View.VISIBLE);
             dataViewHolder.flMessageLeft.setVisibility(View.GONE);
             dataViewHolder.tvMessage.setText(dataList.get(position).message);
