@@ -68,7 +68,7 @@ public class paymentActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         initRecyclerView();
 
-        NotificationsHelper.createNotification("Оплата заказов", paymentActivity.class, 0);
+        NotificationsHelper.createNotification("Баланс", paymentActivity.class, 0);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         getPayments();

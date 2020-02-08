@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.beerdelivery.driver.adapter.ChatAdapter;
+import com.beerdelivery.driver.helper.NotificationsHelper;
 import com.beerdelivery.driver.helper.PrefManager;
 import com.beerdelivery.driver.helper.Urls;
 import com.beerdelivery.driver.model.ChatMessageModel;
@@ -67,6 +68,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
         getMessages();
         doSomeWork();
+        NotificationsHelper.createNotification("Чат", ChatActivity.class, 0);
     }
 
     private void initRecyclerView() {

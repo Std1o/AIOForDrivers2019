@@ -96,7 +96,7 @@ public class OldOrdersActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        NotificationsHelper.createNotification("Обзор заказов", BrowseFreeOrders.class, 0);
+        NotificationsHelper.createNotification("Завершенные заказы", OldOrdersActivity.class, 0);
     }
 
     private void initRecyclerView() {

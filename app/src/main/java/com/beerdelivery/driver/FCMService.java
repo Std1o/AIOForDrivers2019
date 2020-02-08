@@ -1,10 +1,15 @@
 package com.beerdelivery.driver;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -66,6 +71,7 @@ public class FCMService extends FirebaseMessagingService {
             if (remoteMessage.getData().get("type").equals("info")) createNotification("Диспетчерская:", remoteMessage.getData().get("body"));
 
             if (remoteMessage.getData().get("type").equals("robotOrder")) getFreeOrders(remoteMessage.getData().get("orderID"));
+            if (remoteMessage.getData().get("type").equals("mes")) createNotification("Диспетчерская:", remoteMessage.getData().get("body"));
 
         }
 
@@ -80,21 +86,48 @@ public class FCMService extends FirebaseMessagingService {
 
     // Creates notification based on title and body received
     private void createNotification(String title, String body) {
-        String bigText = body;
-
         Context context = getBaseContext();
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_logo_notif).setContentTitle(title)
-                .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true)
-                .setContentText(body);
+        System.out.println("Message data payload " + body);
 
-        Notification notification = new NotificationCompat.BigTextStyle(mBuilder)
-                .bigText(bigText).build();
+        int notificationCode = 378;
+        NotificationManager notificationManager;;
 
-        NotificationManager mNotificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
+        Uri defaultRingtone = null;
+        defaultRingtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = new NotificationChannel("BeerDelivery",
+                    "Beer Delivery",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel description");
+            notificationManager.createNotificationChannel(channel);
+            NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(context, "BeerDelivery")
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true)
+                    .setContentText(body)
+                    .setContentIntent(pendingIntent)
+                    .setSound(defaultRingtone)
+                    .setContentTitle(getString(R.string.app_name))
+                    .setAutoCancel(true)
+                    .setContentText(body);
+            notificationManager.notify(notificationCode, notificationCompat.build());
+        } else {
+            notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+            NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(context, "BeerDelivery")
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSound(defaultRingtone)
+                    .setContentIntent(pendingIntent)
+                    .setContentTitle(getString(R.string.app_name))
+                    .setAutoCancel(true)
+                    .setContentText(body);
+            notificationManager.notify(notificationCode, notificationCompat.build());
+        }
     }
 
     private void getFreeOrders(final String orderId) {

@@ -98,7 +98,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        NotificationsHelper.createNotification("Обзор заказов", BrowseFreeOrders.class, 0);
+        NotificationsHelper.createNotification("Свободные заказы", BrowseFreeOrders.class, 0);
 
     }
 
