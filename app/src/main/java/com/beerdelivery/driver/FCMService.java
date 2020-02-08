@@ -71,7 +71,11 @@ public class FCMService extends FirebaseMessagingService {
             if (remoteMessage.getData().get("type").equals("info")) createNotification("Диспетчерская:", remoteMessage.getData().get("body"));
 
             if (remoteMessage.getData().get("type").equals("robotOrder")) getFreeOrders(remoteMessage.getData().get("orderID"));
-            if (remoteMessage.getData().get("type").equals("mes")) createNotification("Диспетчерская:", remoteMessage.getData().get("body"));
+            if (remoteMessage.getData().get("type").equals("mes")) {
+                if (!ChatActivity.isChatOpened) {
+                    createNotification("Диспетчерская:", remoteMessage.getData().get("body"));
+                }
+            }
 
         }
 

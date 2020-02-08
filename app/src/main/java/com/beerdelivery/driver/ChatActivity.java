@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +57,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     ChatAdapter adapter;
     PrefManager prefManager;
     RequestQueue queue;
+    public static boolean isChatOpened = false;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
@@ -68,6 +71,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
         getMessages();
         doSomeWork();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancel(378);
         NotificationsHelper.createNotification("Чат", ChatActivity.class, 0);
     }
 
@@ -234,6 +239,18 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         };
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isChatOpened = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isChatOpened = false;
     }
 
     private void initializeAdapter() {
