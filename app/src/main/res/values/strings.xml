@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BeerDelivery</string>
+    <string name="app_name">Beer Delivery</string>
 
 
     <string name="default_notification_channel_id">31</string>

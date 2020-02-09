@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textCommentary"
+                android:id="@+id/textName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -34,11 +34,11 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/textDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="1dp"
+                android:text="@string/app_name"
                 android:textColor="@color/darkGrey"
                 android:textSize="12dp" />
         </LinearLayout>
