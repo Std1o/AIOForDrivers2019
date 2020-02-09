@@ -44,7 +44,7 @@ public class UsefulServicesAdapter extends RecyclerView.Adapter<UsefulServicesAd
 
     @Override
     public DataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.transaction_item, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.services_item, viewGroup, false);
         DataViewHolder pvh = new DataViewHolder(v);
         return pvh;
     }
