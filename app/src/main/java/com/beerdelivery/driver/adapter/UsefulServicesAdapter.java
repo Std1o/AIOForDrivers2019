@@ -19,13 +19,12 @@ public class UsefulServicesAdapter extends RecyclerView.Adapter<UsefulServicesAd
 
     public static class DataViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textCommentary, textDate, textValue;
+        TextView textCommentary, textDate;
 
         DataViewHolder(View itemView) {
             super(itemView);
             textCommentary = (TextView) itemView.findViewById(R.id.textCommentary);
             textDate = (TextView) itemView.findViewById(R.id.textDate);
-            textValue = (TextView) itemView.findViewById(R.id.textValue);
         }
     }
 
@@ -52,8 +51,7 @@ public class UsefulServicesAdapter extends RecyclerView.Adapter<UsefulServicesAd
     @Override
     public void onBindViewHolder(final DataViewHolder dataViewHolder, final int position) {
 
-        dataViewHolder.textValue.setText(dataList.get(position).name);
-        dataViewHolder.textCommentary.setText(dataList.get(position).phone);
+        dataViewHolder.textCommentary.setText(dataList.get(position).name);
     }
 
     @Override
