@@ -25,6 +25,9 @@ allprojects {
         repositories {
             maven { url 'https://dl.bintray.com/yandex-money/maven' }
         }
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
         mavenCentral()
         
     }

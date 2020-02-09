@@ -22,9 +22,9 @@ import com.beerdelivery.driver.adapter.UsefulServicesAdapter;
 import com.beerdelivery.driver.helper.NotificationsHelper;
 import com.beerdelivery.driver.helper.PrefManager;
 import com.beerdelivery.driver.helper.Urls;
-import com.beerdelivery.driver.model.ChatMessageModel;
-import com.beerdelivery.driver.model.ModelPayment;
+import com.beerdelivery.driver.imageloader.GlideImageLoader;
 import com.beerdelivery.driver.model.ServicesModel;
+import com.yyydjk.library.BannerLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UsefulServices extends AppCompatActivity {
@@ -60,6 +61,21 @@ public class UsefulServices extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         getPayments();
+        initBanner();
+    }
+
+    private void initBanner() {
+        BannerLayout bannerLayout2 = (BannerLayout) findViewById(R.id.banner2);
+
+        final List<String> urls = new ArrayList<>();
+        urls.add("http://img3.imgtn.bdimg.com/it/u=2674591031,2960331950&fm=23&gp=0.jpg");
+        urls.add("http://img5.imgtn.bdimg.com/it/u=3639664762,1380171059&fm=23&gp=0.jpg");
+        urls.add("http://img0.imgtn.bdimg.com/it/u=1095909580,3513610062&fm=23&gp=0.jpg");
+        urls.add("http://img4.imgtn.bdimg.com/it/u=1030604573,1579640549&fm=23&gp=0.jpg");
+        urls.add("http://img5.imgtn.bdimg.com/it/u=2583054979,2860372508&fm=23&gp=0.jpg");
+
+        bannerLayout2.setImageLoader(new GlideImageLoader());
+        bannerLayout2.setViewUrls(urls);
     }
 
     private void initRecyclerView() {
