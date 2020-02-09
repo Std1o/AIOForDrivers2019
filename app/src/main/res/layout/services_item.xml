@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="57dp"
     android:layout_marginTop="20dp"
-    app:cardBackgroundColor="@color/white"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     app:cardElevation="12dp">
 
     <LinearLayout
