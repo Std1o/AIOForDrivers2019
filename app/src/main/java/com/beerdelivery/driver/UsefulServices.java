@@ -40,6 +40,8 @@ public class UsefulServices extends AppCompatActivity {
     private PrefManager pref;
     private RecyclerView rv;
     private ArrayList<ServicesModel> servicesList = new ArrayList<>();
+    private ArrayList<ServicesModel> bannerList = new ArrayList<>();
+    private ArrayList<String> bannerUrls = new ArrayList<>();
     UsefulServicesAdapter adapter;
     RequestQueue queue;
 
@@ -61,20 +63,21 @@ public class UsefulServices extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         getPayments();
-        initBanner();
     }
 
     private void initBanner() {
-        BannerLayout bannerLayout2 = (BannerLayout) findViewById(R.id.banner2);
-
-        final List<String> urls = new ArrayList<>();
-        urls.add("http://img3.imgtn.bdimg.com/it/u=2674591031,2960331950&fm=23&gp=0.jpg");
-        urls.add("http://img5.imgtn.bdimg.com/it/u=3639664762,1380171059&fm=23&gp=0.jpg");
-        urls.add("http://img0.imgtn.bdimg.com/it/u=1095909580,3513610062&fm=23&gp=0.jpg");
-        urls.add("http://img4.imgtn.bdimg.com/it/u=1030604573,1579640549&fm=23&gp=0.jpg");
+        BannerLayout bannerLayout2 = findViewById(R.id.banner2);
 
         bannerLayout2.setImageLoader(new GlideImageLoader());
-        bannerLayout2.setViewUrls(urls);
+        bannerLayout2.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+            @Override
+            public void onItemClick(int i) {
+                Toast.makeText(UsefulServices.this, bannerList.get(i).phone, Toast.LENGTH_SHORT).show();
+            }
+        });
+        if (!bannerUrls.isEmpty()) {
+            bannerLayout2.setViewUrls(bannerUrls);
+        }
     }
 
     private void initRecyclerView() {
@@ -131,11 +134,15 @@ public class UsefulServices extends AppCompatActivity {
                                 for (int i = 0; i < jArr.length(); i++) {
                                     JSONObject obj = jArr.getJSONObject(i);
                                     if (obj.getString("type").equals("1")) {
-                                        if (servicesList.size()-1 < i) {
-                                            servicesList.add(new ServicesModel(obj.getString("info_1"), obj.getString("phone"), obj.getString("info_2")));
-                                            adapter.notifyItemInserted(servicesList.size() - 1);
-                                            rv.smoothScrollToPosition(servicesList.size() - 1);
-                                        }
+                                        servicesList.add(new ServicesModel(obj.getString("info_1"), obj.getString("phone"), obj.getString("info_2")));
+                                        adapter.notifyItemInserted(servicesList.size() - 1);
+                                        rv.smoothScrollToPosition(servicesList.size() - 1);
+                                    }
+                                    else if (obj.getString("type").equals("0")) {
+                                        bannerList.add(new ServicesModel(pref.getCityUrl()+ obj.getString("baner"), obj.getString("phone"), obj.getString("info_2")));
+                                        bannerUrls.add(pref.getCityUrl() + "/"+ obj.getString("baner"));
+                                        Log.e("666", String.valueOf(bannerUrls.get(0)));
+                                        initBanner();
                                     }
                                 }
                             }

@@ -1,11 +1,13 @@
 package com.beerdelivery.driver.model;
 
 public class BannerModel {
-    public String message;
-    public String sender;
+    public String image;
+    public String phone;
+    public String url;
 
-    public BannerModel(String message, String sender) {
-        this.message = message;
-        this.sender = sender;
+    public BannerModel(String image, String phone, String url) {
+        this.image = image;
+        this.phone = phone;
+        this.url = url;
     }
 }
