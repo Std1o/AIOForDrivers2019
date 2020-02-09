@@ -72,7 +72,6 @@ public class UsefulServices extends AppCompatActivity {
         urls.add("http://img5.imgtn.bdimg.com/it/u=3639664762,1380171059&fm=23&gp=0.jpg");
         urls.add("http://img0.imgtn.bdimg.com/it/u=1095909580,3513610062&fm=23&gp=0.jpg");
         urls.add("http://img4.imgtn.bdimg.com/it/u=1030604573,1579640549&fm=23&gp=0.jpg");
-        urls.add("http://img5.imgtn.bdimg.com/it/u=2583054979,2860372508&fm=23&gp=0.jpg");
 
         bannerLayout2.setImageLoader(new GlideImageLoader());
         bannerLayout2.setViewUrls(urls);
@@ -133,7 +132,7 @@ public class UsefulServices extends AppCompatActivity {
                                     JSONObject obj = jArr.getJSONObject(i);
                                     if (obj.getString("type").equals("1")) {
                                         if (servicesList.size()-1 < i) {
-                                            servicesList.add(new ServicesModel(obj.getString("info_1"), obj.getString("phone")));
+                                            servicesList.add(new ServicesModel(obj.getString("info_1"), obj.getString("phone"), obj.getString("info_2")));
                                             adapter.notifyItemInserted(servicesList.size() - 1);
                                             rv.smoothScrollToPosition(servicesList.size() - 1);
                                         }

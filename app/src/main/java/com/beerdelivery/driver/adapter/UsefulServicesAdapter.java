@@ -1,11 +1,16 @@
 package com.beerdelivery.driver.adapter;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beerdelivery.driver.R;
@@ -20,10 +25,12 @@ public class UsefulServicesAdapter extends RecyclerView.Adapter<UsefulServicesAd
     public static class DataViewHolder extends RecyclerView.ViewHolder {
 
         TextView textName;
+        CardView cv;
 
         DataViewHolder(View itemView) {
             super(itemView);
             textName = (TextView) itemView.findViewById(R.id.textName);
+            cv = itemView.findViewById(R.id.cv);
         }
     }
 
@@ -51,6 +58,35 @@ public class UsefulServicesAdapter extends RecyclerView.Adapter<UsefulServicesAd
     public void onBindViewHolder(final DataViewHolder dataViewHolder, final int position) {
 
         dataViewHolder.textName.setText(dataList.get(position).name);
+        dataViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!dataList.get(position).phone.isEmpty()) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel:" + dataList.get(position).phone));
+                    activity.startActivity(intent);
+                }
+                else if(!dataList.get(position).url.isEmpty()) {
+                    openBrowser(dataList.get(position).url);
+                }
+                else {
+                    Toast.makeText(activity, "Номер или ссылка не указаны", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    private void openBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        intent.setPackage("com.android.chrome");
+        try {
+            activity.startActivity(intent);
+        }
+        catch (ActivityNotFoundException e) {
+            Intent intent2 = new Intent(Intent.ACTION_VIEW);
+            intent2.setData(Uri.parse(url));
+            activity.startActivity(intent2);
+        }
     }
 
     @Override
