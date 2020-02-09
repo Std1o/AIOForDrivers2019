@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.btnUsefulServices:
+                startActivity(new Intent(this, UsefulServices.class));
                 break;
         }
     }
