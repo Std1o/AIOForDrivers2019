@@ -18,12 +18,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.beerdelivery.driver.adapter.PaymentAdapter;
+import com.beerdelivery.driver.adapter.UsefulServicesAdapter;
 import com.beerdelivery.driver.helper.NotificationsHelper;
 import com.beerdelivery.driver.helper.PrefManager;
 import com.beerdelivery.driver.helper.Urls;
 import com.beerdelivery.driver.model.ChatMessageModel;
 import com.beerdelivery.driver.model.ModelPayment;
+import com.beerdelivery.driver.model.ServicesModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,8 +38,8 @@ public class UsefulServices extends AppCompatActivity {
 
     private PrefManager pref;
     private RecyclerView rv;
-    ArrayList<ModelPayment> list = new ArrayList<>();
-    PaymentAdapter adapter;
+    private ArrayList<ServicesModel> servicesList = new ArrayList<>();
+    UsefulServicesAdapter adapter;
     RequestQueue queue;
 
     @Override
@@ -69,7 +70,7 @@ public class UsefulServices extends AppCompatActivity {
     }
 
     private void initializeAdapter(){
-        adapter = new PaymentAdapter(list, UsefulServices.this);
+        adapter = new UsefulServicesAdapter(servicesList, UsefulServices.this);
         rv.setAdapter(adapter);
     }
 
@@ -114,8 +115,13 @@ public class UsefulServices extends AppCompatActivity {
                                 JSONArray jArr = response.getJSONArray("chat");
                                 for (int i = 0; i < jArr.length(); i++) {
                                     JSONObject obj = jArr.getJSONObject(i);
-
-
+                                    if (obj.getString("type").equals("1")) {
+                                        if (servicesList.size()-1 < i) {
+                                            servicesList.add(new ServicesModel(obj.getString("info_1"), obj.getString("phone")));
+                                            adapter.notifyItemInserted(servicesList.size() - 1);
+                                            rv.smoothScrollToPosition(servicesList.size() - 1);
+                                        }
+                                    }
                                 }
                             }
                         } catch (JSONException e) {
