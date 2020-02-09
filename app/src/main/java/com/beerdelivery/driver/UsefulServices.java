@@ -5,6 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -72,11 +75,35 @@ public class UsefulServices extends AppCompatActivity {
         bannerLayout2.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
             @Override
             public void onItemClick(int i) {
-                Toast.makeText(UsefulServices.this, bannerList.get(i).phone, Toast.LENGTH_SHORT).show();
+                if (!bannerList.get(i).phone.isEmpty()) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel:" + bannerList.get(i).phone));
+                    startActivity(intent);
+                }
+                else if(!bannerList.get(i).url.isEmpty()) {
+                    openBrowser(bannerList.get(i).url);
+                }
+                else {
+                    Toast.makeText(UsefulServices.this, "Номер или ссылка не указаны", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         if (!bannerUrls.isEmpty()) {
             bannerLayout2.setViewUrls(bannerUrls);
+        }
+    }
+
+    private void openBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        intent.setPackage("com.android.chrome");
+        try {
+            startActivity(intent);
+        }
+        catch (ActivityNotFoundException e) {
+            Intent intent2 = new Intent(Intent.ACTION_VIEW);
+            intent2.setData(Uri.parse(url));
+            startActivity(intent2);
         }
     }
 
