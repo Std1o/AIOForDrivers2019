@@ -353,7 +353,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onRestart() {
         super.onRestart();
-        n.createNotification("Такси", MainActivity.class, 0);
+        n.createNotification("СЛУЖБА ДОСТАВКИ", MainActivity.class, 0);
         Log.e("666", "onRestart()");
         takeInfo("takeStartInfo");
     }
