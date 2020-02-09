@@ -22,6 +22,7 @@ import com.beerdelivery.driver.adapter.PaymentAdapter;
 import com.beerdelivery.driver.helper.NotificationsHelper;
 import com.beerdelivery.driver.helper.PrefManager;
 import com.beerdelivery.driver.helper.Urls;
+import com.beerdelivery.driver.model.ChatMessageModel;
 import com.beerdelivery.driver.model.ModelPayment;
 
 import org.json.JSONArray;
@@ -86,12 +87,12 @@ public class UsefulServices extends AppCompatActivity {
 
     private void getPayments() {
 
-        String url = pref.getCityUrl() + Urls.INFO_PAYMENT_URL;
+        String url = pref.getCityUrl() + Urls.MESSAGES_URL;
 
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("command", "getFreeOrders");
+        map.put("command", "newsList");
         map.put("driverId", pref.getDriverId());
         map.put("hash", pref.getHash());
 
@@ -105,40 +106,18 @@ public class UsefulServices extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //          Log.e("666", "Autorize - " + response);
+                                 Log.e("666", "Services - " + response);
                         try {
                             String status = response.getString("st");
 
-
                             if (status.equals("0")) {
-                                // ArrList.clear();
-
-                                JSONArray jArr = response.getJSONArray("pays");
-
-                                Log.e("666", jArr.toString());
-                                int all = jArr.length();
+                                JSONArray jArr = response.getJSONArray("chat");
                                 for (int i = 0; i < jArr.length(); i++) {
                                     JSONObject obj = jArr.getJSONObject(i);
 
-                                    System.out.println(obj);
-                                    list.add(new ModelPayment(obj.getString("t1"), obj.getString("t3"), obj.getString("t2")));
-
 
                                 }
-
-
-
-                                adapter.notifyDataSetChanged();
-
                             }
-                            if (status.equals("-1")) {
-
-                            }
-
-
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("666", "Autorize - " + e);
