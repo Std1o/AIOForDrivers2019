@@ -7,65 +7,25 @@
     android:layout_height="match_parent"
     android:background="@color/grayWhite"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".UsefulServices"
-    tools:showIn="@layout/activity_useful_services"
+    tools:context=".paymentActivity"
+    tools:showIn="@layout/activity_payment"
     android:orientation="vertical">
-    <RelativeLayout
+    <com.yyydjk.library.BannerLayout
+        android:id="@+id/banner2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="25dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/balanceText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/balance"
-                android:textColor="@color/darkGrey"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/amountBalanceText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:textSize="38dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="25dp"
-            android:layout_alignParentRight="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/commission"
-                android:textColor="@color/darkGrey"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/tvCommission"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:layout_gravity="center_horizontal"
-                android:textSize="38dp" />
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_height="200dp"
+        app:autoPlayDuration="5000"
+        app:indicatorMargin="10dp"
+        app:indicatorPosition="centerBottom"
+        app:indicatorShape="oval"
+        app:indicatorSpace="3dp"
+        app:scrollDuration="900"
+        app:selectedIndicatorColor="?attr/colorAccent"
+        app:selectedIndicatorHeight="6dp"
+        app:selectedIndicatorWidth="6dp"
+        app:unSelectedIndicatorColor="#99ffffff"
+        app:unSelectedIndicatorHeight="6dp"
+        app:unSelectedIndicatorWidth="6dp"/>
 
     <View
         android:layout_width="match_parent"
