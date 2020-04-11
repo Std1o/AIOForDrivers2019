@@ -508,7 +508,7 @@ public class BrowseFreeOrders extends AppCompatActivity {
 
 
     private void playDefaultNotificationSound() {
-        Uri notification = Uri.parse("android.resource://com.beerdelivery.driver/raw/notify_sound");
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
         r.play();
     }

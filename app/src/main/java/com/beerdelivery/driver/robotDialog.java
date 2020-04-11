@@ -339,7 +339,7 @@ public class robotDialog extends Activity implements OnMapReadyCallback, Permiss
 
 
     private void playDefaultNotificationSound() {
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri notification = Uri.parse("android.resource://com.beerdelivery.driver/raw/notify_sound");
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
         r.play();
     }
