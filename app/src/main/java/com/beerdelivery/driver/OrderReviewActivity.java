@@ -97,7 +97,7 @@ public class OrderReviewActivity extends AppCompatActivity implements OnMapReady
     public static String orderId;
     private PrefManager pref;
     RequestQueue queue;
-    public static String from, toAddress, time, price, info, orderPrice, textTariff;
+    public static String from, toAddress, time, price, info, orderPrice, textTariff, clientPhone;
     TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice, tvTextTariff;
     Toolbar toolbar;
 

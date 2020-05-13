@@ -88,7 +88,7 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
     public static String orderId, statusOrder;
     private PrefManager pref;
     RequestQueue queue;
-    public static String from, toAddress, time, price, info, orderPrice, textTariff;
+    public static String from, toAddress, time, price, info, orderPrice, textTariff, clientPhone;
     TextView textDateTime, textFrom, textTo, priceValue, tvOrderPrice, tvTextTariff;
     Toolbar toolbar;
     CardView btnChangeOrderStatus;
@@ -257,11 +257,12 @@ public class TakenOrderActivity extends AppCompatActivity implements OnMapReadyC
         tvTextTariff = findViewById(R.id.textTariff);
 
         callBtn = findViewById(R.id.callBtn);
+        System.out.println(clientPhone);
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:89529339193"));
+                        Uri.parse("tel:" + clientPhone));
                 startActivity(intent);
             }
         });

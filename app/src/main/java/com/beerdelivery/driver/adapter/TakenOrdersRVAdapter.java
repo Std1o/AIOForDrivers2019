@@ -64,7 +64,7 @@ public class TakenOrdersRVAdapter extends RecyclerView.Adapter<TakenOrdersRVAdap
         dataViewHolder.orderTarif.setText(modelTakenOrders.getorderTarif());
         dataViewHolder.clientPlace.setText(modelTakenOrders.getclientPlace());
         dataViewHolder.clientRoute.setText(modelTakenOrders.getclientRoute());
-        dataViewHolder.clientPhone.setText(modelTakenOrders.getclientPhone());
+        dataViewHolder.clientPhone.setText(modelTakenOrders.getClientPhone());
 
         dataViewHolder.orderStatus.setText(modelTakenOrders.getorderStatus());
         dataViewHolder.orderPrice.setText( modelTakenOrders.getOrderPrice());

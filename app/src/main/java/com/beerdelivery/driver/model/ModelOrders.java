@@ -4,28 +4,24 @@ package com.beerdelivery.driver.model;
  * Created by BeerDelivery on 01.12.2019.
  */
 public class ModelOrders {
-    private String status, orderTime, orderTarif, clientPlace,clientRoute, orderInfo, orderId, coords_store, coords_client, orderPrice, textTariff;
-
+    private String status;
+    private String orderTime;
+    private String orderTarif;
+    private String clientPlace;
+    private String clientRoute;
+    private String orderInfo;
+    private String orderId;
+    private String coords_store;
+    private String coords_client;
+    private String orderPrice;
+    private String textTariff;
+    private String clientPhone;
 
     public ModelOrders() {
     }
 
-    public ModelOrders(String status, String ordertime, String  ordertarif, String  clientplace, String clientroute, String  orderinfo, String  orderid, String coords_store, String coords_client, String orderPrice, String textTariff) {
-        this.orderTime = ordertime;
-        this.orderTarif = ordertarif;
-        this.clientPlace = clientplace;
-        this.clientRoute = clientroute;
-        this.orderInfo = orderinfo;
-        this.orderId = orderid;
-        this.status = status;
-        this.coords_store = coords_store;
-        this.coords_client = coords_client;
-        this.orderPrice = orderPrice;
-        this.textTariff = textTariff;
-    }
-
-      public String getorderTime() {return orderTime;}
-      public void setorderTime(String v) {this.orderTime = v;}
+    public String getorderTime() {return orderTime;}
+    public void setorderTime(String v) {this.orderTime = v;}
 
     public String getorderTarif() {return orderTarif;}
     public void setorderTarif(String v) {this.orderTarif = v;}
@@ -56,4 +52,12 @@ public class ModelOrders {
 
     public String getTextTariff() {return textTariff;}
     public void setTextTariff(String v) {this.textTariff = v;}
+
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
+    }
 }
